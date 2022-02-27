@@ -1,2 +1,6 @@
-# Guide to Contributing
-Delete the contents of this file and replace with the contents of a proper guide to contributing to this project, as described in the [instructions](./instructions.md)
+# Contributing to Refreegerator
+We welcome all contributions! There are plenty of ways to contribute:
+- Reporting a bug
+- Submitting a fix
+- Proposing or adding new features
+- Becoming a maintainer
