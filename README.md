@@ -1,12 +1,4 @@
 
-# TODOs: #
-1. Please enter any additional information that you want
-about yourself under the team members section
-2. To the product owner role, please draft a project vision statement
-3. To everyone, feel free to make any other edits to the history, 
-description, etc. as needed 
-4. Please delete the TODO section when all TODOs have been
-completed
 # ReFreegerator #
 
 ## Description ##
