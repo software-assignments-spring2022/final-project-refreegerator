@@ -16,6 +16,15 @@ We welcome all contributions! There are plenty of ways to contribute:
 # Git Workflow
 
 # Contribution Rules and Considerations
+## Rules
+1. When your tasks overlap with someone else's, be sure to communicate to avoid redundancy
+2. If blocked, let the scrum master know or update the team during the next stand up
+3. Get work started in a timely manner, as to avoid last minute issues
+## How to Contribute
+- when coding, continuously make commits so that issues can be identified and caught early
+## What to Contribute
+- work on tasks given to you by the scrum master
+- if details are unclear, ask so that contrbutions are exactly as expected
 
 # Local Development Instructions
 1. Copy the repo link and clone it to your local
@@ -50,5 +59,7 @@ We welcome all contributions! There are plenty of ways to contribute:
     ```
 9. Viola!
 
-# Building and Testing Instructions
+# Building and Testing 
+
+## to be determined...
 
