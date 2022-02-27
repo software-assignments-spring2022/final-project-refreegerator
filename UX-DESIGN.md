@@ -1,7 +1,7 @@
 # User Experience Design
 
 ## Site Map
-![sitemap](ux-design/siteMap.png)
+<img src="ux-design/siteMap.png" alt="sitemap" width="200"/>
 
 ## Wireframes
 ![wireframe1](ux-design/LoginScreen.png)
