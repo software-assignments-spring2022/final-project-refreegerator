@@ -38,7 +38,7 @@ For instructions on how to contribute to this project, please navigate to
 ### Alex ###
 ayt239@nyu.edu
 ### Ally ###
-[please enter email here]
+ah4733@nyu.edu
 ### Amanda ###
 aq438@nyu.edu
 ### Matthew ###
