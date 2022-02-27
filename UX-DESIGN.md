@@ -1,14 +1,26 @@
 # User Experience Design
 
 ## Site Map
-<img src="ux-design/siteMap.png" alt="sitemap" width="200"/>
+<img src="ux-design/siteMap.png" alt="sitemap" width="500"/>
 
 ## Wireframes
-![wireframe1](ux-design/LoginScreen.png)
-![wireframe2](ux-design/CreateAccount.png)
-![wireframe3](ux-design/ViewItems.png)
-![wireframe4](ux-design/EditPage.png)
-![wireframe5](ux-design/AddItem.png)
-![wireframe5](ux-design/SortBy.png)
+### Wireframe 1: 
+<img src="ux-design/LoginScreen.png" alt="wireframe1" width="300"/>
+
+### Wireframe 2: 
+<img src="ux-design/CreateAccount.png" alt="wireframe2" width="300"/>
+
+### Wireframe 3: 
+<img src="ux-design/ViewItems.png" alt="wireframe3" width="300"/>
+
+### Wireframe 4: 
+<img src="ux-design/EditPage.png" alt="wireframe4" width="300"/>
+
+### Wireframe 5: 
+<img src="ux-design/AddItem.png" alt="wireframe5" width="300"/>
+
+### Wireframe 6: 
+<img src="ux-design/SortBy.png" alt="wireframe6" width="300"/>
+
 
 
