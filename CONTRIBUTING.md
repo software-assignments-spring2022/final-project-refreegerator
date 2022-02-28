@@ -20,12 +20,12 @@ We welcome all contributions! There are plenty of ways to contribute:
 ## Sprint Details
 - sprints will take 1-2 weeks depending on the tasks decided by the product owner
 ## Daily Standup
-- standups will occur (days) from (times)
+- standups will occur Tuesday and Saturadays at 9 PM
 - all members are expected to attend
 - members will not cover for others who are misisng
 - members who make no progress on a task for two stand ups or more in a row will be reported to management
 ## Coding Standards
-- (need to pick a code editor/linter)
+- we will be using Visual Studio Code and JSLint
 - make small commits
 - start simple with code (to get it working), before iterating
 - push working code, and if your code breaks the build, fix it
