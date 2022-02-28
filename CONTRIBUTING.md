@@ -35,6 +35,10 @@ We welcome all contributions! There are plenty of ways to contribute:
 write automated tests to cover integration points and functionality
 
 # Git Workflow
+- We will be using the MERN stack
+- Tasks and any formal changes are decided during team meetings (planning)
+- Everyone will be working locally and pulling/pushing to branches specific to the sprint
+- Branches will be merged to main at the end of the sprint
 
 # Contribution Rules and Considerations
 ## Rules
