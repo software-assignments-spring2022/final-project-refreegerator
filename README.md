@@ -10,7 +10,7 @@ dates. From here, the app will track the foods and notify
 the user when a food is close to spoiling.
 
 ## Project Vision Statement ##
-[To be drafted by product owner role]
+Our vision is to build a web app that can help grocery store shoppers manage the expiration date of their perishable food items.
 
 ## History and Contribution ##
 
