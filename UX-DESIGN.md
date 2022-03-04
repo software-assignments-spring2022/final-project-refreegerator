@@ -1,5 +1,6 @@
 # User Experience Design
-
+## Prototype
+A link to the InVision  prototype can be found [here.](https://invis.io/H812F7L3KF5D)
 ## Site Map
 <img src="ux-design/siteMap.png" alt="sitemap" width="500"/>
 
