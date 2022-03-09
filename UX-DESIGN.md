@@ -7,7 +7,7 @@ A link to the InVision  prototype can be found [here.](https://projects.invision
 ## Wireframes
 ### Wireframe 1: Home screen with Login Prompt
 <img src="ux-design/LoginScreen.png" alt="wireframe1" width="300"/>
-This is the initial page a user will see when accessing our app. It will prompt the user to login, or create an account. Additionally, there is room for an introduction to the functionality of our program below. If the user has a valid login, they will be redirected to the item page, and if they don't they will be directed toward the create account page. 
+This is the initial page a user will see when accessing our app. It will prompt the user to login, or create an account. If the user has a valid login, they will be redirected to the item page, if they don't they will be directed toward the create account page or can continue to use the program as a guest. 
 
 ### Wireframe 2: Create account page
 <img src="ux-design/CreateAccount.png" alt="wireframe2" width="300"/>
