@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
 import './Login.css'
+import UserList from "./UserList"
+import GuestList from "./GuestList"
 
 /**
  * A React component that represents the Home page of the app.
@@ -12,8 +14,9 @@ const Login = props => {
       <h1>Hello and welcome!</h1>
       <p>This is a full MERN-stack app, whether you like it or not!</p>
       <p>
-        New User? <Link to="/create">Create an account</Link> or <Link to="/YourList">continue as a guest</Link>.
+          New User? <Link to="/create">Create an account</Link> or <Link to= "/GuestList"  >continue as a guest</Link>.
       </p>
+        
     </>
   )
 }
