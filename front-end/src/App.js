@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from './Login'
 import Header from './Header'
 import Footer from './Footer'
-
+import SuggestedRecipes from "./SuggestedRecipes"
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
         <main className="App-main">
           <Routes>
             <Route path="/" element={<Login />}></Route>
+            <Route path = "/SuggestedRecipes" element = {<SuggestedRecipes />}> </Route>
           </Routes>
         </main>
         <Footer />
