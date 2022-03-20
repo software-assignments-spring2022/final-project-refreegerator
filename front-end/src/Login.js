@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './Login.css'
+
+import UserList from "./UserList"
+import GuestList from "./GuestList"
+
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
@@ -16,8 +20,9 @@ const Fregley = props => {
     <>
       <h1>Welcome to ReFreegerator!</h1>
       <p>
-        New User? <Link to="/create">Create an account</Link> or <Link to="/guest">continue as a guest</Link>.
+          New User? <Link to="/create">Create an account</Link> or <Link to= "/GuestList"  >continue as a guest</Link>.
       </p>
+        
     </>
   )
 }
