@@ -1,0 +1,37 @@
+article {
+    flex: auto;
+    margin: 20px;
+    padding: 10px;
+    text-align: center;
+    width: 300px;
+    margin: 0 auto;
+  }
+.Item-details{
+    border: 1px solid black;
+    border-radius: 20px;
+}
+h1 {
+  font-weight: bold;
+  font-size: 20px;
+}
+#notes{
+  padding-bottom: 40px;
+}
+.Quantity{
+  margin-top: 10px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid black;
+}
+#quantity1{
+  float: left;
+  margin-left: 10px;
+}
+#quantity2{
+  float: right;
+  margin-right: 10px;
+}
+.Name{
+  text-align: center;
+  font-size: 28px;
+  margin: 10px;
+}
