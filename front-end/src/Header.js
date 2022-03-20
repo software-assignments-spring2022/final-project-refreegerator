@@ -11,18 +11,18 @@ const Header = props => {
   return (
     <header className="Header-header">
       <nav className="Header-navbar">
-        <Link to="/" className="logo">
+        {/* <Link to="/" className="logo">
           <img src={logo} alt="Our fabulous logo" />
-        </Link>
+        </Link> */}
         <ul className="nav-links">
           <li className="nav-item">
             <Link to="/">Login</Link>
           </li>
           <li className="nav-item">
-            <Link to="/messages">Messages</Link>
+            <Link to="/create"> Create An Account </Link>
           </li>
           <li className="nav-item">
-            <Link to="/about">About</Link>
+            <Link to="/guest"> Continue As Guest </Link>
           </li>
         </ul>
       </nav>

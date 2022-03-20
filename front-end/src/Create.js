@@ -1,10 +1,6 @@
 import { Link } from 'react-router-dom'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import './Login.css'
-
-import UserList from "./UserList"
-import GuestList from "./GuestList"
-
+import './Create.css'
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
@@ -15,22 +11,11 @@ import "./styles.css";
  * @param {*} param0 an object holding any props passed to this component from its parent component
  * @returns The contents of this component, in JSX form.
  */
-const Fregley = props => {
-  return (
-    <>
-      <h1>Welcome to ReFreegerator!</h1>
-      <p>
-          New User? <Link to="/create">Create an account</Link> or <Link to= "/GuestList"  >continue as a guest</Link>.
-      </p>
-        
-    </>
-  )
-}
 
 
 
 
-function Login() {
+function Create() {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -58,7 +43,7 @@ function Login() {
 
     var { uname, pass } = document.forms[0];
 
-    // check for login info
+    
     const userData = database.find((user) => user.username === uname.value); //this will be more integrated once we work with mongodb more
 
     // Compare user info
@@ -81,7 +66,7 @@ function Login() {
       <div className="error">{errorMessages.message}</div>
     );
 
-  // JSX code for login form
+
   const renderForm = (
     <div className="form">
       <form onSubmit={handleSubmit}>
@@ -103,7 +88,7 @@ function Login() {
         
       </form>
       
-      <div> New User? <a href="/create">Create an account</a> or <a href= "guest">continue as a guest.</a> </div> 
+      <div> Already a user? <a href="/">Sign in</a>, or <a href = "/guest">continue as a guest.</a>  </div> 
     </div>
   );
 
@@ -111,7 +96,7 @@ function Login() {
     <div className="app">
       
       <div className="login-form">
-        <div className="title">Sign In</div>
+        <div className="title">Create Account</div>
         
         {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
       </div>
@@ -122,5 +107,5 @@ function Login() {
 }
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<Login />, rootElement);
-export default Login
+ReactDOM.render(<Create />, rootElement);
+export default Create
