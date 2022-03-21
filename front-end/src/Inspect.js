@@ -2,6 +2,7 @@ import React from 'react'
 import './Inspect.css'
 import Item from "./Item"
 import { Link } from 'react-router-dom'
+
 const Inspect = () => {
   return (
     <>
@@ -14,8 +15,8 @@ const Inspect = () => {
             <b>Suggested Recipes</b>
         </div>
         <div className='Buttons'>
-            <Link to="/"><button>Back</button></Link>
-            <Link to="/"><button>Edit Item</button></Link>
+            <Link to="/"><button className='buttons1'>Back</button></Link>
+            <Link to="/"><button className='buttons1'>Edit Item</button></Link>
         </div>
     </>
   )

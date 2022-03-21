@@ -10,6 +10,8 @@ import GuestList from "./GuestList"
 import SuggestedRecipes from "./SuggestedRecipes"
 import Add from './Add'
 import Edit from './Edit'
+import Profile from "./Profile"
+import Inspect from "./Inspect"
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
             <Route path="/Edit" element={<Edit />}></Route>
             <Route path= "/UserList" element = {<UserList />}> </Route>
             <Route path = "/GuestList" element = {<GuestList />}> </Route>
+            <Route path="/inspect" element={<Inspect />} />
+            <Route path = "/Profile" element = {<Profile />}> </Route>
           </Routes>
         </main>
         

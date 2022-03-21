@@ -3,20 +3,30 @@
   justify-content: space-between;
   align-items: center;
 }
-
+.Refreegerator{
+  color: white;
+  text-decoration: none;
+}
 .Header-header {
   background-color: #282c34;
-  min-height: 20vh;
+  min-height: 12vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 1vmin);
   color: white;
 }
+.profile {
+ display:block;
+ width: 60px;
+ margin-left: auto;
+ padding-right: 15px;
+}
 
 .logo {
-  display: inline-block;
+  display: block;
+  width: 60px;
 }
 
 .nav-links {
