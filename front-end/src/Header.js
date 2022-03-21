@@ -9,10 +9,14 @@ import { Link } from 'react-router-dom'
  */
 const Header = props => {
   return (
+      <>
     <header className="Header-header">
-      <nav className="Header-navbar">
-        <h2> ReFreegerator </h2>
-          <img src={logo} className = "logo"  alt="ReFreegerator Logo" />
+      <img src = {logo} className = "logo" alt = "Dropdown" />
+      <h2> ReFreegerator </h2>
+        <span> </span>
+      <img src={logo} className = "profile"  alt="ReFreegerator Logo" />
+    </header>
+          {/*
         <ul className="nav-links">
           <li className="nav-item">
             <Link to="/">Login</Link>
@@ -27,8 +31,8 @@ const Header = props => {
             <Link to = "/"> [dropdown goes here] </Link>
         </li>
         </ul>
-      </nav>
-    </header>
+          */}
+      </>
   )
 }
 
