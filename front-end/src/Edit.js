@@ -32,7 +32,7 @@ const Edit = props =>{
         <h1>Edit an Item</h1>
         <form onSubmit={handleSubmit}>
 
-      <label>Name:
+      <label className="sec">Name:
       <input 
         type="text" 
         name="name" 
@@ -42,7 +42,7 @@ const Edit = props =>{
       />
       </label>
         <br></br>
-      <label> Quantity:
+      <label className="sec"> Quantity:
         <input 
           type="number" 
           name="quantity" 
@@ -52,7 +52,7 @@ const Edit = props =>{
         />
         </label>
         <br></br>
-        <label>Extra Information:
+        <label className="sec">Extra Information:
         <input 
           type="text" 
           name="info" 
@@ -63,7 +63,7 @@ const Edit = props =>{
         </label>
         <br></br>
 
-        <label>Expiration Date:
+        <label className="sec">Expiration Date:
         <input 
           type="date" 
           name="ex_date" 
@@ -74,12 +74,12 @@ const Edit = props =>{
         </label>
         <br></br>
 
-        <label>Enable Alerts:
+        <label className="sec">Enable Alerts:
         <input
         type="checkbox"
         name= "enableAlerts"
         //value = {props.details.value||""}
-        checked = {true}
+        // checked = {true}
         // checked = {props.details.checked}
         onChange={handleChange}
         />
@@ -87,7 +87,7 @@ const Edit = props =>{
 
         <br></br>
       
-        <label>Notify me:
+        <label className="sec">Notify me:
         <input 
           type="number" 
           name="notif" 

@@ -86,7 +86,7 @@ const Add = props =>{
         days before expiration
         </label>
         <br></br>
-        <button type="submit">Submit</button>
+        <input type="submit" />
     </form>
     <button onClick={cancel}>Cancel</button>
         </>
