@@ -11,9 +11,8 @@ const Header = props => {
   return (
     <header className="Header-header">
       <nav className="Header-navbar">
-        {/* <Link to="/" className="logo">
-          <img src={logo} alt="Our fabulous logo" />
-        </Link> */}
+        <h2> ReFreegerator </h2>
+          <img src={logo} className = "logo"  alt="ReFreegerator Logo" />
         <ul className="nav-links">
           <li className="nav-item">
             <Link to="/">Login</Link>
@@ -24,6 +23,9 @@ const Header = props => {
           <li className="nav-item">
             <Link to="/guest"> Continue As Guest </Link>
           </li>
+        <li className = "nav-item">
+            <Link to = "/"> [dropdown goes here] </Link>
+        </li>
         </ul>
       </nav>
     </header>

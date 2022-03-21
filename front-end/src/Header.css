@@ -16,7 +16,8 @@
 }
 
 .logo {
-  display: inline-block;
+  display: block;
+  width: 100px;
 }
 
 .nav-links {
