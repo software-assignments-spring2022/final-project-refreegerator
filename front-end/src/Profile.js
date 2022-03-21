@@ -40,6 +40,7 @@ const Profile = props => {
                         type = "number" 
                         step = "1" 
                         min ='0' 
+                        max='9'
                         id = 'number' 
                         value={days}
                         onChange={e => setDays(e.target.value)}
@@ -78,7 +79,7 @@ const Profile = props => {
             </div>
             <input type="submit" className='save' value="Save"/>                    
         </form>
-        <Link to="/"><button>Back</button></Link>
+        <Link to="/"><button className='buttons1'>Back</button></Link>
     </>
   )
 }

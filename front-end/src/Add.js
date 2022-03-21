@@ -15,12 +15,12 @@ const Add = props =>{
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(inputs);
-        navigate('/');
+        navigate('/UserList');
     }
     const cancel = (event) =>{
       event.preventDefault();
       console.log("cancelled");
-      navigate('/');
+      navigate('/UserList');
     }
       return (
         <>
@@ -86,7 +86,7 @@ const Add = props =>{
         days before expiration
         </label>
         <br></br>
-        <button type="submit">Submit</button>
+        <input type="submit" />
     </form>
     <button onClick={cancel}>Cancel</button>
         </>
