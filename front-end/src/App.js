@@ -10,7 +10,8 @@ import GuestList from "./GuestList"
 import SuggestedRecipes from "./SuggestedRecipes"
 import Add from './Add'
 import Edit from './Edit'
-
+import Profile from "./Profile"
+import Inspect from "./Inspect"
 function App() {
   return (
     <div className="App">
@@ -25,6 +26,8 @@ function App() {
             <Route path="/Edit" element={<Edit />}></Route>
             <Route path= "/UserList" element = {<UserList />}> </Route>
             <Route path = "/GuestList" element = {<GuestList />}> </Route>
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/inspect" element={<Inspect />} />
           </Routes>
         </main>
         

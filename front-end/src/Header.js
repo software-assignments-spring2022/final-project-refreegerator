@@ -1,5 +1,6 @@
 import './Header.css'
-import logo from './logo.svg'
+import logo from './fridge.png'
+import profile from './profile.png'
 import { Link } from 'react-router-dom'
 
 /**
@@ -11,11 +12,12 @@ const Header = props => {
   return (
       <>
     <header className="Header-header">
-      <img src = {logo} className = "logo" alt = "Dropdown" />
-      <h2> ReFreegerator </h2>
+      <img src = {logo} className = "logo" alt = "ReFreegerator Logo" />
+      <h2> <Link to="/UserList" className='Refreegerator'> Refreegerator </Link> </h2>
         <span> </span>
-      <img src={logo} className = "profile"  alt="ReFreegerator Logo" />
+        <Link to= "/profile" className = "profile"><img src={profile} className = "profile"  alt="Dropdown" /></Link>
     </header>
+    
           {/*
         <ul className="nav-links">
           <li className="nav-item">
@@ -31,6 +33,7 @@ const Header = props => {
             <Link to = "/"> [dropdown goes here] </Link>
         </li>
         </ul>
+        
           */}
       </>
   )
