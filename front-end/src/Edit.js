@@ -15,17 +15,17 @@ const Edit = props =>{
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(inputs);
-        navigate('/');
+        navigate('/UserList');
     }
     const cancel = (event) =>{
         event.preventDefault();
         console.log("cancelled");
-        navigate('/');
+        navigate('/UserList');
       }
     const del = (event) =>{
         event.preventDefault();
         console.log("deleted");
-        navigate('/');
+        navigate('/UserList');
     }
       return (
         <>

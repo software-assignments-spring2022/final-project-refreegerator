@@ -15,12 +15,12 @@ const Add = props =>{
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(inputs);
-        navigate('/');
+        navigate('/UserList');
     }
     const cancel = (event) =>{
       event.preventDefault();
       console.log("cancelled");
-      navigate('/');
+      navigate('/UserList');
     }
       return (
         <>
