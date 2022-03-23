@@ -77,7 +77,7 @@ const Profile = props => {
                     </label>
                 </div>
             </div>
-            <input type="submit" className='save' value="Save"/>                    
+            <Link to="/UserList"><input type="submit" className='save' value="Save"/></Link>                    
         </form>
         <Link to="/"><button className='buttons1'>Back</button></Link>
     </>

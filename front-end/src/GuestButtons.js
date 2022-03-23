@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom'
 
 const GuestButtons= () => {
     return(
         <div class = "navigation">
-            <button type = "button"> Edit List</button>
-            <button type = "button"> Add Item</button>
+             <Link to="/edit"><button type = "button"> Edit List</button></Link>
+            <Link to="/add"><button type = "button"> Add Item</button></Link>
         </div>
     )
 

@@ -1,10 +1,12 @@
+import { Link } from 'react-router-dom'
+
 const UserButtons = () => {
     return(
         <div class = "navigation">
-            <button type = "button"> Profile </button>
-            <button type = "button"> Log Out</button>
-            <button type = "button"> Edit List</button>
-            <button type = "button"> Add Item</button>
+            <Link to="/profile"><button type = "button"> Profile </button></Link>
+            <Link to="/"><button type = "button"> Log Out</button></Link>
+            <Link to="/edit"><button type = "button"> Edit List</button></Link>
+            <Link to="/add"><button type = "button"> Add Item</button></Link>
         </div>
     )
 
