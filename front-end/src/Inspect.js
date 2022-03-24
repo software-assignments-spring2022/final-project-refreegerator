@@ -15,8 +15,8 @@ const Inspect = () => {
             <b>Suggested Recipes</b>
         </div>
         <div className='Buttons'>
-            <Link to="/"><button className='buttons1'>Back</button></Link>
-            <Link to="/"><button className='buttons1'>Edit Item</button></Link>
+            <Link to="/userlist"><button className='buttons1'>Back</button></Link>
+            <Link to="/edit"><button className='buttons1'>Edit Item</button></Link>
         </div>
     </>
   )
