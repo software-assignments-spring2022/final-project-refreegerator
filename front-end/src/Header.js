@@ -35,15 +35,15 @@ const Header = () => {
               transformOrigin={{ horizontal: 'right', vertical: 'top' }}
               anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
-              <Link to="/profile">
+              <Link to="/profile" className='dropdownMenu'>
                   <MenuItem>
-                      <h4 style={{textDecoration:`none`}}>Settings</h4>
+                      <h4 >Settings</h4>
                   </MenuItem>
               </Link>
               <MenuItem>
-              <Link to="/">
-                    <h4 style={{textDecoration:`none`}}>Logout</h4>
-                  </Link>
+              <Link to="/" className='dropdownMenu'>
+                    <h4 >Logout</h4>
+              </Link>
               </MenuItem>
           </Menu>
           </div> 

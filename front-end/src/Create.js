@@ -88,7 +88,7 @@ function Create() {
         
       </form>
       
-      <div> Already a user? <a href="/">Sign in</a>, or <a href = "/guest">continue as a guest.</a>  </div> 
+      <div> Already a user? <a href="/">Sign in</a>, or <a href = "/guestlist">continue as a guest.</a>  </div> 
     </div>
   );
 

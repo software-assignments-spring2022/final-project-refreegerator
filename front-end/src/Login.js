@@ -103,7 +103,7 @@ function Login() {
         
       </form>
       
-      <div> New User? <a href="/create">Create an account</a> or <a href= "guest">continue as a guest.</a> </div> 
+      <div> New User? <a href="/create">Create an account</a> or <a href= "/guestlist">continue as a guest.</a> </div> 
     </div>
   );
 

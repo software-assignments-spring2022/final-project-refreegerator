@@ -32,10 +32,10 @@ const Profile = props => {
         <h1 className='Header'>Profile Preferences</h1> <br></br>
         <form className='Preferences' onSubmit={handleSubmit}>
             <div className='Preference'>
-                <div className = 'column'>
+                <div className = 'column left'>
                     <label>Deafult Notification before expiration (days): </label>
                 </div>
-                <div className = 'column'>
+                <div className = 'column right'>
                     <input 
                         type = "number" 
                         step = "1" 
@@ -48,10 +48,10 @@ const Profile = props => {
                 </div>
             </div>
             <div className='Preference'>
-                <div className = 'column'>
+                <div className = 'column left'>
                     <label>Suggest nearby stores stocked with relevant items?</label>
                 </div>
-                <div className = 'column'>
+                <div className = 'column right'>
                     <label className="switch">
                         <input 
                             type="checkbox"
@@ -63,10 +63,10 @@ const Profile = props => {
                 </div>
             </div>
             <div className='Preference'>
-                <div className = 'column'>
+                <div className = 'column left'>
                     <label>Autocomplete expiration dates for recognized items?</label>
                 </div>
-                <div className = 'column'>
+                <div className = 'column right'>
                     <label className="switch">
                         <input 
                         type="checkbox"
@@ -79,7 +79,7 @@ const Profile = props => {
             </div>
             <Link to="/UserList"><input type="submit" className='save' value="Save"/></Link>                    
         </form>
-        <Link to="/"><button className='buttons1'>Back</button></Link>
+        <Link to="/UserList"><button className='buttons1'>Back</button></Link>
     </>
   )
 }
