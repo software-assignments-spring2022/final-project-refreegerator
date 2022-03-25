@@ -78,7 +78,11 @@ const YourList = props => {
             <label htmlFor="sortpref">Sort by:</label>
             <select  onChange = {handleSort} name ="sorting preference" id="sortpref" >
               <option value="closetospoil">Closest to Spoiling</option>
-              <option value="dateadded">Date Added</option>
+                {// <option value="dateadded">Date Added</option>
+                 //this option can be added back when we get json objects with actual data;
+                    //as of this comment, the placeholders don't contain that data, so i've commented it
+                    //out for now
+                }
               <option value="foodcat">Category</option>
               <option value = "name"> Item Name </option>
             </select>
