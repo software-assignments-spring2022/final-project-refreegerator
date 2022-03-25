@@ -9,7 +9,8 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
 
-
+//import { useNavigate } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 /**
  * A React component that represents the Home page of the app.
  * @param {*} param0 an object holding any props passed to this component from its parent component
@@ -34,7 +35,6 @@ function Login() {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-
   // User Login info
   const database = [
     {
@@ -55,7 +55,6 @@ function Login() {
   const handleSubmit = (event) => {
     //don't reload on submit
     event.preventDefault();
-
     var { uname, pass } = document.forms[0];
 
     // check for login info
@@ -83,6 +82,7 @@ function Login() {
 
   // JSX code for login form
   const renderForm = (
+
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
@@ -99,8 +99,6 @@ function Login() {
           <input type="submit" />
         </div>
         <br></br>
-        
-        
       </form>
       
       <div> New User? <a href="/create">Create an account</a> or <a href= "/guestlist">continue as a guest.</a> </div> 
@@ -109,11 +107,11 @@ function Login() {
 
   return (
     <div className="app">
-      
       <div className="login-form">
         <div className="title">Sign In</div>
         
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+          {isSubmitted ?<Navigate to = "/UserList"
+              replace =  {true}/>: renderForm}
       </div>
       
     </div>
