@@ -1,5 +1,5 @@
 import YourList from "./YourList"
-import UserButtons from "./UserButtons"
+import ListButtons from "./ListButtons"
 
 
 const UserList = props => {
@@ -7,7 +7,7 @@ const UserList = props => {
     return(
         <>
             <YourList />
-            <UserButtons />
+            <ListButtons />
         </>
     )
 }

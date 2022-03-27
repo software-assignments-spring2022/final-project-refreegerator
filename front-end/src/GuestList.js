@@ -1,12 +1,12 @@
 import YourList from "./YourList"
-import GuestButtons from "./GuestButtons"
+import ListButtons from "./ListButtons"
 
 const GuestList = props => {
 
     return(
         <>
             <YourList />
-            <GuestButtons />
+            <ListButtons />
         </>
     )
 }

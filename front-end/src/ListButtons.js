@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-const UserButtons = () => {
+const ListButtons = () => {
     return(
         <div className= "navigation">
             <Link to="/edit"><button type = "button"> Edit List</button></Link>
@@ -12,4 +12,4 @@ const UserButtons = () => {
 
 }
 
-export default UserButtons
+export default ListButtons
