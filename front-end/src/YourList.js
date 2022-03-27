@@ -4,23 +4,9 @@ import ListItem from './ListItem'
 import { useState, useEffect} from "react";
 import Edit from "./Edit.js"
 import Inspect from "./Inspect.js"
-const placeholder = [
-    {category : "Dairy",
-        name : "Cheese",
-        expdatestr : "3000-05-25"
-    },
-    {category : "Zed",
-            name: "Bread",
-            expdatestr : "1031-01-29"
-    },
-    {category : "Basket",
-            name :"Alphabetical",
-            expdatestr :"2020-01-01" 
-    }
-]
 const YourList = props => {
     const [sortpref, setSortPref] = useState(""); 
-    const [orderedList, updateOrder] = useState(placeholder);
+    const [orderedList, updateOrder] = useState(props.placeholder);
     const [isEditing, editMode] = useState(false);
     const [isInspecting, inspectMode] = useState(false);
     const hasList = true;
@@ -37,6 +23,11 @@ const YourList = props => {
 
         }
         setCurrent(item)
+    }
+    const handleDelete = (item) =>{
+        updateOrder(orderedList.filter( 
+            (iterateitem) => (iterateitem !== item))
+        )
     }
 
     const current = new Date();
@@ -120,7 +111,11 @@ const YourList = props => {
                                 <div>
                                     <button onClick = {() => handleClick(listitem)} >
                                         Edit This Item
+
                                     </button>
+                                    {props.editAll && 
+                                    <button onClick = {() => handleDelete(listitem)}> Delete </button>
+                                    }
                                 </div>
                                 </>
                             )
