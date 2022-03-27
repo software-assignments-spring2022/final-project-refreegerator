@@ -2,28 +2,40 @@ import ReactDom from "react-dom";
 import React from "react";
 import ListItem from './ListItem'
 import { useState, useEffect} from "react";
+import Edit from "./Edit.js"
 const placeholder = [
     {category : "Dairy",
         name : "Cheese",
-        expdatestr : "1/27/3000"
+        expdatestr : "3000-05-25"
     },
     {category : "Zed",
             name: "Bread",
-            expdatestr : "1/29/1031"
+            expdatestr : "1031-01-29"
     },
     {category : "Basket",
             name :"Alphabetical",
-            expdatestr :"1/1/2020" 
+            expdatestr :"2020-01-01" 
     }
 ]
 const YourList = props => {
-
     const [sortpref, setSortPref] = useState(""); 
     const [orderedList, updateOrder] = useState(placeholder);
+    const [isEditing, editMode] = useState(false);
     const hasList = true;
     const handleSelect= (event) => {
         setSortPref(event.target.value)
     };
+    const [currentItem, setCurrent] = useState({})
+    const handleClick = (item) => {
+        if (isEditing == false){
+           console.log("div was clicked")
+           editMode(true);
+            console.table(item)
+
+        }
+        setCurrent(item)
+    }
+
     const current = new Date();
     const days_until_spoil = (expdate) => {
         const msdiff = expdate - current
@@ -72,35 +84,55 @@ const YourList = props => {
     }
    let newlist = orderedList; 
         if (hasList) {
-        return (
-        <>
-            <h1> Your List </h1>
-            <label htmlFor="sortpref">Sort by:</label>
-            <select  onChange = {handleSort} name ="sorting preference" id="sortpref" >
-              <option value="closetospoil">Closest to Spoiling</option>
-                {// <option value="dateadded">Date Added</option>
-                 //this option can be added back when we get json objects with actual data;
-                    //as of this comment, the placeholders don't contain that data, so i've commented it
-                    //out for now
-                }
-              <option value="foodcat">Category</option>
-              <option value = "name"> Item Name </option>
-            </select>
-            {
-            orderedList.map((listitem, i, holdarray) =>
-                    (
-               <ListItem key ={JSON.stringify(listitem)}                   
+            if (isEditing == false) {
+                return (
+                <>
+                    <h1> Your List </h1>
+                    <label htmlFor="sortpref">Sort by:</label>
+                    <select  onChange = {handleSort} name ="sorting preference" id="sortpref" >
+                      <option value="closetospoil">Closest to Spoiling</option>
+                        {// <option value="dateadded">Date Added</option>
+                         //this option can be added back when we get json objects with actual data;
+                            //as of this comment, the placeholders don't contain that data, so i've commented it
+                            //out for now
+                        }
+                      <option value="foodcat">Category</option>
+                      <option value = "name"> Item Name </option>
+                    </select>
+                    {
+                    orderedList.map((listitem, i, holdarray) =>
+
+                            (
+                                < span key = {JSON.stringify(listitem)}
+                                    onClick = {() => handleClick(listitem)}
+                                >
+                   <ListItem key ={JSON.stringify(listitem)}                   
                          content = {JSON.stringify(listitem)}                    
-                   category = {listitem.category}
-                   name = {listitem.name}
-                   expdatestr = {listitem.expdatestr}
-               />
+                           category = {listitem.category}
+                           name = {listitem.name}
+                           expdatestr = {listitem.expdatestr}
+                       />
+                                </span> 
+                            )
+                        )
+                    }
+                </>
+                )
+
+            }
+            if (isEditing == true){
+                    console.log(editMode.toString()) 
+                    console.log(isEditing)
+                return (
                     
-                    )
+                    <Edit func = {editMode} 
+                        listitem = {currentItem}
+                        changelist = {updateOrder}
+                        currentlist = {orderedList}
+                    />
                 )
             }
-        </>
-        )
+
     }
     else{
         return <h1>Your list seems to be empty. Add an item!</h1>
