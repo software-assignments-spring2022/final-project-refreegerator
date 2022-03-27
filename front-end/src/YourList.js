@@ -3,6 +3,7 @@ import React from "react";
 import ListItem from './ListItem'
 import { useState, useEffect} from "react";
 import Edit from "./Edit.js"
+import Inspect from "./Inspect.js"
 const placeholder = [
     {category : "Dairy",
         name : "Cheese",
@@ -21,9 +22,11 @@ const YourList = props => {
     const [sortpref, setSortPref] = useState(""); 
     const [orderedList, updateOrder] = useState(placeholder);
     const [isEditing, editMode] = useState(false);
+    const [isInspecting, inspectMode] = useState(false);
     const hasList = true;
-    const handleSelect= (event) => {
-        setSortPref(event.target.value)
+    const handleSelect= (item) => {
+        setCurrent(item)
+        inspectMode(true)
     };
     const [currentItem, setCurrent] = useState({})
     const handleClick = (item) => {
@@ -84,7 +87,7 @@ const YourList = props => {
     }
    let newlist = orderedList; 
         if (hasList) {
-            if (isEditing == false) {
+            if (isEditing == false && isInspecting == false) {
                 return (
                 <>
                     <h1> Your List </h1>
@@ -103,8 +106,9 @@ const YourList = props => {
                     orderedList.map((listitem, i, holdarray) =>
 
                             (
-                                < span key = {JSON.stringify(listitem)}
-                                    onClick = {() => handleClick(listitem)}
+                                <>
+                                < div key = {JSON.stringify(listitem)}
+                                    onClick = {() => handleSelect(listitem)}
                                 >
                    <ListItem key ={JSON.stringify(listitem)}                   
                          content = {JSON.stringify(listitem)}                    
@@ -112,7 +116,13 @@ const YourList = props => {
                            name = {listitem.name}
                            expdatestr = {listitem.expdatestr}
                        />
-                                </span> 
+                                </div> 
+                                <div>
+                                    <button onClick = {() => handleClick(listitem)} >
+                                        Edit This Item
+                                    </button>
+                                </div>
+                                </>
                             )
                         )
                     }
@@ -120,7 +130,7 @@ const YourList = props => {
                 )
 
             }
-            if (isEditing == true){
+            if (isEditing == true && isInspecting == false){
                     console.log(editMode.toString()) 
                     console.log(isEditing)
                 return (
@@ -130,6 +140,17 @@ const YourList = props => {
                         changelist = {updateOrder}
                         currentlist = {orderedList}
                     />
+                )
+            }
+            if (isInspecting == true && isEditing == false) {
+                return (
+                    <Inspect listitem = {currentItem} 
+                             inspectMode = {inspectMode}
+                             editMode = {editMode}
+
+                    />
+
+
                 )
             }
 
