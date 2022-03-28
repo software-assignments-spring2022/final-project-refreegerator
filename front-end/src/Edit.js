@@ -1,42 +1,51 @@
 import { useState } from "react";
 import './Edit.css'
 import { useNavigate } from 'react-router-dom';
+import UserList from "./UserList"
 
-const Edit = props =>{
-    const [inputs, setInputs] = useState({});
+const Edit = (props) =>{
+    const [inputs, setInputs] = useState(props.listitem);
+    //console.log(props.func.toString());
     const navigate = useNavigate();
     const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;;
-        setInputs(values => ({...values, [name]: value}))
-      }
+    const name = event.target.name;
+    const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+    setInputs(values => ({...values, [name]: value}))
+    }
+   //console.table(inputs) 
     
-
-    const handleSubmit = (event) => {
+    const handlesubmit = (event) => {
         event.preventDefault();
         console.log(inputs);
-        navigate('/UserList');
+        let newlist = props.currentlist
+        newlist[props.currentlist.indexOf(props.listitem)] = inputs
+        console.table(newlist)
+        props.changelist(newlist)
+        props.func(false)
+        //navigate('/userlist');
     }
     const cancel = (event) =>{
-        event.preventDefault();
+        event.preventdefault();
         console.log("cancelled");
-        navigate('/UserList');
+        props.func(false);
+        //navigate('/userlist');
       }
     const del = (event) =>{
-        event.preventDefault();
+        event.preventdefault();
         console.log("deleted");
-        navigate('/UserList');
+        //navigate('/userlist');
     }
       return (
         <>
-        <h1>Edit an Item</h1>
-        <form onSubmit={handleSubmit}>
+        <h1>edit an item</h1>
+        <form onSubmit={handlesubmit}>
 
       <label className="sec">Name:
       <input 
         type="text" 
         name="name" 
-        value={inputs.name || ""} 
+        //value={inputs.name || ""} 
+          value = {inputs.name || "name"}
         // value={props.details.name || "name"} 
         onChange={handleChange}
       />
@@ -66,8 +75,8 @@ const Edit = props =>{
         <label className="sec">Expiration Date:
         <input 
           type="date" 
-          name="ex_date" 
-          value={inputs.ex_date || ""} 
+          name="expdatestr" 
+          value={inputs.expdatestr || ""} 
           //value={props.details.ex_date || ""} 
           onChange={handleChange}
         />
@@ -91,7 +100,7 @@ const Edit = props =>{
         <input 
           type="number" 
           name="notif" 
-          value={inputs.notif || ""} 
+          //value={inputs.notif || ""} 
           //value={props.details.notif || ""} 
           onChange={handleChange}
         />

@@ -3,20 +3,31 @@ import './Inspect.css'
 import Item from "./Item"
 import { Link } from 'react-router-dom'
 
-const Inspect = () => {
+const Inspect = (props) => {
+    const editHandle = () =>{
+        props.editMode(true)
+        props.inspectMode(false)
+    }
+    const handleBack = () => {
+        props.editMode(false)
+        props.inspectMode(false)
+
+    }
   return (
     <>
+        <div>
         <Item
-            name="Eggs"
-            details="I bought my eggs from Eggs-R-Us instead of Eggs-Mart this time"
-            quantity="2"
+            name={props.listitem.name}
+            details={props.listitem.info}
+            quantity = {props.quantity}
         />
         <div className='Recipes'>
             <b>Suggested Recipes</b>
         </div>
         <div className='Buttons'>
-            <Link to="/userlist"><button className='buttons1'>Back</button></Link>
-            <Link to="/edit"><button className='buttons1'>Edit Item</button></Link>
+            <button onClick = {() => handleBack()}className='buttons1'>Back</button>
+            <button onClick = {() => editHandle()}className='buttons1'>Edit Item</button>
+        </div>
         </div>
     </>
   )
