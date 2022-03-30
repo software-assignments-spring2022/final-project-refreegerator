@@ -6,7 +6,7 @@ import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
-
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 /**
  * A React component that is used for the header displayed at the top of every page of the site.
  * @param {*} param0 an object holding any props passed to this component from its parent component
@@ -14,17 +14,39 @@ import IconButton from '@mui/material/IconButton';
  */
 const Header = () => {
   const [anchor, setAnchor] = React.useState(null);
+  const [anchor2, setAnchor2] = React.useState(null);
   const handleClick = (event) => {
     setAnchor(event.currentTarget);
   };
   const handleClose = () => {
     setAnchor(null);
   };
+  const handleClick2 = (event) => {
+    setAnchor2(event.currentTarget);
+  };
+  const handleClose2 = () => {
+    setAnchor2(null);
+  };
   return (
       <>
     <header className="Header-header">
       <img src = {logo} className = "logo" alt = "ReFreegerator Logo" />
       <h2> <Link to="/UserList" className='Refreegerator'> Refreegerator </Link> </h2>
+        <div id= "notifications">
+        <NotificationsNoneIcon onClick={handleClick2} fontSize="large"></NotificationsNoneIcon>
+        <Menu
+              anchorEl={anchor2}
+              open={Boolean(anchor2)}
+              onClose={handleClose2}
+              onClick={handleClose2}
+              transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+              anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+          >
+            <MenuItem>
+                <h6 >Example Notification</h6>
+            </MenuItem>
+          </Menu>
+        </div>    
        <div id="profile"> 
         <IconButton onClick={handleClick}><Avatar/> </IconButton>
           <Menu

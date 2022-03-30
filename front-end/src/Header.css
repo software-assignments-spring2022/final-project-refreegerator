@@ -22,13 +22,17 @@
   color: black;
 }
 #profile {
- display:block;
- width: 60px;
- margin-left: auto;
+ display:flex;
  margin-right: 25px;
  padding-right: 15px;
 }
-
+#notifications {
+  display:flex;
+  margin-left: auto;
+  margin-right: 10px;
+  width: 40px;
+}
+ 
 .logo {
   display: block;
   width: 60px;
