@@ -21,7 +21,7 @@ const GuestList = props => {
     return(
         <>
             <YourList placeholder = {placeholder}/>
-            <ListButtons />
+            <ListButtons editAll = {false} />
         </>
     )
 }
