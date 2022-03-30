@@ -11,11 +11,12 @@ const YourList = props => {
     const [orderedList, updateOrder] = useState(props.placeholder);
    const [alreadyAdded, changeAdded] = useState(false); 
     //let addeditemlist = location.state.addeditemlist
-    let {addeditemlist} = location.state
+    if (location.state != null){
+        let {addeditemlist} = location.state
+    
 //    if (addeditemlist != undefined) {
 //        updateOrder(orderedList);
 //    }
-    console.table(addeditemlist)
     
     //let specific_item = location.state
 //    if (specific_item != null && alreadyAdded == false){
@@ -39,8 +40,9 @@ const YourList = props => {
             console.table(orderedList)
         }
     }
-    console.table(orderedList)
-    console.table(addeditemlist)
+    }
+    //console.table(orderedList)
+    //console.table(addeditemlist)
     const [isEditing, editMode] = useState(false);
     const [isInspecting, inspectMode] = useState(false);
     const hasList = true;
