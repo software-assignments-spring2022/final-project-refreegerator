@@ -1,8 +1,10 @@
 import YourList from "./YourList"
 import ListButtons from "./ListButtons"
+import {useState, useEffect} from "react"
 
 const GuestList = props => {
 
+    const [editAll, setEditAll] = useState(false)
     const placeholder = [
         {category : "Dairy",
             name : "Cheese",
@@ -20,8 +22,14 @@ const GuestList = props => {
 
     return(
         <>
-            <YourList placeholder = {placeholder}/>
-            <ListButtons />
+            <YourList placeholder = {placeholder}
+                      editAll = {editAll}                                 
+                      setEditAll = {setEditAll}
+            />
+            <ListButtons 
+                      editAll = {editAll}                                 
+                      setEditAll = {setEditAll}
+            />
         </>
     )
 }
