@@ -14,9 +14,10 @@ const YourList = props => {
     
     //const [propagate, setPropagate] = useState(props.
     //let addeditemlist = location.state.addeditemlist
-    if (location.state != null){
+    if (location.state != null && alreadyAdded == false){
         let {addeditemlist} = location.state
         let {addeditem} = location.state
+        changeAdded(true)
     
 //    if (addeditemlist != undefined) {
 //        updateOrder(orderedList);
@@ -72,6 +73,7 @@ const YourList = props => {
         updateOrder(orderedList.filter( 
             (iterateitem) => (iterateitem !== item))
         )
+        props.propagate(orderedList)
     }
 
     const current = new Date();
