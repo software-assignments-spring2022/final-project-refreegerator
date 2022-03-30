@@ -1,5 +1,6 @@
 import YourList from "./YourList"
 import ListButtons from "./ListButtons"
+import {useState, useEffect} from "react"
 
 const GuestList = props => {
     
@@ -9,7 +10,9 @@ const GuestList = props => {
     console.log(is);
     console.log(typeof(is));
     // console.log(item.map(i => i.name));
-    const guestData = [
+
+    const [editAll, setEditAll] = useState(false)
+    const placeholder = [
         {category : "Dairy",
             name : "Cheese",
             // name: is.map(i, e => i.name, i.ex_date),
@@ -27,8 +30,14 @@ const GuestList = props => {
 
     return(
         <>
-            <YourList guestData = {guestData}/>
-            {/*<ListButtons /> */}
+            <YourList placeholder = {placeholder}
+                      editAll = {editAll}                                 
+                      setEditAll = {setEditAll}
+            />
+            <ListButtons 
+                      editAll = {editAll}                                 
+                      setEditAll = {setEditAll}
+            />
         </>
     )
 }
