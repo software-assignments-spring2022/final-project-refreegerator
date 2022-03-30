@@ -3,8 +3,58 @@ import './Add.css'
 import { useNavigate } from 'react-router-dom';
 
 const Add = props =>{
+    let currentdate = new Date();
+    const autocomplete_names = [
+        "yogurt",
+    ];
+    const placeholder = [
+        {name: "yogurt", days:14, category: "dairy"} 
+    ]
     const [inputs, setInputs] = useState({});
+    const [autodate, setAutodate] = useState("");
     const navigate = useNavigate();
+    const autoComplete = (event) => {
+        let foodname = "undefined"
+        //console.log(event.target.name);
+        
+        if (event.target.name == "name"){
+
+             foodname = event.target.value;
+             handleChange(event); 
+        }
+        //console.log(foodname);
+        if (autocomplete_names.includes(foodname)){
+            console.log("success");
+            event.target.name = "ex_date";
+            placeholder.forEach(auto_item =>
+                {
+                    if (auto_item.name == foodname){
+                       //if (event.target.name = "ex_date"){
+                           handleChange(event);
+                           console.log("ex date = true");
+                           console.log(auto_item);
+                           console.log(currentdate);
+                            //if (event.target.value == ""){
+                                let newdate =  new Date();
+                                newdate.setDate(currentdate.getDate() + auto_item.days)
+                                const newdatestr = newdate.toLocaleDateString('en-CA');
+                                event.target.value = newdatestr;
+                                console.log("current date is: ");
+                                console.log(currentdate);
+                                console.log("new date is: ");
+                                console.log(newdatestr);
+                                console.log(event.target.value);
+                                handleChange(event);
+                            //}
+
+                       //}
+
+                    }
+                }
+            )
+            event.target.name = "name";
+        }
+    }
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;;
@@ -32,7 +82,7 @@ const Add = props =>{
         type="text" 
         name="name" 
         value={inputs.name || ""} 
-        onChange={handleChange}
+        onChange={autoComplete}
       />
       </label>
         <br></br>
