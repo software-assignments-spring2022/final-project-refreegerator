@@ -2,10 +2,17 @@ import YourList from "./YourList"
 import ListButtons from "./ListButtons"
 
 const GuestList = props => {
-
-    const placeholder = [
+    
+    var i = localStorage.getItem('item');
+    console.log(i);
+    var is = JSON.parse(localStorage.getItem('items'));
+    console.log(is);
+    console.log(typeof(is));
+    // console.log(item.map(i => i.name));
+    const guestData = [
         {category : "Dairy",
             name : "Cheese",
+            // name: is.map(i, e => i.name, i.ex_date),
             expdatestr : "3000-05-25"
         },
         {category : "Zed",
@@ -20,8 +27,8 @@ const GuestList = props => {
 
     return(
         <>
-            <YourList placeholder = {placeholder}/>
-            <ListButtons />
+            <YourList guestData = {guestData}/>
+            {/*<ListButtons /> */}
         </>
     )
 }

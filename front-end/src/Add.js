@@ -8,14 +8,24 @@ const Add = props =>{
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;;
-        setInputs(values => ({...values, [name]: value}))
+        setInputs(values => ({...values, [name]: value}));
+        // console.log(inputs);
       }
     
 
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(inputs);
+        // localStorage.setItem('items', inputs);
+        addEntry();
         navigate('/UserList');
+    }
+    function addEntry(){
+      var existingEntries = JSON.parse(localStorage.getItem("items"));
+      if(existingEntries == null) existingEntries = [];
+      localStorage.setItem("item",JSON.stringify(inputs));
+      existingEntries.push(inputs);
+      localStorage.setItem("items", JSON.stringify(existingEntries));
     }
     const cancel = (event) =>{
       event.preventDefault();
@@ -43,6 +53,16 @@ const Add = props =>{
           value={inputs.quantity || ""} 
           onChange={handleChange}
         />
+        </label>
+        <br></br>
+        <label className="sec"> Category:
+        <select name="category" id="category" onChange={handleChange} value = {""}>
+        <option value="Fruits">Fruits</option>
+        <option value="Vegetable">Vegetable</option>
+        <option value="Grains">Grains</option>
+        <option value="Protein">Protein</option>
+        <option value="Dairy">Dairy</option>
+        </select>
         </label>
         <br></br>
         <label className="sec">Extra Information:
