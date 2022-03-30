@@ -8,11 +8,15 @@ import {useLocation} from "react-router-dom"
 const YourList = props => {
     const location = useLocation();
     const [sortpref, setSortPref] = useState(""); 
+    
     const [orderedList, updateOrder] = useState(props.placeholder);
-   const [alreadyAdded, changeAdded] = useState(false); 
+    const [alreadyAdded, changeAdded] = useState(false); 
+    
+    //const [propagate, setPropagate] = useState(props.
     //let addeditemlist = location.state.addeditemlist
     if (location.state != null){
         let {addeditemlist} = location.state
+        let {addeditem} = location.state
     
 //    if (addeditemlist != undefined) {
 //        updateOrder(orderedList);
@@ -33,9 +37,13 @@ const YourList = props => {
         console.log("original list has length: ");
         console.log(orderedList.length);
         if (addeditemlist.length > orderedList.length){
-            
             console.log("adding the new item");
+            let new_arr = orderedList;
+            //new_arr.push(addeditem)
             updateOrder(addeditemlist)
+            //updateOrder(new_arr);
+            props.propagate(addeditemlist)
+            
             setSortPref("foodcat")
             console.table(orderedList)
         }

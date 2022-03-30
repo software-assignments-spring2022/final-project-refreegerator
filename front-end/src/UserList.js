@@ -20,6 +20,13 @@ const UserList = props => {
                 quantity:5
         }
     ]
+    const [items, setItems] = useState(placeholder)
+    useEffect(() => {
+        console.log("propagation has occurred")
+        console.table(items)
+
+    }
+    )
     let new_item = { name: "Potatoes", category: "Storage", expdatestr: "2020-02-02", quantity: 6}
     placeholder[0] = new_item;
     
@@ -28,12 +35,13 @@ const UserList = props => {
         <>
             <YourList placeholder = {placeholder}
                       editAll = {editAll}                                 
+                      propagate = {setItems}
                       setEditAll = {setEditAll}
             />
             <ListButtons 
                       editAll = {editAll}                                 
                       setEditAll = {setEditAll}
-                      allItems = {placeholder} 
+                      allItems = {items} 
             />
         </>
     )

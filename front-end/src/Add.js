@@ -169,6 +169,7 @@ const Add = props =>{
             {/*<Link to = {{pathname: "/UserList", state: {placeholder : olditems}}}>*/}
             <Link to = "/UserList" state = {{addeditemlist: itemList,
 
+                                    addeditem:inputs
                 }}>
                 <button > Submit </button>
                 {/*specific_item: inputs*/}
