@@ -1,9 +1,18 @@
 import { useState } from "react";
 import './Add.css'
 import { useNavigate } from 'react-router-dom';
-
+import {Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 const Add = props =>{
     let currentdate = new Date();
+    //console.log("hello")
+    const location = useLocation();
+
+    let {olditems} = location.state
+    const [oldLength, setOldLength] = useState(olditems.length)
+    const [newLength, setNewLength] = useState(olditems.length)
+    const [itemList, setItemList] = useState(olditems)
+    //console.log(olditems.length)
     const autocomplete_names = [
         "yogurt",
     ];
@@ -12,20 +21,19 @@ const Add = props =>{
     ]
     const [inputs, setInputs] = useState({});
     const [autodate, setAutodate] = useState("");
+    //const [allitems, setAllItems] = useState(props.allitems)
     const navigate = useNavigate();
     const autoComplete = (event) => {
         let foodname = "undefined"
         //console.log(event.target.name);
-        
         if (event.target.name == "name"){
-
              foodname = event.target.value;
              handleChange(event); 
         }
         //console.log(foodname);
         if (autocomplete_names.includes(foodname)){
             console.log("success");
-            event.target.name = "ex_date";
+            event.target.name = "expdatestr";
             placeholder.forEach(auto_item =>
                 {
                     if (auto_item.name == foodname){
@@ -59,13 +67,25 @@ const Add = props =>{
         const name = event.target.name;
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;;
         setInputs(values => ({...values, [name]: value}))
+        //console.log(olditems.length);
+        if (oldLength == newLength){
+            console.log("the lengths are equal");
+            setNewLength(oldLength+1)
+            setOldLength(-1)
+            olditems.push(inputs)
+            setItemList(olditems)
+        }
+        else{
+            olditems[newLength-1] = inputs;
+            setItemList(olditems);
+        }
       }
     
 
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(inputs);
-        navigate('/UserList');
+        //navigate('/UserList');
     }
     const cancel = (event) =>{
       event.preventDefault();
@@ -83,6 +103,14 @@ const Add = props =>{
         name="name" 
         value={inputs.name || ""} 
         onChange={autoComplete}
+      />
+      </label>
+      <label className="sec">Category:
+      <input 
+        type="text" 
+        name="category" 
+        value={inputs.category || ""} 
+        onChange={handleChange}
       />
       </label>
         <br></br>
@@ -108,8 +136,8 @@ const Add = props =>{
         <label className="sec">Expiration Date:
         <input 
           type="date" 
-          name="ex_date" 
-          value={inputs.ex_date || ""} 
+          name="expdatestr" 
+          value={inputs.expdatestr || ""} 
           onChange={handleChange}
         />
         </label>
@@ -136,8 +164,17 @@ const Add = props =>{
         days before expiration
         </label>
         <br></br>
-        <input type="submit" />
+            {/*<input type="submit" />*/ }
+
+            {/*<Link to = {{pathname: "/UserList", state: {placeholder : olditems}}}>*/}
+            <Link to = "/UserList" state = {{addeditemlist: itemList,
+
+                }}>
+                <button > Submit </button>
+                {/*specific_item: inputs*/}
+            </Link>
     </form>
+            
     <button onClick={cancel}>Cancel</button>
         </>
       );

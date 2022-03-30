@@ -4,9 +4,43 @@ import ListItem from './ListItem'
 import { useState, useEffect} from "react";
 import Edit from "./Edit.js"
 import Inspect from "./Inspect.js"
+import {useLocation} from "react-router-dom"
 const YourList = props => {
+    const location = useLocation();
     const [sortpref, setSortPref] = useState(""); 
     const [orderedList, updateOrder] = useState(props.placeholder);
+   const [alreadyAdded, changeAdded] = useState(false); 
+    //let addeditemlist = location.state.addeditemlist
+    let {addeditemlist} = location.state
+//    if (addeditemlist != undefined) {
+//        updateOrder(orderedList);
+//    }
+    console.table(addeditemlist)
+    
+    //let specific_item = location.state
+//    if (specific_item != null && alreadyAdded == false){
+//        let new_arr = orderedList;
+//        new_arr.push(specific_item)
+//        updateOrder(specific_item)
+//        changeAdded(true)
+//
+//    }
+    if (addeditemlist != null) {
+        console.log("the branch has been taken");
+        console.log("received list has length: ");
+        console.log(addeditemlist.length);
+        console.log("original list has length: ");
+        console.log(orderedList.length);
+        if (addeditemlist.length > orderedList.length){
+            
+            console.log("adding the new item");
+            updateOrder(addeditemlist)
+            setSortPref("foodcat")
+            console.table(orderedList)
+        }
+    }
+    console.table(orderedList)
+    console.table(addeditemlist)
     const [isEditing, editMode] = useState(false);
     const [isInspecting, inspectMode] = useState(false);
     const hasList = true;

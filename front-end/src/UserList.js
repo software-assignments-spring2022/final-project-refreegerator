@@ -16,9 +16,13 @@ const UserList = props => {
         },
         {category : "Basket",
                 name :"Alphabetical",
-                expdatestr :"2020-01-01" 
+                expdatestr :"2020-01-01" ,
+                quantity:5
         }
     ]
+    let new_item = { name: "Potatoes", category: "Storage", expdatestr: "2020-02-02", quantity: 6}
+    placeholder[0] = new_item;
+    
 
     return(
         <>
@@ -29,6 +33,7 @@ const UserList = props => {
             <ListButtons 
                       editAll = {editAll}                                 
                       setEditAll = {setEditAll}
+                      allItems = {placeholder} 
             />
         </>
     )
