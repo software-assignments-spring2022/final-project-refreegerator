@@ -8,7 +8,7 @@ import {useLocation} from "react-router-dom"
 const YourList = props => {
     const location = useLocation();
     const [sortpref, setSortPref] = useState(""); 
-    
+    props.setSingleItem(false)    
     const [orderedList, updateOrder] = useState(props.placeholder);
     const [alreadyAdded, changeAdded] = useState(false); 
     
@@ -171,7 +171,7 @@ const YourList = props => {
                 )
 
             }
-            if (isEditing == true && isInspecting == false){
+            if (isEditing == true  && isInspecting == false){
                     console.log(editMode.toString()) 
                     console.log(isEditing)
                 return (
@@ -180,6 +180,8 @@ const YourList = props => {
                         listitem = {currentItem}
                         changelist = {updateOrder}
                         currentlist = {orderedList}
+                        setEditAll = {props.setEditAll}
+                        setSingleItem = {props.setSingleItem}
                     />
                 )
             }

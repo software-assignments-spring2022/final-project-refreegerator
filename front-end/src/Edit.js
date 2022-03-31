@@ -5,6 +5,7 @@ import UserList from "./UserList"
 
 const Edit = (props) =>{
     const [inputs, setInputs] = useState(props.listitem);
+    const [update, setUpdate] = useState(false);
     //console.log(props.func.toString());
     const navigate = useNavigate();
     const handleChange = (event) => {
@@ -12,6 +13,10 @@ const Edit = (props) =>{
     const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
     setInputs(values => ({...values, [name]: value}))
     }
+    if (props.setEditAll != null){
+        props.setEditAll(false)
+    }
+    props.setSingleItem(true)
    //console.table(inputs) 
     
     const handlesubmit = (event) => {
@@ -25,13 +30,18 @@ const Edit = (props) =>{
         //navigate('/userlist');
     }
     const cancel = (event) =>{
-        event.preventdefault();
+        event.preventDefault();
         console.log("cancelled");
         props.func(false);
+        setUpdate(true);
         //navigate('/userlist');
       }
     const del = (event) =>{
-        event.preventdefault();
+        event.preventDefault();
+        props.changelist(props.currentlist.filter(
+            (iterateitem) => (iterateitem != props.listitem))
+        )
+        props.func(false);
         console.log("deleted");
         //navigate('/userlist');
     }

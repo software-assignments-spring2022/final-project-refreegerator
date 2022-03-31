@@ -11,6 +11,9 @@ const ListButtons = (props) => {
     const itemlist = props.allItems;
     //console.table(itemlist);
     //console.log(itemlist.length);
+    if(props.singleItem == false){
+
+
     if (props.editAll == false){
 
         return(
@@ -34,6 +37,10 @@ const ListButtons = (props) => {
     }
 
 
+
+    }
+
+        else return (<>  </>)
 
 }
 
