@@ -3,6 +3,7 @@ import './Add.css'
 import { useNavigate } from 'react-router-dom';
 import {Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
+import Autocomplete from '@mui/material/Autocomplete';
 const Add = props =>{
     let currentdate = new Date();
     //console.log("hello")
@@ -23,22 +24,28 @@ const Add = props =>{
     const [autodate, setAutodate] = useState("");
     //const [allitems, setAllItems] = useState(props.allitems)
     const navigate = useNavigate();
-    const autoComplete = (event) => {
+    const autoComplete = (event, value) => {
         let foodname = "undefined"
+        const currentname = event.target.name;
         //console.log(event.target.name);
-        if (event.target.name == "name"){
+        console.log(event, value)
+        console.log(event.target.name)
+        if (event.target.name == "name" || value != null){
              foodname = event.target.value;
-             handleChange(event); 
+            if (value != null) {
+                foodname = value;
+            }
+             handleChange(event, value); 
         }
         //console.log(foodname);
         if (autocomplete_names.includes(foodname)){
             console.log("success");
-            event.target.name = "expdatestr";
+            //event.target.name = "expdatestr";
             placeholder.forEach(auto_item =>
                 {
                     if (auto_item.name == foodname){
                        //if (event.target.name = "ex_date"){
-                           handleChange(event);
+                           //handleChange(event);
                            console.log("ex date = true");
                            console.log(auto_item);
                            console.log(currentdate);
@@ -46,13 +53,15 @@ const Add = props =>{
                                 let newdate =  new Date();
                                 newdate.setDate(currentdate.getDate() + auto_item.days)
                                 const newdatestr = newdate.toLocaleDateString('en-CA');
-                                event.target.value = newdatestr;
+                                //event.target.value = newdatestr;
                                 console.log("current date is: ");
                                 console.log(currentdate);
                                 console.log("new date is: ");
                                 console.log(newdatestr);
                                 console.log(event.target.value);
-                                handleChange(event);
+                                //handleChange(event);
+                                setInputs(values => ({...values, "expdatestr": newdatestr}))
+                            //event.target.name = currentname; 
                             //}
 
                        //}
@@ -60,13 +69,19 @@ const Add = props =>{
                     }
                 }
             )
-            event.target.name = "name";
+            event.target.name = currentname;
         }
     }
-    const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;;
-        setInputs(values => ({...values, [name]: value}))
+    const handleChange = (event, value) => {
+        console.log(event, value)
+        let  name = event.target.name;
+        let  newval = event.target.type === 'checkbox' ? event.target.checked : event.target.value;;
+        if (value != null) {
+           newval = value 
+           name = "name"
+            console.log(newval)
+        }
+        setInputs(values => ({...values, [name]: newval}))
         //console.log(olditems.length);
         if (oldLength == newLength){
             console.log("the lengths are equal");
@@ -96,7 +111,25 @@ const Add = props =>{
         <>
         <h1>Add an Item</h1>
         <form onSubmit={handleSubmit}>
+            <label className = "sec"> Name:{' '}
+<Autocomplete
+        id="autosuggest_names"
+        freeSolo
+        options={(autocomplete_names)}
+        value = {inputs.name || ""}
+        name = "name"
+        onInputChange= {(event,value)  => autoComplete(event, value)}
+        renderInput={(params) => (
+          <div ref={params.InputProps.ref}>
+            <input type="text"  
+                   {...params.inputProps}
 
+              />
+          </div>
+        )}
+                />
+            </label>
+            {/*
       <label className="sec">Name:
       <input 
         type="text" 
@@ -105,6 +138,7 @@ const Add = props =>{
         onChange={autoComplete}
       />
       </label>
+      */}
       <label className="sec">Category:
       <input 
         type="text" 
