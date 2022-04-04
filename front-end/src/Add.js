@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import {Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import Autocomplete from '@mui/material/Autocomplete';
+import axios from "axios"
+
 const Add = props =>{
     let currentdate = new Date();
     //console.log("hello")
@@ -230,6 +232,18 @@ const Add = props =>{
         // localStorage.setItem('items', inputs);
         //addEntry();
         //navigate('/UserList');
+        addEntry();
+        axios
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/add/save`, {
+          inputs: inputs
+        })
+        .then(response => {
+        })
+        .catch(err => {
+          console.log('error')
+        })
+        navigate('/UserList');
+
     }
     function addEntry(){
       var existingEntries = JSON.parse(localStorage.getItem("items"));
