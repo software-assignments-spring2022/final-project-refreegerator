@@ -19,7 +19,18 @@ app.post('/profile/save', async (req, res) => {
     auto: req.body.auto
   }
   res.json(data)
-  console.log(data)
 })
-
+app.post('/add/save', async (req, res) => {
+  const data = {
+    inputs: req.body.inputs
+  }
+  res.json(data)
+})
+app.post('/edit/save', async (req, res) => {
+  const data = {
+    inputs: req.body.inputs
+  }
+  console.log(data)
+  res.json(data)
+})
 module.exports = app
