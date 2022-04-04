@@ -2,6 +2,7 @@ import React from 'react'
 import './Inspect.css'
 import Item from "./Item"
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const Inspect = (props) => {
     const editHandle = () =>{
@@ -23,6 +24,9 @@ const Inspect = (props) => {
         />
         <div className='Recipes'>
             <b>Suggested Recipes</b>
+        </div>
+        <div className='Stores'>
+            <b>Stores</b>
         </div>
         <div className='Buttons'>
             <button onClick = {() => handleBack()}className='buttons1'>Back</button>
