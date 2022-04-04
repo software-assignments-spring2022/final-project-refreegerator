@@ -1,7 +1,6 @@
 import React from 'react'
 import './Inspect.css'
 import Item from "./Item"
-import { Link } from 'react-router-dom'
 
 const Inspect = (props) => {
     const editHandle = () =>{
@@ -12,7 +11,7 @@ const Inspect = (props) => {
         props.editMode(false)
         props.inspectMode(false)
 
-    }
+    } 
   return (
     <>
         <div>
