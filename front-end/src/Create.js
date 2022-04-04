@@ -4,6 +4,7 @@ import './Create.css'
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
+const axios = require("axios")
 
 
 /**
@@ -19,8 +20,10 @@ function Create() {
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+  const [name, setName] = useState('');
+  const [pass, setPass] = useState('');
   // User Login info
+  /*
   const database = [
     {
       username: "user1",
@@ -36,7 +39,23 @@ function Create() {
     uname: "invalid username",
     pass: "invalid password"
   };
-
+*/
+const handleSubmit = e =>{
+  e.preventDefault();
+  console.log((name));
+  console.log((pass));
+  axios
+    .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/create/save`, {name: name, pass: pass})
+    .then((response) => {
+      console.log(response);
+    })
+    .catch(err => {
+      console.log(`error error error! ${err}`)
+    })
+    setName('');
+    setPass('');
+}
+/*
   const handleSubmit = (event) => {
     //don't reload on submit
     event.preventDefault();
@@ -65,8 +84,8 @@ function Create() {
     name === errorMessages.name && (
       <div className="error">{errorMessages.message}</div>
     );
-
-
+*/
+/*
   const renderForm = (
     <div className="form">
       <form onSubmit={handleSubmit}>
@@ -91,14 +110,40 @@ function Create() {
       <div> Already a user? <a href="/">Sign in</a>, or <a href = "/guestlist">continue as a guest.</a>  </div> 
     </div>
   );
+*/
 
+const renderForm = (
+
+  <div className="form">
+    <form onSubmit={handleSubmit}>
+      <div className="input-container">
+        <label>Username </label>
+        <input type="text" value={name} required onChange={e => setName(e.target.value)} />
+        {/* {renderErrorMessage("uname")} */}
+      </div>
+      <div className="input-container">
+        <label>Password </label>
+        <input type="password" value={pass} required onChange={e => setPass(e.target.value)}/>
+        {/* {renderErrorMessage("pass")} */}
+      </div>
+      <div className="button-container">
+        <input type="submit" />
+      </div>
+      <br></br>
+    </form>
+    
+    <div> New User? <a href="/create">Create an account</a> or <a href= "/guestlist">continue as a guest.</a> </div> 
+  </div>
+);
   return (
     <div className="app">
       
       <div className="login-form">
         <div className="title">Create Account</div>
-        
+        {/*
         {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+  */}
+      {renderForm}
       </div>
       
     </div>
