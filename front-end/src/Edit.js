@@ -60,6 +60,16 @@ const Edit = (props) =>{
         onChange={handleChange}
       />
       </label>
+      <br></br>
+      <label className="sec"> Category:
+        <input 
+          type="text" 
+          name="category" 
+          value={inputs.category || ""} 
+          // value={props.details.category || ""} 
+          onChange={handleChange}
+        />
+        </label>
         <br></br>
       <label className="sec"> Quantity:
         <input 
