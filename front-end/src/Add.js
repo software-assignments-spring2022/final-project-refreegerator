@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import './Add.css'
 import { useNavigate } from 'react-router-dom';
 import {Link } from 'react-router-dom'
@@ -13,6 +13,7 @@ const Add = props =>{
     const [oldLength, setOldLength] = useState(olditems.length)
     const [newLength, setNewLength] = useState(olditems.length)
     const [itemList, setItemList] = useState(olditems)
+    const [update, forceUpdate] = useState(false)
     //console.log(olditems.length)
     const autocomplete_names = [
         "yogurt",
@@ -31,7 +32,20 @@ const Add = props =>{
     const [autodate, setAutodate] = useState("");
     //const [allitems, setAllItems] = useState(props.allitems)
     const navigate = useNavigate();
-    const autoComplete = (event, value) => {
+    useEffect(() => {
+        if (oldLength == newLength){
+            console.log("the lengths are equal");
+            setNewLength(oldLength+1)
+            setOldLength(-1)
+            olditems.push(inputs)
+            setItemList(olditems)
+        }
+        else{
+            olditems[newLength-1] = inputs;
+            setItemList(olditems);
+        }
+                    },[inputs])
+    const autoComplete = async (event, value) =>  { 
         let foodname = "undefined"
         const currentname = event.target.name;
         //console.log(event.target.name);
@@ -41,8 +55,12 @@ const Add = props =>{
              foodname = event.target.value;
             if (value != null) {
                 foodname = value;
+             //handleChange(event, foodname); 
             }
-             handleChange(event, value); 
+            else {
+
+                //handleChange(event)
+            }
         }
         //console.log(foodname);
         if (autocomplete_names.includes(foodname)){
@@ -68,7 +86,11 @@ const Add = props =>{
                                 console.log(newdatestr);
                                 console.log(event.target.value);
                                 //handleChange(event);
-                                setInputs(values => ({...values, "expdatestr": newdatestr}))
+                                 setInputs(values =>  ({...values, "expdatestr": newdatestr}), console.log(inputs))
+                                 
+                                 setInputs(values =>  ({...values, "name": foodname}), console.log(inputs))
+                                 //setInputs(values => ({...values, "": ""}))
+                                //setInputs(values => (values['expdatestr'] = newdatestr))
                                 //setInputs(values => ({...values, "category": newcategory}))
 
                             //event.target.name = currentname; 
@@ -79,19 +101,30 @@ const Add = props =>{
                     }
                 }
             )
-            event.target.name = currentname;
+            //event.target.name = currentname;
+            //handleChange(event, value)
+            handleChange(event, value)
         }
     }
     const handleChange = (event, value) => {
         console.log(event, value)
-        let  name = event.target.name;
-        let  newval = event.target.type === 'checkbox' ? event.target.checked : event.target.value;;
+        let  newname = event.target.name;
+        let newval = ""
+          newval = event.target.type === 'checkbox' ? event.target.checked : event.target.value;;
         if (value != null) {
            newval = value 
-           name = "name"
-            console.log(newval)
+           newname = "name"
+           console.log(newval)
+            setInputs(values => ({...values, "name": newval}))
+            //setInputs(values => ({...values, "": ""}))
         }
-        setInputs(values => ({...values, [name]: newval}))
+        else{
+             setInputs(values => ({...values, [event.target.name]: newval}))
+        }
+        //setInputs(values => ({...values, [newname]: newval}))
+       
+        //setInputs(values => (values[newname]= newval))
+        console.table(inputs)
         //console.log(olditems.length);
         if (oldLength == newLength){
             console.log("the lengths are equal");
@@ -129,6 +162,7 @@ const Add = props =>{
         value = {inputs.name || ""}
         name = "name"
         onInputChange= {(event,value)  => autoComplete(event, value)}
+        //onChange = {(event,value) => autoComplete(event,value)}
         renderInput={(params) => (
           <div ref={params.InputProps.ref}>
             <input type="text"  
