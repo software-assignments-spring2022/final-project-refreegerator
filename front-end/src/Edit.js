@@ -55,7 +55,7 @@ const Edit = (props) =>{
         type="text" 
         name="name" 
         //value={inputs.name || ""} 
-          value = {inputs.name || "name"}
+          value = {inputs.name || ""}
         // value={props.details.name || "name"} 
         onChange={handleChange}
       />

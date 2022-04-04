@@ -67,7 +67,6 @@ const Add = props =>{
                                 console.log("new date is: ");
                                 console.log(newdatestr);
                                 console.log(event.target.value);
-
                                 //handleChange(event);
                                 setInputs(values => ({...values, "expdatestr": newdatestr}))
                                 //setInputs(values => ({...values, "category": newcategory}))
