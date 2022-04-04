@@ -2,6 +2,7 @@ import { useState } from "react";
 import './Edit.css'
 import { useNavigate } from 'react-router-dom';
 import UserList from "./UserList"
+import axios from "axios"
 
 const Edit = (props) =>{
     const [inputs, setInputs] = useState(props.listitem);
@@ -22,7 +23,17 @@ const Edit = (props) =>{
         console.table(newlist)
         props.changelist(newlist)
         props.func(false)
+        axios
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/edit/save`, {
+          inputs: inputs
+        })
+        .then(response => {
+        })
+        .catch(err => {
+          console.log('error')
+        })
         //navigate('/userlist');
+        
     }
     const cancel = (event) =>{
         event.preventdefault();

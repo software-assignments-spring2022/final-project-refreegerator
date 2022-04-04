@@ -24,7 +24,6 @@ const ProfileForm = () => {
         .catch(err => {
           console.log('error')
         })
-      // clear form
 
     }  
     return (
