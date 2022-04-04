@@ -16,9 +16,16 @@ const Add = props =>{
     //console.log(olditems.length)
     const autocomplete_names = [
         "yogurt",
+        "milk",
+        "banana",
+        "apple"
     ];
     const placeholder = [
-        {name: "yogurt", days:14, category: "dairy"} 
+        {name: "yogurt", days:14, category: "dairy"},
+        {name: "milk", days: 10, category: "dariy"},
+        {name: "banana", days: 7, category: "fruit"},
+        {name: "apple", days: 9, category: "fruit"}
+
     ]
     const [inputs, setInputs] = useState({});
     const [autodate, setAutodate] = useState("");
@@ -53,6 +60,7 @@ const Add = props =>{
                                 let newdate =  new Date();
                                 newdate.setDate(currentdate.getDate() + auto_item.days)
                                 const newdatestr = newdate.toLocaleDateString('en-CA');
+                                const newcategory = auto_item.category
                                 //event.target.value = newdatestr;
                                 console.log("current date is: ");
                                 console.log(currentdate);
@@ -61,6 +69,8 @@ const Add = props =>{
                                 console.log(event.target.value);
                                 //handleChange(event);
                                 setInputs(values => ({...values, "expdatestr": newdatestr}))
+                                setInputs(values => ({...values, "category": newcategory}))
+
                             //event.target.name = currentname; 
                             //}
 
