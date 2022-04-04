@@ -3,7 +3,7 @@ import ListButtons from "./ListButtons"
 import {useState, useEffect} from "react"
 
 const UserList = props => {
-    
+  
     const [editAll, setEditAll] = useState(false)
     const placeholder = [
         {category : "Dairy",
@@ -49,4 +49,4 @@ const UserList = props => {
         </>
     )
 }
-export default UserList
+export default UserList  
