@@ -3,6 +3,7 @@ import './Inspect.css'
 import Item from "./Item"
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+const URL = "https://api.kroger.com/v1/"
 
 const Inspect = (props) => {
     const editHandle = () =>{
@@ -14,6 +15,14 @@ const Inspect = (props) => {
         props.inspectMode(false)
 
     }
+
+    const[post, setPost] = React.useState(null);
+
+    React.useEffect(() => {
+        axios.get(URL).then((response) => {
+            setPost(response.data);
+        });
+    });
   return (
     <>
         <div>
