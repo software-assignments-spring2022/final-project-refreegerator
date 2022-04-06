@@ -18,6 +18,7 @@ app.post('/profile/save', async (req, res) => {
     suggest: req.body.suggest,
     auto: req.body.auto
   }
+  console.log(data)
   res.json(data)
 })
 app.post('/add/save', async (req, res) => {
