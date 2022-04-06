@@ -29,9 +29,26 @@ app.post('/create/save', async (req, res)=>{
     }
     res.json(data);
     console.log(data);
-    // res.json({loggedin: true, message: 'loggedin'});
 })
 
+app.get('/userlist', (req, res)=>{
+    const data = [
+        {category : "Dairy",
+            name : "Cheese",
+            expdatestr : "3000-05-25"
+        },
+        {category : "Grain",
+                name: "Bread",
+                expdatestr : "1031-01-29"
+        },
+        {category : "Basket",
+                name :"Alphabetical",
+                expdatestr :"2020-01-01" 
+        }
+    ]
+    res.json(data);
+    console.log(data, 0);
+})
 
 module.exports = app
 

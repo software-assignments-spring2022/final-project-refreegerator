@@ -5,8 +5,10 @@ import { useState, useEffect} from "react";
 import Edit from "./Edit.js"
 import Inspect from "./Inspect.js"
 const YourList = props => {
+
+
     const [sortpref, setSortPref] = useState(""); 
-    const [orderedList, updateOrder] = useState(props.placeholder);
+    const [orderedList, updateOrder] = useState([...props.placeholder]);
     const [isEditing, editMode] = useState(false);
     const [isInspecting, inspectMode] = useState(false);
     const hasList = true;
@@ -14,12 +16,13 @@ const YourList = props => {
         setCurrent(item)
         inspectMode(true)
     };
+    console.log(orderedList);
     const [currentItem, setCurrent] = useState({})
     const handleClick = (item) => {
         if (isEditing == false){
-           console.log("div was clicked")
+           //console.log("div was clicked")
            editMode(true);
-            console.table(item)
+            //console.table(item)
 
         }
         setCurrent(item)
@@ -36,7 +39,7 @@ const YourList = props => {
         return msdiff / (1000 * 60 * 60 * 24) 
     }
     const handleSort = (event) => {
-        console.log(event.target.value)
+        //console.log(event.target.value)
         const newarray = [...orderedList]
         if (event.target.value == "closetospoil") {
         newarray.sort((a,b) => {
@@ -60,7 +63,7 @@ const YourList = props => {
             else {return 1}
             }
             )
-            console.table(newarray)
+            //console.table(newarray)
         }
         if (event.target.value == "foodcat"){
             newarray.sort((a,b) => {
@@ -68,11 +71,11 @@ const YourList = props => {
                 else {return 1}
             }
             ) 
-            console.table(newarray)
+            //console.table(newarray)
         }
         if (event.target.value == "name") {
             newarray.sort((a,b) => (a.name <= b.name) ? -1: 1);
-            console.table(newarray)
+            //console.table(newarray)
         }
             updateOrder(newarray)
     }
@@ -126,8 +129,8 @@ const YourList = props => {
 
             }
             if (isEditing == true && isInspecting == false){
-                    console.log(editMode.toString()) 
-                    console.log(isEditing)
+                    //console.log(editMode.toString()) 
+                    //console.log(isEditing)
                 return (
                     
                     <Edit func = {editMode} 
