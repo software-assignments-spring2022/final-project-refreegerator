@@ -7,8 +7,15 @@ const GuestList = props => {
     var i = localStorage.getItem('item');
     console.log(i);
     var is = JSON.parse(localStorage.getItem('items'));
-    console.log(is);
-    console.log(typeof(is));
+    console.log((is));
+    const data = is.map(item => {
+        const container = {};
+        container.category = item.category;
+        container.name = item.name;
+        container.expdatestr = item.ex_date;
+        return container;
+    });
+    console.log(data);
     // console.log(item.map(i => i.name));
 
     const [editAll, setEditAll] = useState(false)
@@ -30,7 +37,7 @@ const GuestList = props => {
 
     return(
         <>
-            <YourList placeholder = {placeholder}
+            <YourList placeholder = {data}
                       editAll = {editAll}                                 
                       setEditAll = {setEditAll}
             />

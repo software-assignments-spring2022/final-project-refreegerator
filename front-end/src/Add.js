@@ -20,6 +20,7 @@ const Add = props =>{
         addEntry();
         navigate('/UserList');
     }
+    //adding to localStorage
     function addEntry(){
       var existingEntries = JSON.parse(localStorage.getItem("items"));
       if(existingEntries == null) existingEntries = [];
