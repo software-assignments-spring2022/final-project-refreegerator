@@ -16,7 +16,6 @@ const YourList = props => {
         setCurrent(item)
         inspectMode(true)
     };
-    console.log(props.placeholder);
     
     const [currentItem, setCurrent] = useState({})
 

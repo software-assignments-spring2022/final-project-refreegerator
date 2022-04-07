@@ -18,8 +18,6 @@ app.post('/save', async (req, res)=>{
         password: req.body.pass
     }
     res.json(data);
-    console.log(data);
-    // res.json({loggedin: true, message: 'loggedin'});
 })
 
 app.post('/create/save', async (req, res)=>{
@@ -28,7 +26,6 @@ app.post('/create/save', async (req, res)=>{
         password: req.body.pass
     }
     res.json(data);
-    console.log(data);
 })
 
 app.get('/userlist', (req, res)=>{
@@ -47,56 +44,8 @@ app.get('/userlist', (req, res)=>{
         }
     ]
     res.json(data);
-    console.log(data, 0);
 })
 
 module.exports = app
 
 
-
-
-
-
-
-/*
-require('./db');
-const path = require("path")
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
-const mongoose = require('mongoose');
-const User = mongoose.model('User');
-const session = require('express-session');
-app.use(session({
-    secret: 'refreegerator',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
-  }))
-
-passport.use(new LocalStrategy(
-    User.authenticate()
-));
-
-passport.serializeUser(function(user, done) {
-    done(null, user.username);
-});
-  
-passport.deserializeUser(function(username, done) {
-    User.findOne({username: username}, function (err, user) {
-        done(err, user);
-    });
-});
-
-
-
-
-function checkAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
-      return next();
-    }
-    res.redirect('/');
-}
-app.use(passport.initialize());
-app.use(passport.session());
-*/
-// passport.authenticate('local',{ failureRedirect: '/login' }, ()=> {console.log('hi')}),
