@@ -4,17 +4,15 @@ import {useState, useEffect} from "react"
 
 const GuestList = props => {
     
-    var i = localStorage.getItem('item');
-    console.log(i);
-    var is = JSON.parse(localStorage.getItem('items'));
-    console.log((is));
-    const data = is.map(item => {
+    var items = JSON.parse(localStorage.getItem('items'));
+    const data = items.map(item => {
         const container = {};
         container.category = item.category;
         container.name = item.name;
         container.expdatestr = item.ex_date;
         return container;
     });
+    console.log(Array.isArray(data));
     console.log(data);
     // console.log(item.map(i => i.name));
 

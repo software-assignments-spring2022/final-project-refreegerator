@@ -50,7 +50,7 @@ const UserList = props => {
 const fetchData = async() => {
     try {
         const response = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/userlist`);
-        console.log(response.data); 
+        console.log(typeof(response.data)); 
         setItems([...response.data]);
     }
     catch(error){
@@ -75,7 +75,8 @@ const fetchData = async() => {
     }, []);
 
 
-
+    console.log(Array.isArray(items));
+    console.log(items);
     return(
         <>
             <YourList placeholder = {items}

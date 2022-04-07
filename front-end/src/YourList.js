@@ -8,7 +8,7 @@ const YourList = props => {
 
 
     const [sortpref, setSortPref] = useState(""); 
-    const [orderedList, updateOrder] = useState([...props.placeholder]);
+    const [orderedList, updateOrder] = useState([]);
     const [isEditing, editMode] = useState(false);
     const [isInspecting, inspectMode] = useState(false);
     const hasList = true;
@@ -16,8 +16,14 @@ const YourList = props => {
         setCurrent(item)
         inspectMode(true)
     };
-    console.log(orderedList);
+    console.log(props.placeholder);
+    
     const [currentItem, setCurrent] = useState({})
+
+
+    useEffect(() => {
+        updateOrder(props.placeholder)
+    }, [props.placeholder]);
     const handleClick = (item) => {
         if (isEditing == false){
            //console.log("div was clicked")
@@ -142,11 +148,15 @@ const YourList = props => {
             }
             if (isInspecting == true && isEditing == false) {
                 return (
+                    <>
                     <Inspect listitem = {currentItem} 
                              inspectMode = {inspectMode}
                              editMode = {editMode}
 
                     />
+                    
+                    </>
+                    
 
 
                 )
