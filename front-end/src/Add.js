@@ -18,7 +18,7 @@ const Add = props =>{
         console.log(inputs);
         // localStorage.setItem('items', inputs);
         addEntry();
-        navigate('/UserList');
+        navigate('/GuestList');
     }
     //adding to localStorage
     function addEntry(){
@@ -31,7 +31,7 @@ const Add = props =>{
     const cancel = (event) =>{
       event.preventDefault();
       console.log("cancelled");
-      navigate('/UserList');
+      navigate('/GuestList');
     }
       return (
         <>
@@ -57,7 +57,7 @@ const Add = props =>{
         </label>
         <br></br>
         <label className="sec"> Category:
-        <select name="category" id="category" onChange={handleChange} value = {""}>
+        <select name="category" id="category" onChange={handleChange} value = {inputs.category}>
         <option value="Fruits">Fruits</option>
         <option value="Vegetable">Vegetable</option>
         <option value="Grains">Grains</option>
