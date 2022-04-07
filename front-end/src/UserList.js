@@ -8,6 +8,7 @@ const UserList = props => {
   
     const [editAll, setEditAll] = useState(false);
     const [items, setItems] = useState([]); 
+    const [singleItem, setSingleItem] = useState(false);
 
 const fetchData = async() => {
     try {
@@ -21,6 +22,8 @@ const fetchData = async() => {
     
     useEffect(()=>{
         fetchData();
+        // console.log("propagation has occurred")
+        // console.table(items);
     }, []);
 
 
@@ -28,11 +31,15 @@ const fetchData = async() => {
         <>
             <YourList placeholder = {items}
                       editAll = {editAll}                                 
+                      propagate = {setItems}
                       setEditAll = {setEditAll}
+                      setSingleItem = {setSingleItem}
             />
             <ListButtons 
                       editAll = {editAll}                                 
                       setEditAll = {setEditAll}
+                      allItems = {items} 
+                      singleItem = {singleItem}
             />
         </>
     )

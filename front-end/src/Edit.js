@@ -2,9 +2,11 @@ import { useState } from "react";
 import './Edit.css'
 import { useNavigate } from 'react-router-dom';
 import UserList from "./UserList"
+import axios from "axios"
 
 const Edit = (props) =>{
     const [inputs, setInputs] = useState(props.listitem);
+    const [update, setUpdate] = useState(false);
     //console.log(props.func.toString());
     const navigate = useNavigate();
     const handleChange = (event) => {
@@ -12,6 +14,10 @@ const Edit = (props) =>{
     const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
     setInputs(values => ({...values, [name]: value}))
     }
+    if (props.setEditAll != null){
+        props.setEditAll(false)
+    }
+    props.setSingleItem(true)
    //console.table(inputs) 
     
     const handlesubmit = (event) => {
@@ -22,16 +28,31 @@ const Edit = (props) =>{
         console.table(newlist)
         props.changelist(newlist)
         props.func(false)
+        axios
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/edit/save`, {
+          inputs: inputs
+        })
+        .then(response => {
+        })
+        .catch(err => {
+          console.log('error')
+        })
         //navigate('/userlist');
+        
     }
     const cancel = (event) =>{
-        event.preventdefault();
+        event.preventDefault();
         console.log("cancelled");
         props.func(false);
+        setUpdate(true);
         //navigate('/userlist');
       }
     const del = (event) =>{
-        event.preventdefault();
+        event.preventDefault();
+        props.changelist(props.currentlist.filter(
+            (iterateitem) => (iterateitem != props.listitem))
+        )
+        props.func(false);
         console.log("deleted");
         //navigate('/userlist');
     }
@@ -45,11 +66,21 @@ const Edit = (props) =>{
         type="text" 
         name="name" 
         //value={inputs.name || ""} 
-          value = {inputs.name || "name"}
+          value = {inputs.name || ""}
         // value={props.details.name || "name"} 
         onChange={handleChange}
       />
       </label>
+      <br></br>
+      <label className="sec"> Category:
+        <input 
+          type="text" 
+          name="category" 
+          value={inputs.category || ""} 
+          // value={props.details.category || ""} 
+          onChange={handleChange}
+        />
+        </label>
         <br></br>
       <label className="sec"> Quantity:
         <input 

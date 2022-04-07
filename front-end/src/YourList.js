@@ -4,11 +4,54 @@ import ListItem from './ListItem'
 import { useState, useEffect} from "react";
 import Edit from "./Edit.js"
 import Inspect from "./Inspect.js"
+import {useLocation} from "react-router-dom"
 const YourList = props => {
-
-
+    const location = useLocation();
     const [sortpref, setSortPref] = useState(""); 
+    props.setSingleItem(false)    
     const [orderedList, updateOrder] = useState([]);
+    const [alreadyAdded, changeAdded] = useState(false); 
+    
+    //const [propagate, setPropagate] = useState(props.
+    //let addeditemlist = location.state.addeditemlist
+    if (location.state != null && alreadyAdded == false){
+        let {addeditemlist} = location.state
+        let {addeditem} = location.state
+        changeAdded(true)
+    
+//    if (addeditemlist != undefined) {
+//        updateOrder(orderedList);
+//    }
+    
+    //let specific_item = location.state
+//    if (specific_item != null && alreadyAdded == false){
+//        let new_arr = orderedList;
+//        new_arr.push(specific_item)
+//        updateOrder(specific_item)
+//        changeAdded(true)
+//
+//    }
+    if (addeditemlist != null) {
+        console.log("the branch has been taken");
+        console.log("received list has length: ");
+        console.log(addeditemlist.length);
+        console.log("original list has length: ");
+        console.log(orderedList.length);
+        if (addeditemlist.length > orderedList.length){
+            console.log("adding the new item");
+            let new_arr = orderedList;
+            //new_arr.push(addeditem)
+            updateOrder(addeditemlist)
+            //updateOrder(new_arr);
+            props.propagate(addeditemlist)
+            
+            setSortPref("foodcat")
+            console.table(orderedList)
+        }
+    }
+    }
+    //console.table(orderedList)
+    //console.table(addeditemlist)
     const [isEditing, editMode] = useState(false);
     const [isInspecting, inspectMode] = useState(false);
     const hasList = true;
@@ -23,6 +66,7 @@ const YourList = props => {
     useEffect(() => {
         updateOrder(props.placeholder)
     }, [props.placeholder]);
+    
     const handleClick = (item) => {
         if (isEditing == false){
            //console.log("div was clicked")
@@ -36,6 +80,7 @@ const YourList = props => {
         updateOrder(orderedList.filter( 
             (iterateitem) => (iterateitem !== item))
         )
+        props.propagate(orderedList)
     }
 
     const current = new Date();
@@ -133,15 +178,17 @@ const YourList = props => {
                 )
 
             }
-            if (isEditing == true && isInspecting == false){
-                    //console.log(editMode.toString()) 
-                    //console.log(isEditing)
+            if (isEditing == true  && isInspecting == false){
+                    console.log(editMode.toString()) 
+                    console.log(isEditing)
                 return (
                     
                     <Edit func = {editMode} 
                         listitem = {currentItem}
                         changelist = {updateOrder}
                         currentlist = {orderedList}
+                        setEditAll = {props.setEditAll}
+                        setSingleItem = {props.setSingleItem}
                     />
                 )
             }
