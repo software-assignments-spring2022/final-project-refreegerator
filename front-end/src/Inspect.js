@@ -3,7 +3,8 @@ import './Inspect.css'
 import Item from "./Item"
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-const URL = "https://api.kroger.com/v1/"
+//const URL = "https://api.kroger.com/v1/"
+const URL = "https://api.kroger.com/v1/connect/oauth2/token/products"
 
 const Inspect = (props) => {
     const editHandle = () =>{
@@ -36,6 +37,9 @@ const Inspect = (props) => {
         </div>
         <div className='Stores'>
             <b>Stores</b>
+            <div>post.price</div>
+            <div>post.instore</div>
+            <div>post.shiptohome</div>
         </div>
         <div className='Buttons'>
             <button onClick = {() => handleBack()}className='buttons1'>Back</button>
