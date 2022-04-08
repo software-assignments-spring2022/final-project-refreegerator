@@ -12,9 +12,8 @@ const ProfileForm = () => {
     const [auto, setAuto] = useLocalStorage("auto","")
 
 
-    const submitForm = e => {
 
-    
+    const submitForm = e => {
       e.preventDefault()
       console.log('front end')
       console.log(days)
@@ -32,6 +31,12 @@ const ProfileForm = () => {
           console.log('error')
         })
     } 
+
+    function handleRadioButton(value) {
+        this.setState({
+            value: value
+        })
+    }
 
 
     return (
@@ -57,13 +62,25 @@ const ProfileForm = () => {
                     <label>Suggest nearby stores stocked with relevant items?</label>
                 </div>
                 <div className = 'column right'>
-                    <label className="switch">
+                    <label className = 'radio'>
                         <input 
-                            type="checkbox"
-                            value="true"
-                            onChange={e => setSuggest(e.target.value)}
+                            type="radio"
+                            value="no"
+                            name="choiceradio"
+                            //checked={this.state.value === "no"}
+                            onClick={e => setSuggest(e.target.value)}
+                            //onClick={this.handleRadioButton}
                         />
-                        <span className="slider round"></span>
+                        no
+                        <label className = 'radiogap'>
+                        <input 
+                            type="radio"
+                            value="yes"
+                            name="choiceradio"
+                            onClick={e => setSuggest(e.target.value)}
+                        />
+                        yes
+                        </label>
                     </label>
                 </div>
             </div>
@@ -72,14 +89,26 @@ const ProfileForm = () => {
                 <label>Autocomplete expiration dates for recognized items?</label>
             </div>
             <div className = 'column right'>
-                <label className="switch">
-                    <input 
-                    type="checkbox"
-                    value="true"
-                    onChange={e => setAuto(e.target.value)}
-                    />
-                    <span className="slider round"></span>
-                </label>
+            <label className = 'radio'>
+                        <input 
+                            type="radio"
+                            value="no"
+                            name="choiceradio2"
+                            //checked={this.state.value === "no"}
+                            onClick={e => setAuto(e.target.value)}
+                            //onClick={this.handleRadioButton}
+                        />
+                        no
+                        <label className = 'radiogap'>
+                        <input 
+                            type="radio"
+                            value="yes"
+                            name="choiceradio2"
+                            onClick={e => setAuto(e.target.value)}
+                        />
+                        yes
+                        </label>
+                    </label>
             </div>
         </div>    
         <input type="submit" value="Save"/>
