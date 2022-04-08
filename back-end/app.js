@@ -9,15 +9,25 @@ app.use(cors()) // allow cross-origin resource sharing
 
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
-
+const userData= require('./temp_data/user.json'); 
+const fs = require('fs');
 app.post('/save', async (req, res)=>{
     const data = {
         username: req.body.name,
         password: req.body.pass
     }
-    res.json(data);
-    console.log(data);
-    // res.json({loggedin: true, message: 'loggedin'});
+    let b = 0;
+    userData.map(user => {
+        if(user.username === data.username && user.password === data.password){
+            b = 1;
+        }
+    });
+    if(b === 1){
+        res.json(true)
+    }
+    else{
+        res.json(false)
+    }
 })
 
 app.post('/create/save', async (req, res)=>{
@@ -25,8 +35,14 @@ app.post('/create/save', async (req, res)=>{
         username: req.body.name,
         password: req.body.pass
     }
-    res.json(data);
-    console.log(data);
+    userData.push(data);
+    console.log(userData);
+    fs.writeFile('./temp_data/user.json', JSON.stringify(userData), function(err) {
+        if (err) {
+            console.log(err);
+        }
+    });
+    res.json(userData);
 })
 
 app.get('/userlist', (req, res)=>{

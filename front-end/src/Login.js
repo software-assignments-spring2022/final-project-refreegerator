@@ -4,11 +4,9 @@ import './Login.css'
 
 import UserList from "./UserList"
 import GuestList from "./GuestList"
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
-const axios = require("axios")
 //import { useNavigate } from 'react-router-dom';
 import { Navigate } from "react-router-dom";
 // import { render } from '../../back-end/app'
@@ -17,6 +15,8 @@ import { Navigate } from "react-router-dom";
  * @param {*} param0 an object holding any props passed to this component from its parent component
  * @returns The contents of this component, in JSX form.
  */
+ const axios = require("axios")
+
 const Fregley = props => {
   return (
     <>
@@ -58,20 +58,25 @@ function Login() {
     pass: "invalid password"
   };
 */
+  useEffect(()=>{
+    setLoggedin(false);
+    console.log(loggedin);
+  }, [])
+
   const handleSubmit = e =>{
     e.preventDefault();
-    console.log((name));
-    console.log((pass));
+    console.log(loggedin);
     axios
       .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/save`, {name: name, pass: pass})
       .then((response) => {
-        console.log(response);
+        setLoggedin(response.data);
       })
       .catch(err => {
         console.log(`error error error! ${err}`)
       })
       setName('');
       setPass('');
+    
   }
   
 
@@ -134,11 +139,10 @@ function Login() {
       <div className="app">
         <div className="login-form">
           <div className="title">Sign In</div>
-            {renderForm}
-{/*
-            {isSubmitted ?<Navigate to = "/UserList"
-                replace =  {true}/>: renderForm}
-    */}
+            {/* {renderForm} */}
+
+            {loggedin ?<Navigate to = "/UserList"/>: renderForm}
+    
         </div>
         
       </div>

@@ -4,6 +4,8 @@ import './Create.css'
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
+import { Navigate } from "react-router-dom";
+
 const axios = require("axios")
 
 
@@ -16,12 +18,13 @@ const axios = require("axios")
 
 
 
-function Create() {
+const Create = props =>{
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [name, setName] = useState('');
   const [pass, setPass] = useState('');
+  const [signedIn, setSignedIn] = useState(false);
   // User Login info
   /*
   const database = [
@@ -52,8 +55,7 @@ const handleSubmit = e =>{
     .catch(err => {
       console.log(`error error error! ${err}`)
     })
-    setName('');
-    setPass('');
+  setSignedIn(true);
 }
 /*
   const handleSubmit = (event) => {
@@ -113,7 +115,7 @@ const handleSubmit = e =>{
 */
 
 const renderForm = (
-
+<>
   <div className="form">
     <form onSubmit={handleSubmit}>
       <div className="input-container">
@@ -134,8 +136,10 @@ const renderForm = (
     
     <div> New User? <a href="/create">Create an account</a> or <a href= "/guestlist">continue as a guest.</a> </div> 
   </div>
+  </>
 );
   return (
+    <>
     <div className="app">
       
       <div className="login-form">
@@ -143,11 +147,13 @@ const renderForm = (
         {/*
         {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
   */}
-      {renderForm}
+        {/* {renderForm} */}
+
+        {signedIn ?<Navigate to = "/UserList"/>: renderForm}
       </div>
       
     </div>
-    
+    </>
   );
 }
 
