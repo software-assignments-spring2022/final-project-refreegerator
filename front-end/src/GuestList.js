@@ -9,7 +9,7 @@ const GuestList = props => {
         const container = {};
         container.category = item.category;
         container.name = item.name;
-        container.expdatestr = item.ex_date;
+        container.expdatestr = item.expdatestr;
         return container;
     });
 

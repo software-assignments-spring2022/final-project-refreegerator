@@ -229,6 +229,7 @@ const Add = props =>{
     const handleSubmit = (event) => {
         event.preventDefault();
         addEntry();
+        console.log(inputs);
         //navigate('/UserList');
         /*
         axios
