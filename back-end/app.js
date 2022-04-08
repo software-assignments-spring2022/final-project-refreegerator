@@ -39,6 +39,10 @@ app.get('/userlist', (req, res)=>{
         {category : "Basket",
                 name :"Alphabetical",
                 expdatestr :"2020-01-01" 
+        },
+        {category : "Meat",
+        name :"Chicken",
+        expdatestr :"2022-04-11" 
         }
     ]
     res.json(data);
@@ -54,6 +58,7 @@ app.post('/profile/save', async (req, res) => {
     suggest: req.body.suggest,
     auto: req.body.auto
   }
+  console.log(data)
   res.json(data)
 })
 app.post('/add/save', async (req, res) => {
@@ -69,4 +74,5 @@ app.post('/edit/save', async (req, res) => {
   console.log(data)
   res.json(data)
 })
+
 module.exports = app
