@@ -141,8 +141,10 @@ const Edit = (props) =>{
 
         <input type="submit" />
     </form>
+    <div className = "navigation">
     <button onClick={cancel}>Cancel</button>
     <button onClick={del}>Delete Item</button>
+    </div>
         </>
       );
 }
