@@ -1,7 +1,7 @@
 import YourList from "./YourList"
 import ListButtons from "./ListButtons"
 import {useState, useEffect} from "react"
-
+import Header from "./Header"
 const GuestList = props => {
     
     var i = localStorage.getItem('item');
@@ -35,19 +35,32 @@ const GuestList = props => {
         console.table(items)
     }
     )
+    let profile_preferences = props.preferences || {
+
+        notification_days: 5
+    }
     return(
         <>
+            <Header 
+
+                    expiringItems = {placeholder}
+                    profilePreferences = {profile_preferences}
+            />
             <YourList placeholder = {placeholder}
                       editAll = {editAll}                                 
                       propagate = {setItems}
                       setEditAll = {setEditAll}
                       setSingleItem = {setSingleItem}
+                        expiringItems = {placeholder}
+                        profilePreferences = {profile_preferences}
             />
             <ListButtons 
                       editAll = {editAll}                                 
                       setEditAll = {setEditAll}
                       allItems = {items} 
                       singleItem = {singleItem}
+                      expiringItems = {placeholder}
+                      profilePreferences = {profile_preferences}
             />
         </>
     )

@@ -54,6 +54,8 @@ const UserList = props => {
                       setEditAll = {setEditAll}
                       allItems = {items} 
                       singleItem = {singleItem}
+                      expiringItems = {placeholder}
+                      profilePreferences = {profile_preferences}
             />
         </>
     )

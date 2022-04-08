@@ -16,12 +16,16 @@ const ListButtons = (props) => {
 
     if (props.editAll == false){
 
+        console.log(props.expiringItems)
         return(
             <div className= "navigation">
                 <button onClick = {() => manageEdit()}type = "button"> Edit List</button>
                 {// <Link to={{pathname: "/add", state: {allitems: itemlist}}} >
                    }
-                <Link to = "/add" state= {{olditems:itemlist}}>
+                <Link to = "/add" state= {{olditems:itemlist,
+                                            expiringItems : props.expiringItems,
+                                            profilePreferences : props.profile_preferences
+                    }}>
                 <button type = "button"> Add Item</button>
                 </Link>
             </div>
@@ -31,7 +35,15 @@ const ListButtons = (props) => {
         return(
             <div className= "navigation">
                 <button onClick = {() => manageEdit()}type = "button"> Done Editing </button>
-                <Link to="/add"><button type = "button"> Add Item</button></Link>
+                <Link to="/add"
+                    state = {{
+                        expiringItems : props.expiringItems,
+                        profilePreferences : props.profile_preferences
+
+                    }} 
+
+
+                ><button type = "button"> Add Item</button></Link>
             </div>
         )
     }

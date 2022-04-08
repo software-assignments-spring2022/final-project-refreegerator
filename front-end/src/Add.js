@@ -4,14 +4,19 @@ import { useNavigate } from 'react-router-dom';
 import {Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 import Autocomplete from '@mui/material/Autocomplete';
+import Header from "./Header"
 import axios from "axios"
 
 const Add = props =>{
     let currentdate = new Date();
     //console.log("hello")
     const location = useLocation();
-
+//
+                        //expiringItems : props.expiringItems,
+                        //profilePreferences : props.profile_preferences
     let {olditems} = location.state
+    let {expiringItems} = location.state
+    let {profilePreferences} = location.state
     const [oldLength, setOldLength] = useState(olditems.length)
     const [newLength, setNewLength] = useState(olditems.length)
     const [itemList, setItemList] = useState(olditems)
@@ -259,6 +264,10 @@ const Add = props =>{
     }
       return (
         <>
+            <Header
+                expiringItems = {expiringItems}
+                profilePreferences = {profilePreferences}
+            />
         <h1>Add an Item</h1>
         <form onSubmit={handleSubmit}>
             <label className = "sec"> Name:{' '}

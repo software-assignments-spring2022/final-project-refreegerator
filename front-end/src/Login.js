@@ -5,6 +5,7 @@ import './Login.css'
 import UserList from "./UserList"
 import GuestList from "./GuestList"
 
+import Header from "./Header"
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./styles.css";
@@ -106,6 +107,8 @@ function Login() {
   );
 
   return (
+      <>
+        <Header/>
     <div className="app">
       <div className="login-form">
         <div className="title">Sign In</div>
@@ -113,12 +116,11 @@ function Login() {
           {isSubmitted ?<Navigate to = "/UserList"
               replace =  {true}/>: renderForm}
       </div>
-      
     </div>
-    
+      </> 
   );
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<Login />, rootElement);
+//const rootElement = document.getElementById("root");
+//ReactDOM.render(<Login />, rootElement);
 export default Login

@@ -15,7 +15,7 @@ import {useLocation} from "react-router-dom"
  * @returns The contents of this component, in JSX form.
  */
 const Header = (props) => {
-  const location = useLocation();
+  //const location = useLocation();
   const [anchor, setAnchor] = React.useState(null);
   const [anchor2, setAnchor2] = React.useState(null);
   const handleClick = (event) => {
@@ -32,19 +32,28 @@ const Header = (props) => {
   };
   const expiringItems = props.expiringItems || [];
     let preferences = props.profilePreferences;
+    if (preferences == null ){
+        preferences = {notification_days: 10}
+    }
     let expdatepref = preferences.notification_days;
     console.log(expdatepref)
+    console.log("loading header")
   return (
       <>
     <header className="Header-header">
       <img src = {logo} className = "logo" alt = "ReFreegerator Logo" />
-      <h2> <Link to="/UserList" 
+      <h2>
+        <div>
+          <Link to="/UserList" 
+
                  className='Refreegerator'
                 state={{ passpreferences:  preferences,
                          expiringItems: expiringItems
                          }}
 
-      > Refreegerator </Link> </h2>
+      > Refreegerator </Link> 
+        </div>
+        </h2>
         <div id= "notifications">
         <NotificationsNoneIcon onClick={handleClick2} fontSize="large"></NotificationsNoneIcon>
         <Menu
