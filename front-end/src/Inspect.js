@@ -24,10 +24,15 @@ const Inspect = (props) => {
                 setPost(response.data);
             });
         }); */
+
+
     /* things = data.map(item =>{
     const brand = item.brand
     const price = item.items.price
     } */
+    fetch("GSData.json")
+    .then(response => response.json())
+    .then(json => console.log(json));
         
     
   return (
@@ -43,9 +48,7 @@ const Inspect = (props) => {
         </div>
         <div className='Stores'>
             <b>Stores</b>
-            <div>item.price</div>
-            <div>item.instore</div>
-            <div>item.shiptohome</div>
+            <div>response.price</div> 
         </div>
         <div className='Buttons'>
             <button onClick = {() => handleBack()}className='buttons1'>Back</button>
