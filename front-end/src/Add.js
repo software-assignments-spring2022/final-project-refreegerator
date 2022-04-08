@@ -231,7 +231,7 @@ const Add = props =>{
         addEntry();
         // console.log(inputs);
         //navigate('/UserList');
-        
+        console.log(inputs)
         axios
         .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/add/save`, {
           inputs: inputs
@@ -241,7 +241,7 @@ const Add = props =>{
         .catch(err => {
           console.log('error')
         })
-        navigate('/GuestList');
+        navigate('/UserList');
 
     }
     //adding to localStorage

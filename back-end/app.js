@@ -48,6 +48,7 @@ app.post('/create/save', async (req, res)=>{
 
 app.get('/userlist', (req, res)=>{
     const d = itemData;
+    console.log(d);
     res.json(d);
 })
 
@@ -68,9 +69,8 @@ app.post('/add/save', async (req, res) => {
   const data = {
     inputs: req.body.inputs
   }
-  itemData.push(data);
-    console.log(itemData);
-    fs.writeFile('./temp_data/items.json', JSON.stringify(itemData), function(err) {
+  itemData.push(req.body.inputs);
+    fs.writeFile('./temp_data/items.json', JSON.stringify(itemData.data), function(err) {
         if (err) {
             console.log(err);
         }
