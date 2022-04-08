@@ -5,4 +5,4 @@
 
 ## Testing
 This project uses mocha and chai as its testing framework and library. 
-- `npx mocha test/[testname].test.js` where testname is substituted with the name of the test. 
+- `npx mocha test/[testname].test.js` where testname is substituted with the name of the test will run the unit tests.
