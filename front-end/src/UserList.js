@@ -1,7 +1,7 @@
 import YourList from "./YourList"
 import ListButtons from "./ListButtons"
 import {useState, useEffect} from "react"
-
+import Header from "./Header"
 const UserList = props => {
   
     const [editAll, setEditAll] = useState(false)
@@ -12,11 +12,11 @@ const UserList = props => {
         },
         {category : "Zed",
                 name: "Bread",
-                expdatestr : "1031-01-29"
+                expdatestr : "5031-01-29"
         },
         {category : "Basket",
                 name :"Alphabetical",
-                expdatestr :"2020-01-01" ,
+                expdatestr :"3020-01-01" ,
                 quantity:5
         }
     ]
@@ -30,10 +30,19 @@ const UserList = props => {
     )
     let new_item = { name: "Potatoes", category: "Storage", expdatestr: "2020-02-02", quantity: 6}
     placeholder[0] = new_item;
+    let profile_preferences = props.preferences || {
+        notification_days: 5
+
+    } 
     
 
     return(
         <>
+            <Header
+                    expiringItems = {placeholder}
+                    profilePreferences = {profile_preferences} 
+
+            />
             <YourList placeholder = {placeholder}
                       editAll = {editAll}                                 
                       propagate = {setItems}

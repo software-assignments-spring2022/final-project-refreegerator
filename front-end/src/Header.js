@@ -12,7 +12,7 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
  * @param {*} param0 an object holding any props passed to this component from its parent component
  * @returns The contents of this component, in JSX form.
  */
-const Header = () => {
+const Header = (props) => {
   const [anchor, setAnchor] = React.useState(null);
   const [anchor2, setAnchor2] = React.useState(null);
   const handleClick = (event) => {
@@ -27,6 +27,10 @@ const Header = () => {
   const handleClose2 = () => {
     setAnchor2(null);
   };
+  const expiringItems = props.expiringItems || [];
+    let preferences = props.profilePreferences;
+    let expdatepref = preferences.notification_days;
+    console.log(expdatepref)
   return (
       <>
     <header className="Header-header">
@@ -35,6 +39,7 @@ const Header = () => {
         <div id= "notifications">
         <NotificationsNoneIcon onClick={handleClick2} fontSize="large"></NotificationsNoneIcon>
         <Menu
+              
               anchorEl={anchor2}
               open={Boolean(anchor2)}
               onClose={handleClose2}
@@ -42,9 +47,28 @@ const Header = () => {
               transformOrigin={{ horizontal: 'right', vertical: 'top' }}
               anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
-            <MenuItem>
-                <h6 >Example Notification</h6>
-            </MenuItem>
+            {
+                    expiringItems.map((listitem, i, holdarray) =>
+                {
+                            let current_date = new Date();
+                            let item_date = Date.parse(listitem.expdatestr)
+                            let date_diff = item_date - current_date;
+                            date_diff = date_diff /(1000*60*60*24)
+                            console.log (date_diff, expdatepref)
+                           return (  (date_diff <= expdatepref)&&
+                        <MenuItem>
+                            <div>
+                                <button onClick = {() => handleClick(listitem)} >
+                                    {listitem.name} is close to expiring!
+                                </button>
+                            </div>
+                        </MenuItem>
+                
+               )
+                    
+            }
+                    )
+            }
           </Menu>
         </div>    
        <div id="profile"> 
