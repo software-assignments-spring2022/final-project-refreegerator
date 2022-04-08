@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 import "./Profile.css"
+import { Link } from 'react-router-dom'
 
 const ProfileForm = () => {
     // create a state variable for each form field
@@ -52,8 +53,7 @@ const ProfileForm = () => {
                     <label className="switch">
                         <input 
                             type="checkbox"
-                            value="1"
-                            onChange={e => setSuggest(e.target.value)}
+                            onChange={e => setSuggest(e.target.checked)}
                         />
                         <span className="slider round"></span>
                     </label>
@@ -67,14 +67,13 @@ const ProfileForm = () => {
                 <label className="switch">
                     <input 
                     type="checkbox"
-                    value={auto}
-                    onChange={e => setAuto(e.target.value)}
+                    onChange={e => setAuto(e.target.checked)}
                     />
                     <span className="slider round"></span>
                 </label>
             </div>
         </div>    
-        <input type="submit" value="Save" />
+        <Link to="/UserList"><input type="submit" value="Save" /></Link>
       </form>
     )
   }
