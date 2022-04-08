@@ -1,6 +1,6 @@
 .Footer-footer {
   background-color: #89C43A;
-  min-height: 100px;
+  min-height: 8vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
