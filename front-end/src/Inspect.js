@@ -24,6 +24,11 @@ const Inspect = (props) => {
                 setPost(response.data);
             });
         }); */
+    /* things = data.map(item =>{
+    const brand = item.brand
+    const price = item.items.price
+    } */
+        
     
   return (
     <>
