@@ -10,6 +10,7 @@ app.use(cors()) // allow cross-origin resource sharing
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
 const userData= require('./temp_data/user.json'); 
+const itemData= require('./temp_data/items.json'); 
 const fs = require('fs');
 app.post('/save', async (req, res)=>{
     const data = {
@@ -46,25 +47,8 @@ app.post('/create/save', async (req, res)=>{
 })
 
 app.get('/userlist', (req, res)=>{
-    const data = [
-        {category : "Dairy",
-            name : "Cheese",
-            expdatestr : "3000-05-25"
-        },
-        {category : "Grain",
-                name: "Bread",
-                expdatestr : "1031-01-29"
-        },
-        {category : "Basket",
-                name :"Alphabetical",
-                expdatestr :"2020-01-01" 
-        },
-        {category : "Meat",
-        name :"Chicken",
-        expdatestr :"2022-04-11" 
-        }
-    ]
-    res.json(data);
+    const d = itemData;
+    res.json(d);
 })
 
 
@@ -84,6 +68,13 @@ app.post('/add/save', async (req, res) => {
   const data = {
     inputs: req.body.inputs
   }
+  itemData.push(data);
+    console.log(itemData);
+    fs.writeFile('./temp_data/items.json', JSON.stringify(itemData), function(err) {
+        if (err) {
+            console.log(err);
+        }
+    });
   res.json(data)
 })
 app.post('/edit/save', async (req, res) => {
