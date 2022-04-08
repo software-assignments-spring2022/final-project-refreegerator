@@ -133,7 +133,7 @@ const Add = props =>{
              foodname = event.target.value;
             if (value != null) {
                 foodname = value;
-             //handleChange(event, foodname); 
+                handleChange(event, foodname); 
             }
             else {
 
@@ -193,7 +193,7 @@ const Add = props =>{
            newval = value 
            newname = "name"
            console.log(newval)
-            setInputs(values => ({...values, "name": newval}))
+           setInputs(values => ({...values, "name": newval}))
             //setInputs(values => ({...values, "": ""}))
         }
         else{
