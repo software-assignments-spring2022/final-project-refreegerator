@@ -49,7 +49,6 @@ app.get('/userlist', (req, res)=>{
         }
     ]
     res.json(data);
-    console.log(data, 0);
 })
 
 
