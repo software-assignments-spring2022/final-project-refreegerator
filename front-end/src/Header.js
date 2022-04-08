@@ -7,12 +7,15 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import { useState, useEffect} from "react";
+import {useLocation} from "react-router-dom"
 /**
  * A React component that is used for the header displayed at the top of every page of the site.
  * @param {*} param0 an object holding any props passed to this component from its parent component
  * @returns The contents of this component, in JSX form.
  */
 const Header = (props) => {
+  const location = useLocation();
   const [anchor, setAnchor] = React.useState(null);
   const [anchor2, setAnchor2] = React.useState(null);
   const handleClick = (event) => {
@@ -35,7 +38,13 @@ const Header = (props) => {
       <>
     <header className="Header-header">
       <img src = {logo} className = "logo" alt = "ReFreegerator Logo" />
-      <h2> <Link to="/UserList" className='Refreegerator'> Refreegerator </Link> </h2>
+      <h2> <Link to="/UserList" 
+                 className='Refreegerator'
+                state={{ passpreferences:  preferences,
+                         expiringItems: expiringItems
+                         }}
+
+      > Refreegerator </Link> </h2>
         <div id= "notifications">
         <NotificationsNoneIcon onClick={handleClick2} fontSize="large"></NotificationsNoneIcon>
         <Menu
@@ -81,7 +90,12 @@ const Header = (props) => {
               transformOrigin={{ horizontal: 'right', vertical: 'top' }}
               anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
-              <Link to="/profile" className='dropdownMenu'>
+              <Link to= "/profile"
+                 className='Refreegerator'
+                state={{ passpreferences:  preferences,
+                         expiringItems: expiringItems         
+                         }}
+              >
                   <MenuItem>
                       <h4 >Settings</h4>
                   </MenuItem>
