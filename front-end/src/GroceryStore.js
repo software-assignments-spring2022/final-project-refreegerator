@@ -1,4 +1,7 @@
 // Product request
+const fs = require('fs');
+
+
 async function getProducts(item) {
     // Use access stored access token for product request
     let accessToken = authentication.getAccessToken();
@@ -28,7 +31,12 @@ async function getProducts(item) {
   
     // Return json object
     console.log(productsResponse.json());
+    var jsonData = JSON.stringify(productsResponse.json())
+    fs.writeFile('GSData.json', jsonData, function(err) {
+      if(err) {
+        console.log(err);
+      }
+    });
     return productsResponse.json();
-  }
+  };
 
-getProducts('milk');

@@ -3,8 +3,8 @@ import './Inspect.css'
 import Item from "./Item"
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-//const URL = "https://api.kroger.com/v1/"
-const URL = "https://api.kroger.com/v1/connect/oauth2/token/products"
+import data from './GSData.json'
+
 
 const Inspect = (props) => {
     const editHandle = () =>{
@@ -16,14 +16,15 @@ const Inspect = (props) => {
         props.inspectMode(false)
 
     }
+      /* please dont get rid of yet, may need for authentication
+        const[post, setPost] = React.useState(null);
 
-    const[post, setPost] = React.useState(null);
-
-    React.useEffect(() => {
-        axios.get(URL).then((response) => {
-            setPost(response.data);
-        });
-    });
+        React.useEffect(() => {
+            axios.get(URL).then((response) => {
+                setPost(response.data);
+            });
+        }); */
+    
   return (
     <>
         <div>
@@ -37,17 +38,19 @@ const Inspect = (props) => {
         </div>
         <div className='Stores'>
             <b>Stores</b>
-            <div>post.price</div>
-            <div>post.instore</div>
-            <div>post.shiptohome</div>
+            <div>item.price</div>
+            <div>item.instore</div>
+            <div>item.shiptohome</div>
         </div>
         <div className='Buttons'>
             <button onClick = {() => handleBack()}className='buttons1'>Back</button>
             <button onClick = {() => editHandle()}className='buttons1'>Edit Item</button>
         </div>
         </div>
+
     </>
   )
+
 }
 
 export default Inspect
