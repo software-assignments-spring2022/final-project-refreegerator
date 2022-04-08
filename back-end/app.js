@@ -10,6 +10,46 @@ app.use(cors()) // allow cross-origin resource sharing
 app.use(express.json()) // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming POST data
 
+app.post('/save', async (req, res)=>{
+    const data = {
+        username: req.body.name,
+        password: req.body.pass
+    }
+    res.json(data);
+})
+
+app.post('/create/save', async (req, res)=>{
+    const data = {
+        username: req.body.name,
+        password: req.body.pass
+    }
+    res.json(data);
+})
+
+app.get('/userlist', (req, res)=>{
+    const data = [
+        {category : "Dairy",
+            name : "Cheese",
+            expdatestr : "3000-05-25"
+        },
+        {category : "Grain",
+                name: "Bread",
+                expdatestr : "1031-01-29"
+        },
+        {category : "Basket",
+                name :"Alphabetical",
+                expdatestr :"2020-01-01" 
+        },
+        {category : "Meat",
+        name :"Chicken",
+        expdatestr :"2022-04-11" 
+        }
+    ]
+    res.json(data);
+})
+
+
+
 
 
 app.post('/profile/save', async (req, res) => {
@@ -34,26 +74,5 @@ app.post('/edit/save', async (req, res) => {
   console.log(data)
   res.json(data)
 })
-app.get('/userlist', (req, res)=>{
-  const data = [
-      {category : "Dairy",
-          name : "Cheese",
-          expdatestr : "3000-05-25"
-      },
-      {category : "Grain",
-              name: "Bread",
-              expdatestr : "1031-01-29"
-      },
-      {category : "Basket",
-              name :"Alphabetical",
-              expdatestr :"2020-01-01" 
-      },
-      {category : "Meat",
-      name :"Chicken",
-      expdatestr :"2022-04-11" 
-      }
-  ]
-  res.json(data);
-  console.log(data, 0);
-})
+
 module.exports = app
