@@ -1,18 +1,25 @@
 import { useState } from "react"
 import axios from "axios"
 import "./Profile.css"
+import { useLocalStorage } from "./useLocalStorage"
+
+
 
 const ProfileForm = () => {
     // create a state variable for each form field
-    const [days, setDays] = useState('')
-    const [suggest, setSuggest] = useState('')
-    const [auto, setAuto] = useState('')
+    const [days, setDays] = useLocalStorage("days","")
+    const [suggest, setSuggest] = useLocalStorage("suggest","")
+    const [auto, setAuto] = useLocalStorage("auto","")
+
 
     const submitForm = e => {
+
+    
       e.preventDefault()
       console.log('front end')
       console.log(days)
       console.log(suggest)
+      console.log(auto)
       axios
         .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/profile/save`, {
           days: days,
@@ -24,13 +31,14 @@ const ProfileForm = () => {
         .catch(err => {
           console.log('error')
         })
+    } 
 
-    }  
+
     return (
       <form className="Preferences" onSubmit={submitForm}>
         <div className='Preference'>
             <div className = 'column left'>
-                <label>Deafult Notification before expiration (days): </label>
+                <label>Default Notification before expiration (days): </label>
             </div>
             <div className = 'column right'>
                 <input 
@@ -52,7 +60,7 @@ const ProfileForm = () => {
                     <label className="switch">
                         <input 
                             type="checkbox"
-                            value="1"
+                            value="true"
                             onChange={e => setSuggest(e.target.value)}
                         />
                         <span className="slider round"></span>
@@ -67,35 +75,16 @@ const ProfileForm = () => {
                 <label className="switch">
                     <input 
                     type="checkbox"
-                    value={auto}
+                    value="true"
                     onChange={e => setAuto(e.target.value)}
                     />
                     <span className="slider round"></span>
                 </label>
             </div>
         </div>    
-        <input type="submit" value="Save" />
+        <input type="submit" value="Save"/>
       </form>
     )
   }
-  export default ProfileForm
-  /**<form onSubmit={handleSubmit} className='Preferences' method="Post">
-  <div className='Preference'>
-      <div className = 'column left'>
-          <label>Deafult Notification before expiration (days): </label>
-      </div>
-      <div className = 'column right'>
-          <input 
-              type = "number" 
-              step = "1" 
-              min ='0' 
-              max='9'
-              id = 'number' 
-              value={days}
-              onChange={e => setDays(e.target.value)}
-          />
-      </div>
-  </div>
-  
-  <Link to="/UserList"><input type="submit" className='save' value="Save"/></Link>                    
-  </form>*/
+export default ProfileForm
+ 
