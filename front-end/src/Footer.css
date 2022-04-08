@@ -1,11 +1,13 @@
 .Footer-footer {
   background-color: #89C43A;
-  min-height: 14vh;
+  min-height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   font-size: calc(10px + 0.5vmin); /* half the font size of the header */
   color: white;
-  margin-top: auto;
+  position:fixed;
+  left:0px;
+  bottom:0px;
   width: 100%;
 }
