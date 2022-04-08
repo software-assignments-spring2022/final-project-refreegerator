@@ -4,17 +4,14 @@ import {useState, useEffect} from "react"
 
 const GuestList = props => {
     
-    var items = JSON.parse(localStorage.getItem('items'));
-    const data = items.map(item => {
+    var item = JSON.parse(localStorage.getItem('items'));
+    const data = item.map(item => {
         const container = {};
         container.category = item.category;
         container.name = item.name;
         container.expdatestr = item.ex_date;
         return container;
     });
-    console.log(Array.isArray(data));
-    console.log(data);
-    // console.log(item.map(i => i.name));
 
     const [editAll, setEditAll] = useState(false)
     const placeholder = [
@@ -33,7 +30,7 @@ const GuestList = props => {
                 quantity:5
         }
     ]
-    const [items, setItems] = useState(placeholder)
+    const [items, setItems] = useState(data)
     const [singleItem, setSingleItem] = useState(false);
     useEffect(() => {
         console.log("propagation has occurred")

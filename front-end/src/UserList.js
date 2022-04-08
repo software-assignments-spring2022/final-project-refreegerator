@@ -13,6 +13,7 @@ const UserList = props => {
 const fetchData = async() => {
     try {
         const response = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/userlist`);
+        console.log(typeof(response.data)); 
         setItems([...response.data]);
     }
     catch(error){
@@ -25,7 +26,6 @@ const fetchData = async() => {
         // console.log("propagation has occurred")
         // console.table(items);
     }, []);
-
 
     return(
         <>

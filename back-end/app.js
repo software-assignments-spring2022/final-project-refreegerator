@@ -16,6 +16,8 @@ app.post('/save', async (req, res)=>{
         password: req.body.pass
     }
     res.json(data);
+    console.log(data);
+    // res.json({loggedin: true, message: 'loggedin'});
 })
 
 app.post('/create/save', async (req, res)=>{
@@ -24,6 +26,7 @@ app.post('/create/save', async (req, res)=>{
         password: req.body.pass
     }
     res.json(data);
+    console.log(data);
 })
 
 app.get('/userlist', (req, res)=>{
@@ -42,6 +45,7 @@ app.get('/userlist', (req, res)=>{
         }
     ]
     res.json(data);
+    console.log(data, 0);
 })
 
 

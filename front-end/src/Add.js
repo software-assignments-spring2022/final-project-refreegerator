@@ -112,7 +112,7 @@ const Add = props =>{
     const navigate = useNavigate();
     useEffect(() => {
         if (oldLength == newLength){
-            console.log("the lengths are equal");
+            // console.log("the lengths are equal");
             setNewLength(oldLength+1)
             setOldLength(-1)
             olditems.push(inputs)
@@ -127,8 +127,8 @@ const Add = props =>{
         let foodname = "undefined"
         const currentname = event.target.name;
         //console.log(event.target.name);
-        console.log(event, value)
-        console.log(event.target.name)
+        // console.log(event, value)
+        // console.log(event.target.name)
         if (event.target.name == "name" || value != null){
              foodname = event.target.value;
             if (value != null) {
@@ -142,27 +142,27 @@ const Add = props =>{
         }
         //console.log(foodname);
         if (autocomplete_names.includes(foodname)){
-            console.log("success");
+            // console.log("success");
             //event.target.name = "expdatestr";
             placeholder.forEach(auto_item =>
                 {
                     if (auto_item.name == foodname){
                        //if (event.target.name = "ex_date"){
                            //handleChange(event);
-                           console.log("ex date = true");
-                           console.log(auto_item);
-                           console.log(currentdate);
+                           // console.log("ex date = true");
+                           // console.log(auto_item);
+                           // console.log(currentdate);
                             //if (event.target.value == ""){
                                 let newdate =  new Date();
                                 newdate.setDate(currentdate.getDate() + auto_item.days)
                                 const newdatestr = newdate.toLocaleDateString('en-CA');
                                 const newcategory = auto_item.category
                                 //event.target.value = newdatestr;
-                                console.log("current date is: ");
-                                console.log(currentdate);
-                                console.log("new date is: ");
-                                console.log(newdatestr);
-                                console.log(event.target.value);
+                                // console.log("current date is: ");
+                                // console.log(currentdate);
+                                // console.log("new date is: ");
+                                // console.log(newdatestr);
+                                // console.log(event.target.value);
                                 //handleChange(event);
                                  setInputs(values =>  ({...values, "expdatestr": newdatestr}), console.log(inputs))
                                  
@@ -185,14 +185,14 @@ const Add = props =>{
         }
     }
     const handleChange = (event, value) => {
-        console.log(event, value)
+        // console.log(event, value)
         let  newname = event.target.name;
         let newval = ""
           newval = event.target.type === 'checkbox' ? event.target.checked : event.target.value;;
         if (value != null) {
            newval = value 
            newname = "name"
-           console.log(newval)
+          //  console.log(newval)
             setInputs(values => ({...values, "name": newval}))
             //setInputs(values => ({...values, "": ""}))
         }
@@ -202,10 +202,10 @@ const Add = props =>{
         //setInputs(values => ({...values, [newname]: newval}))
        
         //setInputs(values => (values[newname]= newval))
-        console.table(inputs)
+        // console.table(inputs)
         //console.log(olditems.length);
         if (oldLength == newLength){
-            console.log("the lengths are equal");
+            // console.log("the lengths are equal");
             setNewLength(oldLength+1)
             setOldLength(-1)
             olditems.push(inputs)
@@ -215,24 +215,22 @@ const Add = props =>{
             olditems[newLength-1] = inputs;
             setItemList(olditems);
         }
+      }
 /*
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
         setInputs(values => ({...values, [name]: value}));
         // console.log(inputs);
-        */
+        
       }
-    
+    */
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(inputs);
-        //navigate('/UserList');
-        // localStorage.setItem('items', inputs);
-        //addEntry();
-        //navigate('/UserList');
         addEntry();
+        //navigate('/UserList');
+        /*
         axios
         .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/add/save`, {
           inputs: inputs
@@ -241,8 +239,8 @@ const Add = props =>{
         })
         .catch(err => {
           console.log('error')
-        })
-        navigate('/UserList');
+        })*/
+        navigate('/GuestList');
 
     }
     //adding to localStorage
@@ -309,25 +307,6 @@ const Add = props =>{
         />
         </label>
         <br></br>
-        <label className="sec"> Category:
-        <select name="category" id="category" onChange={handleChange} value = {inputs.category}>
-        <option value="Fruits">Fruits</option>
-        <option value="Vegetable">Vegetable</option>
-        <option value="Grains">Grains</option>
-        <option value="Protein">Protein</option>
-        <option value="Dairy">Dairy</option>
-        </select>
-        </label>
-        <br></br>
-        <label className="sec">Extra Information:
-        <input 
-          type="text" 
-          name="info" 
-          value={inputs.info || ""} 
-          onChange={handleChange}
-        />
-        </label>
-        <br></br>
 
         <label className="sec">Expiration Date:
         <input 
@@ -363,13 +342,11 @@ const Add = props =>{
             {/*<input type="submit" />*/ }
 
             {/*<Link to = {{pathname: "/UserList", state: {placeholder : olditems}}}>*/}
-            <Link to = "/UserList" state = {{addeditemlist: itemList,
-
-                                    addeditem:inputs
-                }}>
-                <button > Submit </button>
-                {/*specific_item: inputs*/}
-            </Link>
+            {/* <Link to = "/UserList" state = {{addeditemlist: itemList, addeditem:inputs}}> */}
+            {/*  <button > Submit </button> */}
+            {/*specific_item: inputs*/}
+            {/* </Link> */}
+            <input type="submit"/>
     </form>
             
     <button onClick={cancel}>Cancel</button>
