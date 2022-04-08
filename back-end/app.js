@@ -70,11 +70,12 @@ app.post('/add/save', async (req, res) => {
     inputs: req.body.inputs
   }
   itemData.push(req.body.inputs);
-    fs.writeFile('./temp_data/items.json', JSON.stringify(itemData.data), function(err) {
+    fs.writeFile('./temp_data/items.json', JSON.stringify(itemData), function(err) {
         if (err) {
             console.log(err);
         }
     });
+    console.log(itemData);
   res.json(data)
 })
 app.post('/edit/save', async (req, res) => {
