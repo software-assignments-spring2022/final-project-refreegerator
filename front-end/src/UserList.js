@@ -38,13 +38,9 @@ const UserList = props => {
 
     return(
         <>
-            <Header
-                    expiringItems = {placeholder}
-                    profilePreferences = {profile_preferences} 
-
-            />
             <YourList placeholder = {placeholder}
                       editAll = {editAll}                                 
+                profile_preferences = {profile_preferences}
                       propagate = {setItems}
                       setEditAll = {setEditAll}
                       setSingleItem = {setSingleItem}

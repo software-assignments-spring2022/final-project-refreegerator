@@ -41,11 +41,6 @@ const GuestList = props => {
     }
     return(
         <>
-            <Header 
-
-                    expiringItems = {placeholder}
-                    profilePreferences = {profile_preferences}
-            />
             <YourList placeholder = {placeholder}
                       editAll = {editAll}                                 
                       propagate = {setItems}

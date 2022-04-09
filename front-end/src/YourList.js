@@ -5,6 +5,7 @@ import { useState, useEffect} from "react";
 import Edit from "./Edit.js"
 import Inspect from "./Inspect.js"
 import {useLocation} from "react-router-dom"
+import Header from "./Header"
 const YourList = props => {
     const location = useLocation();
     const [sortpref, setSortPref] = useState(""); 
@@ -125,8 +126,14 @@ const YourList = props => {
    let newlist = orderedList; 
         if (hasList) {
             if (isEditing == false && isInspecting == false) {
+                console.log("header loaded");
                 return (
                 <>
+            <Header
+                    expiringItems = {orderedList}
+                    profilePreferences = {props.profile_preferences} 
+
+            />
                     <h1> Your List </h1>
                     <label htmlFor="sortpref">Sort by:</label>
                     <select  onChange = {handleSort} name ="sorting preference" id="sortpref" >
@@ -174,32 +181,61 @@ const YourList = props => {
             if (isEditing == true  && isInspecting == false){
                     console.log(editMode.toString()) 
                     console.log(isEditing)
+                    console.log("header loaded")
                 return (
-                    
-                    <Edit func = {editMode} 
-                        listitem = {currentItem}
-                        changelist = {updateOrder}
-                        currentlist = {orderedList}
-                        setEditAll = {props.setEditAll}
-                        setSingleItem = {props.setSingleItem}
-                    />
-                )
-            }
-            if (isInspecting == true && isEditing == false) {
-                return (
-                    <Inspect listitem = {currentItem} 
-                             inspectMode = {inspectMode}
-                             editMode = {editMode}
+                    <>    
+            <Header
+                    expiringItems = {orderedList}
+                    profilePreferences = {props.profile_preferences} 
 
-                    />
+            />
+                <Edit func = {editMode} 
+                    listitem = {currentItem}
+                    changelist = {updateOrder}
+                    currentlist = {orderedList}
+                    setEditAll = {props.setEditAll}
+                    setSingleItem = {props.setSingleItem}
+                />
+                    </>
+            )
+        }
+        if (isInspecting == true && isEditing == false) {
+            console.log("header loaded")
+            return (
+                <>
+        <Header
+                expiringItems = {orderedList}
+                profilePreferences = {props.profile_preferences} 
+
+        />
+                <Inspect listitem = {currentItem} 
+                         inspectMode = {inspectMode}
+                         editMode = {editMode}
+
+                />
+                </>
 
 
-                )
-            }
+            )
+        }
 
-    }
-    else{
-        return <h1>Your list seems to be empty. Add an item!</h1>
+}
+else{
+    console.log("header loaded")
+    return (
+
+        <>
+        <Header
+                expiringItems = {orderedList}
+                profilePreferences = {props.profile_preferences} 
+
+        />
+    <h1>Your list seems to be empty. Add an item!</h1>    
+        </>
+
+
+
+        )
     }
 }
 export default YourList
