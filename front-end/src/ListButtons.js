@@ -24,7 +24,7 @@ const ListButtons = (props) => {
                    }
                 <Link to = "/add" state= {{olditems:itemlist,
                                             expiringItems : props.expiringItems,
-                                            profilePreferences : props.profile_preferences
+                    profilePreferences : props.profile_preferences || {notification_days: 5}
                     }}>
                 <button type = "button"> Add Item</button>
                 </Link>

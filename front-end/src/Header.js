@@ -31,11 +31,17 @@ const Header = (props) => {
     setAnchor2(null);
   };
   const expiringItems = props.expiringItems || [];
-    let preferences = props.profilePreferences;
-    if (preferences == null ){
-        preferences = {notification_days: 10}
+    let preferences = null;
+    let renderButtons = false;
+    let expdatepref = 5;
+    if ("profilePreferences" in props){
+         preferences = props.profilePreferences;
+        expdatepref = preferences.notification_days;
+        renderButtons = true;
     }
-    let expdatepref = preferences.notification_days;
+    else {
+        expdatepref = 5;
+    }
     console.log(expdatepref)
     console.log("loading header")
   return (
@@ -54,6 +60,9 @@ const Header = (props) => {
       > Refreegerator </Link> 
         </div>
         </h2>
+        {
+            renderButtons &&
+                <> 
         <div id= "notifications">
         <NotificationsNoneIcon onClick={handleClick2} fontSize="large"></NotificationsNoneIcon>
         <Menu
@@ -99,6 +108,8 @@ const Header = (props) => {
               transformOrigin={{ horizontal: 'right', vertical: 'top' }}
               anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
           >
+               
+
               <Link to= "/profile"
                  className='Refreegerator'
                 state={{ passpreferences:  preferences,
@@ -114,8 +125,14 @@ const Header = (props) => {
                     <h4 >Logout</h4>
               </Link>
               </MenuItem>
+
           </Menu>
           </div> 
+
+                </>
+
+
+        }
     </header>
     
           {/*
