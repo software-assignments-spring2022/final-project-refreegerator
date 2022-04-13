@@ -27,6 +27,7 @@ const Profile = props => {
         console.log(`Received server error: ${err}`)
       })
   }
+  //need to fix zipcode entry and save it somewhere
   return (
     <>
         <h1 className='Header'>Profile Preferences</h1> <br></br>
@@ -59,6 +60,21 @@ const Profile = props => {
                             onChange={e => setSuggest(e.target.value)}
                         />
                         <span className="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div className='Preference'>
+                <div className = 'column left'>
+                    <label>Zip Code:</label>
+                </div>
+                
+                <div className = 'column right'>
+                    <label>
+                        <input 
+                            type="text"
+                            onChange={e => setSuggest(e.target.value)}
+                        />
+                        <span></span>
                     </label>
                 </div>
             </div>

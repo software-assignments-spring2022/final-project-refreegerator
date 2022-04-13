@@ -1,4 +1,6 @@
 // Product request
+import location from "Location.js"
+
 const fs = require('fs');
 
 
