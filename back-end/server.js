@@ -1,7 +1,9 @@
 #!/usr/bin/env node
-
+const assert = require('chai').assert;
+const { expect } = require('chai');
 const server = require('./app')
 require('dotenv').config({ silent: true }) 
+
 
 const port = process.env.PORT || 3001
 

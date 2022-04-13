@@ -5,6 +5,8 @@ import { useState, useEffect} from "react";
 import Edit from "./Edit.js"
 import Inspect from "./Inspect.js"
 import {useLocation} from "react-router-dom"
+const axios = require('axios');
+
 const YourList = props => {
     const location = useLocation();
     const [sortpref, setSortPref] = useState(""); 
@@ -55,9 +57,11 @@ const YourList = props => {
     const [isEditing, editMode] = useState(false);
     const [isInspecting, inspectMode] = useState(false);
     const hasList = true;
-    const handleSelect= (item) => {
+    
+    const handleSelect= async (item) => {
         setCurrent(item)
         inspectMode(true)
+        
     };
     
     const [currentItem, setCurrent] = useState({})
@@ -213,4 +217,5 @@ const YourList = props => {
         return <h1>Your list seems to be empty. Add an item!</h1>
     }
 }
+
 export default YourList
