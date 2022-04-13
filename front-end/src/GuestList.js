@@ -48,6 +48,7 @@ const GuestList = props => {
                       setSingleItem = {setSingleItem}
                         expiringItems = {placeholder}
                         profilePreferences = {profile_preferences}
+                      profile_preferences = {profile_preferences} 
             />
             <ListButtons 
                       editAll = {editAll}                                 
