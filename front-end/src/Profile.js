@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 const Profile = props => {
   const [days, setDays] = useState("")
   const [suggest, setSuggest] = useState("")
+  const [zipcode, setZipCode] = useState("")
   const [auto, setAuto] = useState("")
   useEffect(() => {
     console.log("hello world")
@@ -72,7 +73,7 @@ const Profile = props => {
                     <label>
                         <input 
                             type="text"
-                            onChange={e => setSuggest(e.target.value)}
+                            onChange={e => setZipCode(e.target.value)}
                         />
                         <span></span>
                     </label>
