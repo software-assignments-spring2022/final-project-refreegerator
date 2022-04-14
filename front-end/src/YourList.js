@@ -13,6 +13,20 @@ const YourList = props => {
     props.setSingleItem(false)    
     const [orderedList, updateOrder] = useState([]);
     const [alreadyAdded, changeAdded] = useState(false); 
+    const placeholder = [
+        {category: "Dairy",
+            name: "Cheese",
+            expdatestr: "3000-05-25"
+        },
+        {category: "Zed",
+            name: "Bread",
+            expdatestr: "1031-01-29"
+        },
+        {category: "Basket",
+            name: "Alphabetical",
+            expdatestr: "2020-01-01"
+        }
+    ]
     
     //const [propagate, setPropagate] = useState(props.
     //let addeditemlist = location.state.addeditemlist

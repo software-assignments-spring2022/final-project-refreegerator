@@ -8,7 +8,7 @@ var chai = require('chai'), chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
 chai.request(app)
-    .get('/UserList')
+    .get('/UserList/rec')
     .send({'itemName': 'Bread'})
     .end(function(err, res){
         expect(err).to.be.null;

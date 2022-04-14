@@ -9,6 +9,20 @@ const UserList = props => {
     const [editAll, setEditAll] = useState(false);
     const [items, setItems] = useState([]); 
     const [singleItem, setSingleItem] = useState(false);
+    const placeholder = [
+        {category: "Dairy",
+            name: "Cheese",
+            expdatestr: "3000-05-25"
+        },
+        {category: "Zed",
+            name: "Bread",
+            expdatestr: "1031-01-29"
+        },
+        {category: "Basket",
+            name: "Alphabetical",
+            expdatestr: "2020-01-01"
+        }
+    ]
 
 const fetchData = async() => {
     try {
@@ -34,7 +48,7 @@ const fetchData = async() => {
 
     return(
         <>
-            <YourList placeholder = {items}
+            <YourList placeholder = {placeholder}
                       editAll = {editAll}                                 
                       propagate = {setItems}
                       setEditAll = {setEditAll}

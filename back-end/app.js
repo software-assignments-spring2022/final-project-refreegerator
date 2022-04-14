@@ -100,7 +100,7 @@ app.post('/edit/save', async (req, res) => {
 //   )
 //   res.json(result)
 // })
-app.get('/UserList', function(req, res) {
+app.get('/UserList/rec', function(req, res) {
   // const data = {
   //   inputs: req.body.inputs
   // }
@@ -112,6 +112,7 @@ app.get('/UserList', function(req, res) {
     function(data){ return data.itemName == foodName } 
   )
   // console.log(req);
+  console.log("Greg!");
   res.json(result);
   
 });

@@ -20,7 +20,7 @@ const SuggestedRecipes = (props )=> {
     const getRecipes = async (itemname) => {
         console.log(itemname);
         //here
-        const res = await axios.get(`http://localhost:3001/UserList?itemName=${itemname}`);
+        const res = await axios.get(`http://localhost:3001/UserList/rec?itemName=${itemname}`);
         // console.log("Here bozo 1");
         // console.log(JSON.stringify(res, null, 2))
         if (res.data && res.data[0] && res.data[0].recipes) {
