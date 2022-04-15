@@ -5,6 +5,8 @@ import { useState, useEffect} from "react";
 import Edit from "./Edit.js"
 import Inspect from "./Inspect.js"
 import {useLocation} from "react-router-dom"
+import GuestAdd from "./GuestAdd.js"
+import GuestEdit from "./GuestEdit.js"
 const axios = require('axios');
 
 const YourList = props => {
@@ -13,6 +15,11 @@ const YourList = props => {
     props.setSingleItem(false)    
     const [orderedList, updateOrder] = useState([]);
     const [alreadyAdded, changeAdded] = useState(false); 
+    let isGuest = true;
+    if (isGuest in props) {
+        
+
+    }
     const placeholder = [
         {category: "Dairy",
             name: "Cheese",
@@ -201,7 +208,7 @@ const YourList = props => {
                     console.log(isEditing)
                 return (
                     
-                    <Edit func = {editMode} 
+                    <GuestEdit func = {editMode} 
                         listitem = {currentItem}
                         changelist = {updateOrder}
                         currentlist = {orderedList}

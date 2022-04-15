@@ -21,7 +21,7 @@ const ListButtons = (props) => {
                 <button onClick = {() => manageEdit()}type = "button"> Edit List</button>
                 {// <Link to={{pathname: "/add", state: {allitems: itemlist}}} >
                    }
-                <Link to = "/add" state= {{olditems:itemlist}}>
+                <Link to = "/GuestAdd" state= {{olditems:itemlist}}>
                 <button type = "button"> Add Item</button>
                 </Link>
             </div>

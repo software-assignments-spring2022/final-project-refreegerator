@@ -12,6 +12,7 @@ import Add from './Add'
 import Edit from './Edit'
 import Profile from "./Profile"
 import Inspect from "./Inspect"
+import GuestAdd from "./GuestAdd"
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path = "/GuestList" element = {<GuestList />}> </Route>
             <Route path="/inspect" element={<Inspect />} />
             <Route path = "/Profile" element = {<Profile />}> </Route>
+            <Route path = "/GuestAdd" element = {<GuestAdd />}> </Route>
           </Routes>
         </main>
         
