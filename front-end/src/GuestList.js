@@ -31,7 +31,7 @@ const GuestList = props => {
     const [singleItem, setSingleItem] = useState(false);
     useEffect(() => {
         console.log("propagation has occurred")
-        console.table(items)
+        //console.table(items)
     }
     )
     return(

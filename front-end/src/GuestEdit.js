@@ -19,6 +19,15 @@ const GuestEdit = (props) =>{
     }
     props.setSingleItem(true)
    //console.table(inputs) 
+    function removeEntry(){
+      let existingEntries = JSON.parse(localStorage.getItem("items"));
+      if(existingEntries == null) existingEntries = [];
+      localStorage.removeItem(JSON.stringify(inputs));
+      //existingEntries.push(inputs);
+      //delete existingEntries[key];
+
+      localStorage.setItem("items", JSON.stringify(existingEntries));
+    }
     
     const handlesubmit = (event) => {
         event.preventDefault();
@@ -28,17 +37,25 @@ const GuestEdit = (props) =>{
         console.table(newlist)
         props.changelist(newlist)
         props.func(false)
-        axios
-        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/edit/save`, {
-          inputs: inputs
-        })
-        .then(response => {
-        })
-        .catch(err => {
-          console.log('error')
-        })
         //navigate('/userlist');
         
+        let existingEntries = JSON.parse(localStorage.getItem("items"))
+        if(existingEntries == null) existingEntries = [];
+        console.log("existing entries: ")
+        console.log(props.listitem)
+        console.table(existingEntries)
+        console.log(existingEntries)
+        let newarr = existingEntries.filter(
+            (iterateitem) => (JSON.stringify(iterateitem) != JSON.stringify(props.listitem)
+        ))
+        newarr.push(inputs)
+        console.log("after filtering, existing entries: ")
+        console.table(newarr)
+        localStorage.setItem("items", JSON.stringify(newarr))
+        //props.changelist(newarr)
+        props.func(false);
+        console.log("delete item was called");
+        //navigate('/userlist');
     }
     const cancel = (event) =>{
         event.preventDefault();
@@ -47,13 +64,36 @@ const GuestEdit = (props) =>{
         setUpdate(true);
         //navigate('/userlist');
       }
+    /*function removeEntry(){
+      var existingEntries = JSON.parse(localStorage.getItem("items"));
+      if(existingEntries == null) existingEntries = [];
+      localStorage.removeItem(JSON.stringify(inputs));
+      //existingEntries.push(inputs);
+      //delete existingEntries[key];
+
+      localStorage.setItem("items", JSON.stringify(existingEntries));
+    }*/
     const del = (event) =>{
         event.preventDefault();
+        let existingEntries = JSON.parse(localStorage.getItem("items"))
+        if(existingEntries == null) existingEntries = [];
+        console.log("existing entries: ")
+        console.log(props.listitem)
+        console.table(existingEntries)
+        console.log(existingEntries)
+        let newarr = existingEntries.filter(
+            (iterateitem) => (JSON.stringify(iterateitem) != JSON.stringify(props.listitem)
+        ))
+
+        console.log("after filtering, existing entries: ")
+        console.table(newarr)
+        localStorage.setItem("items", JSON.stringify(newarr))
         props.changelist(props.currentlist.filter(
             (iterateitem) => (iterateitem != props.listitem))
         )
+        //props.changelist(newarr)
         props.func(false);
-        console.log("deleted");
+        console.log("delete item was called");
         //navigate('/userlist');
     }
       return (
