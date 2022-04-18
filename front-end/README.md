@@ -14,6 +14,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+### Continuous Integration:
+
+[![CircleCI](https://circleci.com/gh/software-assignments-spring2022/ReFreegerator/tree/master.svg?style=shield)](https://circleci.com/gh/software-assignments-spring2022/ReFreegerator/tree/master)
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
