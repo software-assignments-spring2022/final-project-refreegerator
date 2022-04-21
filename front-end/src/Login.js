@@ -1,15 +1,10 @@
-import { Link } from 'react-router-dom'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './Login.css'
 
-import UserList from "./UserList"
-import GuestList from "./GuestList"
+import { Navigate, useSearchParams } from "react-router-dom"
+
 import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
 import "./styles.css";
-//import { useNavigate } from 'react-router-dom';
-import { Navigate } from "react-router-dom";
-// import { render } from '../../back-end/app'
+
 /**
  * A React component that represents the Home page of the app.
  * @param {*} param0 an object holding any props passed to this component from its parent component
@@ -17,102 +12,56 @@ import { Navigate } from "react-router-dom";
  */
  const axios = require("axios")
 
-const Fregley = props => {
-  return (
-    <>
-      <h1>Welcome to ReFreegerator!</h1>
-      <p>
-          New User? <Link to="/create">Create an account</Link> or <Link to= "/GuestList"  >continue as a guest</Link>.
-      </p>
-        
-    </>
-  )
-}
+const Login =props => {
+  let [urlSearchParams] = useSearchParams() // get access to the URL query string parameters
 
-
-
-
-function Login() {
   // React States
-  const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState({});
-  const [loggedin, setLoggedin] = useState(false);
   const [name, setName] = useState('');
   const [pass, setPass] = useState('');
 
-  // User Login info
-  /*
-  const database = [
-    {
-      username: "user1",
-      password: "pass1"
-    },
-    {
-      username: "user2",
-      password: "pass2"
+  const [response, setResponse] = useState({}) 
+  const [errorMessage, setErrorMessage] = useState("")
+  useEffect(() => {
+    const qsError = urlSearchParams.get("error") 
+    if (qsError === "protected")
+      setErrorMessage("Please log in to view our fabulous protected content.")
+  }, []) 
+  useEffect(() => {
+    if (response.success && response.token) {
+      console.log(`User successfully logged in: ${response.username}`)
+      localStorage.setItem("token", response.token) 
     }
-  ];
+  }, [response])
 
-  const errors = {
-    uname: "invalid username",
-    pass: "invalid password"
-  };
-*/
-  useEffect(()=>{
-    setLoggedin(false);
-    console.log(loggedin);
-  }, [])
 
-  const handleSubmit = e =>{
+  const handleSubmit = async e =>{
     e.preventDefault();
-    console.log(loggedin);
     axios
-      .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/save`, {name: name, pass: pass})
-      .then((response) => {
-        setLoggedin(response.data);
-      })
-      .catch(err => {
-        console.log(`error error error! ${err}`)
-      })
-      setName('');
-      setPass('');
+    .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/save`, {name: name, pass: pass})
+    .then((response) => {
+      setResponse(response.data);
+      setErrorMessage(response.data.message);
+      console.log(response.data);
+    })
+    .catch(err => {
+      console.log(`error error error! ${err}`)
+      console.log(response)
+      setErrorMessage('inavlid');
+
+    })
+    /*
+    const r = await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/save`, {name: name, pass: pass});
+    setResponse(r.data);
+    setErrorMessage(r.data.message);*/
+    setName('');
+    setPass('');
+
     
   }
   
-
-/*
-  const handleSubmit = (event) => {
-    //don't reload on submit
-    event.preventDefault();
-    var { uname, pass } = document.forms[0];
-
-    // check for login info
-    const userData = database.find((user) => user.username === uname.value); //this will be more integrated once we work with mongodb more
-
-    // Compare user info
-    if (userData) {
-      if (userData.password !== pass.value) {
-        // Invalid password
-        setErrorMessages({ name: "pass", message: errors.pass });
-      } else {
-        setIsSubmitted(true);
-      }
-    } else {
-      // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
-    }
-  };
-*/
-  // Generate JSX code for error message
-  /*
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
-    );
-*/
   // JSX code for login form
   const renderForm = (
-
+    <>
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
@@ -133,27 +82,26 @@ function Login() {
       
       <div> New User? <a href="/create">Create an account</a> or <a href= "/guestlist">continue as a guest.</a> </div> 
     </div>
+    </>
   );
-  if(true){
+  if(!response.success){
     return (
+      <>
       <div className="app">
         <div className="login-form">
           <div className="title">Sign In</div>
-            {/* {renderForm} */}
-
-            {loggedin ?<Navigate to = "/UserList"/>: renderForm}
-    
+          {errorMessage}
+            {renderForm}
         </div>
         
       </div>
-      
+      </>
     );
   }
   else{
-    <Navigate to = "/UserList"/>
+    return(<Navigate to = "/UserList"/>)
   }
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<Login />, rootElement);
+
 export default Login
