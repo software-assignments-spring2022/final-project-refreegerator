@@ -12,23 +12,57 @@ app.use(express.urlencoded({ extended: true })) // decode url-encoded incoming P
 const userData= require('./temp_data/user.json'); 
 const itemData= require('./temp_data/items.json'); 
 const fs = require('fs');
+const _ = require("lodash") // the lodash module has some convenience functions for arrays that we use to sift through our mock user data... you don't need this if using a real database with user info
+const jwt = require("jsonwebtoken")
+const passport = require("passport")
+app.use(passport.initialize())
+
+const { jwtOptions, jwtStrategy } = require("./jwt-config.js") // import setup options for using JWT in passport
+passport.use(jwtStrategy)
+app.get(
+  "/protected",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    res.json({
+      success: true,
+      user: {
+        id: req.user.id,
+        username: req.user.username,
+      },
+      message:
+        "Congratulations: you have accessed this route because you have a valid JWT token!",
+    })
+  }
+)
 app.post('/save', async (req, res)=>{
     const data = {
         username: req.body.name,
         password: req.body.pass
     }
-    let b = 0;
-    userData.map(user => {
-        if(user.username === data.username && user.password === data.password){
-            b = 1;
-        }
-    });
-    if(b === 1){
-        res.json(true)
+    if (!data.username || !data.password){
+      res
+        .status(401)
+        .json({ success: false, message: `no username or password supplied.` })
     }
-    else{
-        res.json(false)
+    const username1 = data.username
+    const user = userData[_.findIndex(userData, { username: username1 })]
+    if (!user) {
+      // no user found with this name... send an error
+      res
+        //.status(401)
+        .json({ success: false, message: `user not found: ${username1}.` })
     }
+    else if(data.password==user.password){
+      const payload = {id : user.id}
+      const token = jwt.sign(payload, jwtOptions.secretOrKey) // create a signed token
+    res.json({ success: true, username: user.username, token: token }) // send the token to the client to store
+      } else {
+        // the password did not match
+        res
+        //.status(401)
+        .json({ success: false, message: "passwords did not match" })
+      }
+
 })
 
 app.post('/create/save', async (req, res)=>{
@@ -51,9 +85,6 @@ app.get('/userlist', (req, res)=>{
     console.log(d);
     res.json(d);
 })
-
-
-
 
 
 app.post('/profile/save', async (req, res) => {
@@ -86,8 +117,5 @@ app.post('/edit/save', async (req, res) => {
   res.json(data)
 })
 
-app.post('/login', (req, res)=>{
-  
-})
 
 module.exports = app
