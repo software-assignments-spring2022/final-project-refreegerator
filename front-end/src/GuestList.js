@@ -1,7 +1,6 @@
 import YourList from "./YourList"
 import ListButtons from "./ListButtons"
 import {useState, useEffect} from "react"
-
 const GuestList = props => {
     
     var item = JSON.parse(localStorage.getItem('items'));
@@ -13,9 +12,6 @@ const GuestList = props => {
         return container;
     });
 
-    const [editAll, setEditAll] = useState(false)
-    const [items, setItems] = useState(data)
-    const [singleItem, setSingleItem] = useState(false);
     const placeholder = [
         {category: "Dairy",
             name: "Cheese",
@@ -30,20 +26,25 @@ const GuestList = props => {
             expdatestr: "2020-01-01"
         }
     ]
+    const [editAll, setEditAll] = useState(false)
+    const [items, setItems] = useState(data)
+    const [singleItem, setSingleItem] = useState(false);
     useEffect(() => {
         console.log("propagation has occurred")
-        console.table(items)
+        //console.table(items)
     }
     )
     return(
         <>
-            <YourList placeholder = {data}
+            <YourList placeholder = {items}
                       editAll = {editAll}                                 
                       propagate = {setItems}
                       setEditAll = {setEditAll}
                       setSingleItem = {setSingleItem}
+                      isGuest = {true}
             />
             <ListButtons 
+                      isGuest = {true}
                       editAll = {editAll}                                 
                       setEditAll = {setEditAll}
                       allItems = {items} 

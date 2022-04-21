@@ -5,6 +5,8 @@ import { useState, useEffect} from "react";
 import Edit from "./Edit.js"
 import Inspect from "./Inspect.js"
 import {useLocation} from "react-router-dom"
+import GuestAdd from "./GuestAdd.js"
+import GuestEdit from "./GuestEdit.js"
 const axios = require('axios');
 
 const YourList = props => {
@@ -13,6 +15,11 @@ const YourList = props => {
     props.setSingleItem(false)    
     const [orderedList, updateOrder] = useState([]);
     const [alreadyAdded, changeAdded] = useState(false); 
+    let isGuest = true;
+    if (isGuest in props) {
+        
+
+    }
     const placeholder = [
         {category: "Dairy",
             name: "Cheese",
@@ -82,7 +89,10 @@ const YourList = props => {
 
 
     useEffect(() => {
-        updateOrder(props.placeholder)
+      let  existingEntries = JSON.parse(localStorage.getItem("items"));
+        //console.log("current localstorage is")
+        //console.table(existingEntries)
+        updateOrder(existingEntries)
     }, [props.placeholder]);
     
     const handleClick = (item) => {
@@ -99,6 +109,22 @@ const YourList = props => {
             (iterateitem) => (iterateitem !== item))
         )
         props.propagate(orderedList)
+        let existingEntries = JSON.parse(localStorage.getItem("items"))
+        if(existingEntries == null) existingEntries = [];
+        console.log("existing entries: ")
+        console.log(props.listitem)
+        console.table(existingEntries)
+        console.log(existingEntries)
+        let newarr = existingEntries.filter(
+            (iterateitem) => (JSON.stringify(iterateitem) != JSON.stringify(item)
+        ))
+
+        console.log("after filtering, existing entries: ")
+        console.table(newarr)
+        localStorage.setItem("items", JSON.stringify(newarr))
+        //props.changelist(newarr)
+        console.log("delete item was called");
+        //navigate('/userlist');
     }
 
     const current = new Date();
@@ -106,6 +132,7 @@ const YourList = props => {
         const msdiff = expdate - current
         return msdiff / (1000 * 60 * 60 * 24) 
     }
+     //console.log(existingEntries)
     const handleSort = (event) => {
         //console.log(event.target.value)
         const newarray = [...orderedList]
@@ -201,7 +228,7 @@ const YourList = props => {
                     console.log(isEditing)
                 return (
                     
-                    <Edit func = {editMode} 
+                    <GuestEdit func = {editMode} 
                         listitem = {currentItem}
                         changelist = {updateOrder}
                         currentlist = {orderedList}
