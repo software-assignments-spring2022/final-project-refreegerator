@@ -20,5 +20,32 @@
         "body": "Put some peanut butter between some bread!"
       }
     ]
-  } 
+  }, 
+  {
+    "itemName": "Eggs",
+    "recipes": [
+      {
+        "title": "Scrambled Eggs",
+        "body": "Lightly beat the eggs in a medium bowl. Cook in a nonstick pan for 10 minutes over low heat."
+      },
+      {
+        "title": "Scrambled Egg Sandwich",
+        "body": "Scramble the eggs as noted earlier, then put them between some bread!"
+      }
+    ]
+  }
+  , 
+  {
+    "itemName": "Egg",
+    "recipes": [
+      {
+        "title": "Scrambled Eggs",
+        "body": "Lightly beat the eggs in a medium bowl. Cook in a nonstick pan for 10 minutes over low heat."
+      },
+      {
+        "title": "Scrambled Egg Sandwich",
+        "body": "Scramble the eggs as noted earlier, then put them between some bread!"
+      }
+    ]
+  }
 ]
