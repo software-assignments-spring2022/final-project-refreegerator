@@ -19,21 +19,7 @@ app.use(passport.initialize())
 
 const { jwtOptions, jwtStrategy } = require("./jwt-config.js") // import setup options for using JWT in passport
 passport.use(jwtStrategy)
-app.get(
-  "/protected",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    res.json({
-      success: true,
-      user: {
-        id: req.user.id,
-        username: req.user.username,
-      },
-      message:
-        "Congratulations: you have accessed this route because you have a valid JWT token!",
-    })
-  }
-)
+
 app.post('/save', async (req, res)=>{
     const data = {
         username: req.body.name,
@@ -80,10 +66,12 @@ app.post('/create/save', async (req, res)=>{
     res.json(userData);
 })
 
-app.get('/userlist', (req, res)=>{
+app.get('/userlist', passport.authenticate("jwt", { session: false }), (req, res)=>{
     const d = itemData;
     console.log(d);
-    res.json(d);
+    res.json({
+      d_: d,
+      success: true});
 })
 
 
@@ -117,5 +105,12 @@ app.post('/edit/save', async (req, res) => {
   res.json(data)
 })
 
+app.get("/logout", function (req, res) {
+  res.json({
+    success: true,
+    message:
+      "logged out",
+  })
+})
 
 module.exports = app

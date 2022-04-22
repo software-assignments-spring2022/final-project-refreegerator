@@ -14,18 +14,14 @@ import Notification from './Notification'
  */
 const Header = () => {
   const [anchor, setAnchor] = React.useState(null);
-  const [anchor2, setAnchor2] = React.useState(null);
   const handleClick = (event) => {
     setAnchor(event.currentTarget);
   };
   const handleClose = () => {
     setAnchor(null);
   };
-  const handleClick2 = (event) => {
-    setAnchor2(event.currentTarget);
-  };
-  const handleClose2 = () => {
-    setAnchor2(null);
+  const logout =() =>{
+    localStorage.removeItem("token");
   };
   return (
       <>
@@ -51,31 +47,13 @@ const Header = () => {
                   </MenuItem>
               </Link>
               <MenuItem>
-              <Link to="/" className='dropdownMenu'>
+              <Link to="/" onClick = {logout} className='dropdownMenu'>
                     <h4 >Logout</h4>
               </Link>
               </MenuItem>
           </Menu>
           </div> 
     </header>
-    
-          {/*
-        <ul className="nav-links">
-          <li className="nav-item">
-            <Link to="/">Login</Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/create"> Create An Account </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/guest"> Continue As Guest </Link>
-          </li>
-        <li className = "nav-item">
-            <Link to = "/"> [dropdown goes here] </Link>
-        </li>
-        </ul>
-        // <Link to= "/profile" className = "profile"><img src={profile} className = "profile"  alt="Dropdown" /></Link>
-          */}
       </>
   )
 }
