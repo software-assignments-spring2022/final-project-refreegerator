@@ -2,6 +2,7 @@ require('dotenv').config({ silent: true }) // load environmental variables from 
 const express = require('express') // CommonJS import style!
 const morgan = require('morgan') // middleware for nice logging of incoming HTTP requests
 const cors = require('cors') 
+const mongoose = require('mongoose')
 
 const app = express() // instantiate an Express object
 app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV === 'test' })) // log all incoming requests, except when in unit test mode.  morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -20,6 +21,13 @@ app.use(passport.initialize())
 const { jwtOptions, jwtStrategy } = require("./jwt-config.js") // import setup options for using JWT in passport
 passport.use(jwtStrategy)
 
+mongoose
+  .connect(`${process.env.DB_CONNECTION_STRING}`)
+  .then(data => console.log(`Connected to MongoDB`))
+  .catch(err => console.error(`Failed to connect to MongoDB: ${err}`))
+
+const {User} = require('./models/User')
+
 app.post('/save', async (req, res)=>{
     const data = {
         username: req.body.name,
@@ -31,42 +39,69 @@ app.post('/save', async (req, res)=>{
         .json({ success: false, message: `no username or password supplied.` })
     }
     const username1 = data.username
-    const user = userData[_.findIndex(userData, { username: username1 })]
-    if (!user) {
-      // no user found with this name... send an error
-      res
-        //.status(401)
-        .json({ success: false, message: `user not found: ${username1}.` })
-    }
-    else if(data.password==user.password){
-      const payload = {id : user.id}
-      const token = jwt.sign(payload, jwtOptions.secretOrKey) // create a signed token
-    res.json({ success: true, username: user.username, token: token }) // send the token to the client to store
-      } else {
-        // the password did not match
+    /*
+    const user = User.find({ username: username1 })*/
+    const retrieve = async() => {
+      const user = await User.findOne({username: username1})
+      console.log(user)
+      if (!user) {
+        // no user found with this name... send an error
         res
-        //.status(401)
-        .json({ success: false, message: "passwords did not match" })
+          //.status(401)
+          .json({ success: false, message: `user not found: ${username1}.` })
       }
+      else if(data.password==user.password){
+        const payload = {id : user.id}
+        const token = jwt.sign(payload, jwtOptions.secretOrKey) // create a signed token
+      res.json({ success: true, username: user.username, token: token }) // send the token to the client to store
+        } else {
+          // the password did not match
+          res
+          //.status(401)
+          .json({ success: false, message: "passwords did not match" })
+        }
+    }
+    retrieve();
 
 })
 
 app.post('/create/save', async (req, res)=>{
     const data = {
         username: req.body.name,
-        password: req.body.pass
+        password: req.body.pass,
     }
-    userData.push(data);
-    console.log(userData);
-    fs.writeFile('./temp_data/user.json', JSON.stringify(userData), function(err) {
-        if (err) {
-            console.log(err);
+    try{
+      const user= await User.findOne({username: data.username})
+      console.log(user)
+      if (user){
+        return res.status(401).json({
+          success: false,
+          message: 'username already exists'
+        })
+      }
+      const newUser = await User.create({
+        username: data.username,
+        password: data.password,
+        preferences: {
+          notification: "0",
+          suggest: 'true',
+          auto: 'true'
         }
-    });
-    res.json(userData);
+      })
+      const payload = {id : newUser.id}
+      const token = jwt.sign(payload, jwtOptions.secretOrKey)
+      return res.json({
+          success: true,
+          username: data.username,
+          token: token
+        })
+    }
+    catch(err){
+      console.error(err)
+    }
 })
 
-app.get('/userlist', passport.authenticate("jwt", { session: false }), (req, res)=>{
+app.get('/userlist', passport.authenticate("jwt", { session: false }), async (req, res)=>{
     const d = itemData;
     console.log(d);
     res.json({
@@ -74,16 +109,42 @@ app.get('/userlist', passport.authenticate("jwt", { session: false }), (req, res
       success: true});
 })
 
+app.get('/profileform', async(req,res)=>{
+    const username = req.query.username;
+    console.log(username);
+    const retrieve = async() => {
+      const user = await User.findOne({username: username})
+      console.log(user)
+      console.log(user.preferences)
+      res.json({
+        preferences: user.preferences
+      })
+    }
+    retrieve();
+
+})
 
 app.post('/profile/save', async (req, res) => {
   const data = {
     days: req.body.days,
     suggest: req.body.suggest,
-    auto: req.body.auto
+    auto: req.body.auto,
+    username: req.body.username
   }
+  const update = {
+    $set: {
+      preferences: {
+        notification: data.days,
+        suggest: data.suggest,
+        auto: data.auto
+      }
+    },
+  }
+  await User.updateOne({username: req.body.username}, update)
   console.log(data)
   res.json(data)
 })
+
 app.post('/add/save', async (req, res) => {
   const data = {
     inputs: req.body.inputs

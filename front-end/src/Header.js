@@ -22,6 +22,7 @@ const Header = () => {
   };
   const logout =() =>{
     localStorage.removeItem("token");
+    localStorage.removeItem("username")
   };
   return (
       <>

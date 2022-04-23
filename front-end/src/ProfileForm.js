@@ -1,4 +1,4 @@
-import { useState } from "react"
+import {useState, useEffect} from "react"
 import axios from "axios"
 import "./Profile.css"
 import { useLocalStorage } from "./useLocalStorage"
@@ -8,10 +8,15 @@ import ToggleSwitch from "./ToggleSwitch"
 
 const ProfileForm = () => {
     // create a state variable for each form field
-    const [days, setDays] = useLocalStorage("days","")
-    const [suggest, setSuggest] = useLocalStorage("suggest","")
-    const [auto, setAuto] = useLocalStorage("auto","")
-
+    /*
+    const [days, setDays] = useLocalStorage("days","0")
+    const [suggest, setSuggest] = useLocalStorage("suggest",false)
+    const [auto, setAuto] = useLocalStorage("auto",false)*/
+    const username = localStorage.getItem("username")
+    const [days, setDays] = useState("0")
+    const [suggest, setSuggest] = useState(true)
+    const [auto, setAuto] = useState(true)
+    const [response, setResponse] = useState({})
     const onSuggestChange = (checked) => {
         setSuggest(checked);
     }
@@ -19,19 +24,45 @@ const ProfileForm = () => {
         setAuto(checked);
     }
 
+    const fetchData = async() => {
+      try {
+        console.log(username);
+          await axios
+            .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/profileform`, {params:{username: username}})
+            .then((response) =>{
+              console.log(response.data)
+              setResponse(response.data.preferences);
+              
+              setDays(response.data.preferences.notification);
+              setSuggest(response.data.preferences.suggest);
+              setAuto(response.data.preferences.auto);
+            })
+            .catch(err =>{
+              console.log(err)
+            })
+          
 
+      }
+      catch(error){
+          console.log(error);
 
+      }
+  };
+  useEffect(()=>{
+    fetchData();
+    setDays(response.notification);
+    setSuggest(response.suggest);
+    setAuto(response.auto);
+  },[])
     const submitForm = e => {
       e.preventDefault()
       console.log('front end')
-      console.log(days)
-      console.log(suggest)
-      console.log(auto)
       axios
         .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/profile/save`, {
           days: days,
           suggest: suggest,
           auto:auto,
+          username: username
         })
         .then(response => {
         })
@@ -39,8 +70,6 @@ const ProfileForm = () => {
           console.log('error')
         })
     } 
-
-
 
     return (
       <form className="Preferences" onSubmit={submitForm}>

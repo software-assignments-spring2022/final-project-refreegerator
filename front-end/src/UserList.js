@@ -20,7 +20,7 @@ const fetchData = async() => {
         const response = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/userlist`, {
             headers: { Authorization: `JWT ${jwtToken}` }
         });
-        // console.log((response.data));
+        console.log((response.data));
         setResponse(response.data); 
         setItems([...response.data.d_]);
     }
