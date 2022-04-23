@@ -3,6 +3,11 @@ const express = require('express') // CommonJS import style!
 const morgan = require('morgan') // middleware for nice logging of incoming HTTP requests
 const cors = require('cors') 
 const mongoose = require('mongoose')
+const jsonData = require('./recipes.json')
+
+var chai = require('chai'), chaiHttp = require('chai-http');
+
+chai.use(chaiHttp);
 
 const app = express() // instantiate an Express object
 app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV === 'test' })) // log all incoming requests, except when in unit test mode.  morgan has a few logging default styles - dev is a nice concise color-coded style
@@ -174,4 +179,30 @@ app.get("/logout", function (req, res) {
   })
 })
 
+// app.post('/recipes', async(req, res) => {
+//   const data = {
+//     inputs: req.body.inputs
+//   }
+//   const itemName = inputs.itemName;
+//   result = jsonData.filter(
+//     function(data){ return data.itemName == itemName }
+//   )
+//   res.json(result)
+// })
+app.get('/UserList/rec', function(req, res) {
+  // const data = {
+  //   inputs: req.body.inputs
+  // }
+  
+  const foodName = req.query.itemName;
+  console.log(`itemName: ${foodName}`);
+  // console.log(req);
+  result = jsonData.filter(
+    function(data){ return data.itemName == foodName } 
+  )
+  // console.log(req);
+  console.log("Greg!");
+  res.json(result);
+  
+});
 module.exports = app

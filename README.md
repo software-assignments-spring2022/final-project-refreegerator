@@ -42,7 +42,8 @@ ssl510@nyu.edu
 
 https://github.com/spenserlaier
 ## Building and Testing ##
-TBA
+Continuous Integration: 
+[![CircleCI](https://circleci.com/gh/software-assignments-spring2022/ReFreegerator/tree/master.svg?style=shield)](https://circleci.com/gh/software-assignments-spring2022/ReFreegerator/tree/master)
 ## Additional Links ##
 1. See the [App Map & Wireframes](instructions-0a-app-map-wireframes.md) and [Prototyping](./instructions-0b-prototyping.md) instructions for the requirements of the initial user experience design of the app.
 

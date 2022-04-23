@@ -14,6 +14,20 @@ const UserList = props => {
     const jwtToken = localStorage.getItem("token")
     const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true) 
     
+    const placeholder = [
+        {category: "Dairy",
+            name: "Cheese",
+            expdatestr: "3000-05-25"
+        },
+        {category: "Zed",
+            name: "Bread",
+            expdatestr: "1031-01-29"
+        },
+        {category: "Basket",
+            name: "Alphabetical",
+            expdatestr: "2020-01-01"
+        }
+    ]
 
 const fetchData = async() => {
     try {
@@ -31,6 +45,11 @@ const fetchData = async() => {
     }
 };
     
+
+
+    let new_item = { name: "Potatoes", category: "Storage", expdatestr: "2020-02-02", quantity: 6}
+    placeholder[0] = new_item;
+    
     useEffect(()=>{
         fetchData();
         // console.log("propagation has occurred")
@@ -46,6 +65,7 @@ const fetchData = async() => {
                       propagate = {setItems}
                       setEditAll = {setEditAll}
                       setSingleItem = {setSingleItem}
+                      
             />
             <ListButtons 
                       editAll = {editAll}                                 
