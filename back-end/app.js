@@ -89,8 +89,8 @@ app.post('/create/save', async (req, res)=>{
         password: data.password,
         preferences: {
           notification: "0",
-          suggest: 'true',
-          auto: 'true'
+          suggest: true,
+          auto: true
         }
       })
       const payload = {id : newUser.id}
