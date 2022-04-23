@@ -1,61 +1,45 @@
-import { Link } from 'react-router-dom'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './Create.css'
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
-import { Navigate } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
 
 const axios = require("axios")
 
 
-/**
- * A React component that represents the Home page of the app.
- * @param {*} param0 an object holding any props passed to this component from its parent component
- * @returns The contents of this component, in JSX form.
- */
-
-
-
-
 const Create = props =>{
+  let [urlSearchParams] = useSearchParams() // get access to the URL query string parameters
+
   // React States
-  const [errorMessages, setErrorMessages] = useState({});
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [name, setName] = useState('');
   const [pass, setPass] = useState('');
   const [signedIn, setSignedIn] = useState(false);
-  // User Login info
-  /*
-  const database = [
-    {
-      username: "user1",
-      password: "pass1"
-    },
-    {
-      username: "user2",
-      password: "pass2"
-    }
-  ];
+  const [errorMessage, setErrorMessage] = useState("")
 
-  const errors = {
-    uname: "invalid username",
-    pass: "invalid password"
-  };
-*/
+
+  useEffect(() => {
+    const qsError = urlSearchParams.get("error") 
+    if (qsError === "protected")
+      setErrorMessage("Please log in to view our fabulous protected content.")
+  }, []) 
+
+
 const handleSubmit = e =>{
   e.preventDefault();
-  console.log((name));
-  console.log((pass));
   axios
     .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/create/save`, {name: name, pass: pass})
     .then((response) => {
-      console.log(response);
+      localStorage.setItem("token", response.data.token);
+      if (response.data.success == true){
+        setSignedIn(true)
+        localStorage.setItem("username", name)
+      }
     })
     .catch(err => {
+      if (err.response?.status === 401){
+        setErrorMessage("this username is taken")
+      }
       console.log(`error error error! ${err}`)
     })
-  setSignedIn(true);
 }
 /*
   const handleSubmit = (event) => {
@@ -134,7 +118,7 @@ const renderForm = (
       <br></br>
     </form>
     
-    <div> New User? <a href="/create">Create an account</a> or <a href= "/guestlist">continue as a guest.</a> </div> 
+    <div>Already a user? <a href="/">Login</a> or <a href= "/guestlist">continue as a guest.</a> </div> 
   </div>
   </>
 );
@@ -144,6 +128,8 @@ const renderForm = (
       
       <div className="login-form">
         <div className="title">Create Account</div>
+        {errorMessage}
+
         {/*
         {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
   */}
@@ -157,6 +143,5 @@ const renderForm = (
   );
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<Create />, rootElement);
+
 export default Create
