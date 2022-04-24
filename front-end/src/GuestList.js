@@ -1,5 +1,5 @@
 import YourList from "./YourList"
-import ListButtons from "./ListButtons"
+import GuestButtons from "./GuestButtons"
 import {useState, useEffect} from "react"
 const GuestList = props => {
     
@@ -43,7 +43,7 @@ const GuestList = props => {
                       setSingleItem = {setSingleItem}
                       isGuest = {true}
             />
-            <ListButtons 
+            <GuestButtons 
                       isGuest = {true}
                       editAll = {editAll}                                 
                       setEditAll = {setEditAll}
