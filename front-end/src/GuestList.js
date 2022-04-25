@@ -4,14 +4,20 @@ import {useState, useEffect} from "react"
 const GuestList = props => {
     
     var item = JSON.parse(localStorage.getItem('items'));
-    const data = item.map(item => {
-        const container = {};
-        container.category = item.category;
-        container.name = item.name;
-        container.expdatestr = item.expdatestr;
-        return container;
-    });
+    let data = []
+    if (item != null && item != undefined){
+         data = item.map(item => {
+            const container = {};
+            container.category = item.category;
+            container.name = item.name;
+            container.expdatestr = item.expdatestr;
+            return container;
+        });
+    }
 
+    else item = []
+    console.log("data is " , data)
+    console.log("item is " , item)
     const placeholder = [
         {category: "Dairy",
             name: "Cheese",

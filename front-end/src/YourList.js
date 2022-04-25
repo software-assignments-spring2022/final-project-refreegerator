@@ -92,7 +92,9 @@ const YourList = props => {
       let  existingEntries = JSON.parse(localStorage.getItem("items"));
         //console.log("current localstorage is")
         //console.table(existingEntries)
+        if (existingEntries != null && existingEntries != undefined){
         updateOrder(existingEntries)
+        }
     }, [props.placeholder]);
     
     const handleClick = (item) => {
@@ -135,7 +137,7 @@ const YourList = props => {
      //console.log(existingEntries)
     const handleSort = (event) => {
         //console.log(event.target.value)
-        const newarray = [...orderedList]
+        let newarray = [...orderedList]
         if (event.target.value == "closetospoil") {
         newarray.sort((a,b) => {
             const a_date = new Date(a.expdatestr)
