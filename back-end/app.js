@@ -234,3 +234,25 @@ app.get('/UserList/rec', function(req, res) {
   
 });
 module.exports = app
+
+
+//for editing an item
+app.post("/", async(req, res) => {
+  const itemName = req.params.name
+  try{
+    const updateItem = await Item.findOneAndUpdate({name: itemName}, {category: req.body.category, name: req.body.name, expdatestr: req.body.expdatestr} )
+    res.json(updateItem)
+  } catch(e){
+  console.log("Couldn't Find Item");
+  res.status(500)
+}
+})
+//for deleting an item
+app.post("/", async(req, res) => {
+  const itemName = req.params.name
+  try{
+    const deleteItem = await Item.findOneAndDelete({name: itemName} )
+  } catch(e){
+    console.log("Cannot find Item")
+  }
+})
