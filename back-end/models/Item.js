@@ -12,13 +12,10 @@ const itemSchema = new Schema(
       required: true,
     },
     expdatestr: {
-        type: String,
-        required: true,
-      },
+      type: String,
+      required: true,
+    },
   },
-  {
-    timestamps: true,
-  }
 )
 
 // create mongoose Model

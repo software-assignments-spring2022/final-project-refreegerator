@@ -32,6 +32,7 @@ mongoose
   .catch(err => console.error(`Failed to connect to MongoDB: ${err}`))
 
 const {User} = require('./models/User')
+const { Item } = require('./models/Item')
 
 app.post('/save', async (req, res)=>{
     const data = {
@@ -150,7 +151,34 @@ app.post('/profile/save', async (req, res) => {
   res.json(data)
 })
 
+
+//adding item
 app.post('/add/save', async (req, res) => {
+  const data = {
+    category: req.body.category,
+    name: req.body.name,
+    expdatestr: req.body.expdatestr,
+  }
+  try{
+    const item = await Item.create({
+      category: data.category,
+      name: data.name,
+      expdatestr: data.expdatestr,
+    })
+    return res.json({
+      item: item,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save item to database',
+    })
+  }
+})
+
+/*app.post('/add/save', async (req, res) => {
   const data = {
     inputs: req.body.inputs
   }
@@ -177,7 +205,7 @@ app.get("/logout", function (req, res) {
     message:
       "logged out",
   })
-})
+})*/
 
 // app.post('/recipes', async(req, res) => {
 //   const data = {
