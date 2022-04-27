@@ -156,17 +156,17 @@ app.post('/profile/save', async (req, res) => {
 app.post('/add/save', async (req, res) => {
 
   const data = {
-    expdatestr: req.body.inputs.expdatestr,
-    name: req.body.inputs.name,
-    category: req.body.inputs.category,
+    expdatestr: req.body.expdatestr,
+    name: req.body.name,
+    category: req.body.category,
   }
   console.log('data here: ' + data)
   console.log('done')
   try{
     const item = await Item.create({
-      category: req.body.category,
-      name: req.body.name,
-      expdatestr: req.body.expdatestr,
+      category: data.category,
+      name: data.name,
+        expdatestr: data.expdatestr,
     })
     return res.json({
       item: item,
