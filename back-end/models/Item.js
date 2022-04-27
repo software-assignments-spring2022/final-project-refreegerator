@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const itemSchema = new Schema(
   {
-    category: {
+    expdatestr: {
       type: String,
       required: true,
     },
@@ -11,11 +11,11 @@ const itemSchema = new Schema(
       type: String,
       required: true,
     },
-    expdatestr: {
+    category: {
       type: String,
       required: true,
-    },
-  },
+    }
+  }
 )
 
 // create mongoose Model
