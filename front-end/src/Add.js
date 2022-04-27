@@ -124,6 +124,7 @@ const Add = props =>{
         }
                     },[inputs])
     const autoComplete = async (event, value) =>  { 
+        console.log("autocomplete called")
         let foodname = "undefined"
         const currentname = event.target.name;
         //console.log(event.target.name);
@@ -133,11 +134,11 @@ const Add = props =>{
              foodname = event.target.value;
             if (value != null) {
                 foodname = value;
-             //handleChange(event, foodname); 
+             handleChange(event, foodname); 
             }
             else {
 
-                //handleChange(event)
+                handleChange(event)
             }
         }
         //console.log(foodname);
@@ -148,7 +149,6 @@ const Add = props =>{
                 {
                     if (auto_item.name == foodname){
                        //if (event.target.name = "ex_date"){
-                           //handleChange(event);
                            // console.log("ex date = true");
                            // console.log(auto_item);
                            // console.log(currentdate);
@@ -185,7 +185,7 @@ const Add = props =>{
         }
     }
     const handleChange = (event, value) => {
-        // console.log(event, value)
+         //console.log(event, value)
         let  newname = event.target.name;
         let newval = ""
           newval = event.target.type === 'checkbox' ? event.target.checked : event.target.value;;
@@ -215,6 +215,7 @@ const Add = props =>{
             olditems[newLength-1] = inputs;
             setItemList(olditems);
         }
+        console.table(inputs)
       }
 /*
     const handleChange = (event) => {
@@ -232,10 +233,11 @@ const Add = props =>{
         // console.log(inputs);
         //navigate('/UserList');
         console.log(inputs)
+        let newdata = inputs;
         axios
-        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/add/save`, {
-          inputs: inputs
-        })
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/add/save`,inputs 
+            
+        )
         .then(response => {
         })
         .catch(err => {
