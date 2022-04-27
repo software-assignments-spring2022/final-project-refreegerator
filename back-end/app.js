@@ -154,6 +154,7 @@ app.post('/profile/save', async (req, res) => {
 
 //adding item
 app.post('/add/save', async (req, res) => {
+
   const data = {
     category: req.body.category,
     name: req.body.name,
@@ -161,9 +162,9 @@ app.post('/add/save', async (req, res) => {
   }
   try{
     const item = await Item.create({
-      category: data.category,
-      name: data.name,
-      expdatestr: data.expdatestr,
+      category: req.body.category,
+      name: req.body.name,
+      expdatestr: req.body.expdatestr,
     })
     return res.json({
       item: item,
