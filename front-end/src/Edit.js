@@ -40,6 +40,7 @@ const Edit = (props) =>{
         //navigate('/userlist');
         
     }
+
     const cancel = (event) =>{
         event.preventDefault();
         console.log("cancelled");
@@ -53,7 +54,16 @@ const Edit = (props) =>{
             (iterateitem) => (iterateitem != props.listitem))
         )
         props.func(false);
-        console.log("deleted");
+        axios
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/delete`, {
+          inputs: inputs
+        })
+        .then(response => {
+        })
+        .catch(err => {
+          console.log('error')
+        })
+        //console.log("deleted");
         //navigate('/userlist');
     }
       return (

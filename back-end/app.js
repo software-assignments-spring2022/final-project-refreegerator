@@ -191,13 +191,13 @@ app.post('/add/save', async (req, res) => {
     console.log(itemData);
   res.json(data)
 })
-app.post('/edit/save', async (req, res) => {
-  const data = {
-    inputs: req.body.inputs
-  }
-  console.log(data)
-  res.json(data)
-})
+// app.post('/edit/save', async (req, res) => {
+//   const data = {
+//     inputs: req.body.inputs
+//   }
+//   console.log(data)
+//   res.json(data)
+// })
 
 app.get("/logout", function (req, res) {
   res.json({
@@ -237,7 +237,7 @@ module.exports = app
 
 
 //for editing an item
-app.post("/", async(req, res) => {
+app.post("/edit/save", async(req, res) => {
   const itemName = req.params.name
   try{
     const updateItem = await Item.findOneAndUpdate({name: itemName}, {category: req.body.category, name: req.body.name, expdatestr: req.body.expdatestr} )
@@ -248,7 +248,7 @@ app.post("/", async(req, res) => {
 }
 })
 //for deleting an item
-app.post("/", async(req, res) => {
+app.post("/delete", async(req, res) => {
   const itemName = req.params.name
   try{
     const deleteItem = await Item.findOneAndDelete({name: itemName} )
