@@ -32,7 +32,7 @@ mongoose
   .catch(err => console.error(`Failed to connect to MongoDB: ${err}`))
 
 const {User} = require('./models/User')
-const { Item } = require('./models/Item')
+const {Item} = require('./models/Item')
 
 app.post('/save', async (req, res)=>{
     const data = {
@@ -155,15 +155,17 @@ app.post('/profile/save', async (req, res) => {
 //adding item
 app.post('/add/save', async (req, res) => {
   const data = {
-    category: req.body.category,
-    name: req.body.name,
-    expdatestr: req.body.expdatestr,
+    expdatestr: req.body.inputs.expdatestr,
+    name: req.body.inputs.name,
+    category: req.body.inputs.category,
   }
+  console.log('data here: ' + data)
+  console.log('done')
   try{
     const item = await Item.create({
-      category: data.category,
-      name: data.name,
-      expdatestr: data.expdatestr,
+      expdatestr: data.inputs.expdatestr,
+      name: data.inputs.name,
+      category: data.inputs.category,
     })
     return res.json({
       item: item,
@@ -190,7 +192,7 @@ app.post('/add/save', async (req, res) => {
     });
     console.log(itemData);
   res.json(data)
-})
+})*/
 // app.post('/edit/save', async (req, res) => {
 //   const data = {
 //     inputs: req.body.inputs
@@ -205,7 +207,7 @@ app.get("/logout", function (req, res) {
     message:
       "logged out",
   })
-})*/
+})
 
 // app.post('/recipes', async(req, res) => {
 //   const data = {

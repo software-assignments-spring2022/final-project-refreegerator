@@ -229,14 +229,15 @@ const Add = props =>{
     const handleSubmit = (event) => {
         event.preventDefault();
         addEntry();
-        // console.log(inputs);
-        //navigate('/UserList');
+        console.log("input test");
         console.log(inputs)
+        //navigate('/UserList');
         axios
         .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/add/save`, {
           inputs: inputs
         })
         .then(response => {
+          console.log(response)
         })
         .catch(err => {
           console.log('error')
