@@ -178,7 +178,12 @@ app.get("/logout", function (req, res) {
       "logged out",
   })
 })
+// kroger api call?
+app.get('/KrogerStores', async(req,res)=>{
+  //get zip
+  //call func?? 
 
+})
 // app.post('/recipes', async(req, res) => {
 //   const data = {
 //     inputs: req.body.inputs
