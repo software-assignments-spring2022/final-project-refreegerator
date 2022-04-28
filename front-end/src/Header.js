@@ -7,7 +7,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Notification from './Notification'
-import {useState} from "react"
+import {useState, useEffect} from "react"
 /**
  * A React component that is used for the header displayed at the top of every page of the site.
  * @param {*} param0 an object holding any props passed to this component from its parent component
@@ -27,7 +27,7 @@ const Header = (props) => {
     localStorage.removeItem("username");
     setLogin(false);
   };
-/*
+
   useEffect(()=>{
     const loggedin = localStorage.getItem("username");
     console.log(loggedin);
@@ -36,8 +36,9 @@ const Header = (props) => {
       // this.forceUpdate();
     }
     //window.location.reload();
-  },[]);*/
-  return (
+  },[]);
+  const userloggedin = () => {
+    return (
       <>
     <header className="Header-header">
       <img src = {logo} className = "logo" alt = "ReFreegerator Logo" />
@@ -72,8 +73,26 @@ const Header = (props) => {
         
     </header>
       </>
-  )
+  );
+  }
+  const guestheader = () => {
+    return (
+      <>
+    <header className="Header-header">
+      <img src = {logo} className = "logo" alt = "ReFreegerator Logo" />
+      <h2> <Link to="/UserList" className='Refreegerator'> Refreegerator </Link> </h2>
+        
+    </header>
+      </>
+  );
+  }
+return(
+  <div>
+    {login ? userloggedin() : guestheader()}
+  </div>
+);
 }
+  
 
 // make this component available to be imported into any other file
 export default Header
