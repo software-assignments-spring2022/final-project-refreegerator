@@ -6,14 +6,17 @@ import { Navigate } from "react-router-dom"
 // import { response } from "../../back-end/app";
 
 const UserList = props => {
-  
     const [editAll, setEditAll] = useState(false);
     const [items, setItems] = useState([]); 
     const [singleItem, setSingleItem] = useState(false);
     const [response, setResponse] = useState({}) 
     const jwtToken = localStorage.getItem("token")
     const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true) 
-    
+    const refresh = localStorage.getItem('refresh');
+    if(refresh == 'true'){
+        window.location.reload();
+        localStorage.setItem('refresh', 'false');
+    }
     const placeholder = [
         {category: "Dairy",
             name: "Cheese",
@@ -28,7 +31,7 @@ const UserList = props => {
             expdatestr: "2020-01-01"
         }
     ]
-
+    
 const fetchData = async() => {
     try {
         const response = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/userlist`, {
