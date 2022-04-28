@@ -13,18 +13,22 @@ import Profile from "./Profile"
 import Inspect from "./Inspect"
 import GuestAdd from "./GuestAdd"
 import GuestHeader from "./GuestHeader"
-import {useState} from "react"
+import {useState, useEffect} from "react"
 
 function App() {
   const [login, setLogin] = useState(false);
+
+  useEffect(()=>{
+
   const loggedIn = localStorage.getItem("username")
-  if(loggedIn!= null|| undefined){
+   if(loggedIn!= null|| undefined){
     setLogin(true);
   }
+},[])
   return (
     <div className="App">
       <Router>
-        {login? (
+      {login? (
           <Header />
         ):(
           <GuestHeader/>
