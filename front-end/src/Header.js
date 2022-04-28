@@ -7,7 +7,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Notification from './Notification'
-import {useState, useEffect} from "react"
+import {useState} from "react"
 /**
  * A React component that is used for the header displayed at the top of every page of the site.
  * @param {*} param0 an object holding any props passed to this component from its parent component
@@ -27,20 +27,12 @@ const Header = (props) => {
     localStorage.removeItem("username");
     setLogin(false);
   };
-  const loggedin = localStorage.getItem("username");
-    console.log(loggedin);
-    if(loggedin!= null){
-      setLogin(true);
-      self.forceUpate();
-      // this.forceUpdate();
-    }
-  /*
+/*
   useEffect(()=>{
     const loggedin = localStorage.getItem("username");
     console.log(loggedin);
     if(loggedin!= null){
-      this.setState({ login : true })
-      // setLogin(true);
+      setLogin(true);
       // this.forceUpdate();
     }
     //window.location.reload();
@@ -50,8 +42,7 @@ const Header = (props) => {
     <header className="Header-header">
       <img src = {logo} className = "logo" alt = "ReFreegerator Logo" />
       <h2> <Link to="/UserList" className='Refreegerator'> Refreegerator </Link> </h2>
-      <>{login ? (
-        <>
+
         <div id= "notifications">
         <Notification/>
       </div>    
@@ -77,11 +68,7 @@ const Header = (props) => {
             </MenuItem>
         </Menu>
         </div> 
-        </>
-      ):(
-        <></>
-      )}
-      </>
+
         
     </header>
       </>

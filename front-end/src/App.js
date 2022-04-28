@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from './Login'
@@ -13,12 +12,23 @@ import Edit from './Edit'
 import Profile from "./Profile"
 import Inspect from "./Inspect"
 import GuestAdd from "./GuestAdd"
+import GuestHeader from "./GuestHeader"
+import {useState} from "react"
 
 function App() {
+  const [login, setLogin] = useState(false);
+  const loggedIn = localStorage.getItem("username")
+  if(loggedIn!= null|| undefined){
+    setLogin(true);
+  }
   return (
     <div className="App">
       <Router>
-        <Header />
+        {login? (
+          <Header />
+        ):(
+          <GuestHeader/>
+        )}
         <main className="App-main">
           <Routes>
             <Route path="/" element={<Login />}></Route>
