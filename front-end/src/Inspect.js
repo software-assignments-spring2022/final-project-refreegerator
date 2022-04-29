@@ -13,6 +13,18 @@ const Inspect = (props) => {
         props.inspectMode(false)
 
     } 
+    const showStore = () => {
+        axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/kroger`, {
+            itemName: props.listitem.name,
+            zipCode: 
+          })
+          .then(response => {
+          })
+          .catch(err => {
+            console.log('error')
+          })
+
+    }
   return (
     <>
         <div>
@@ -27,6 +39,7 @@ const Inspect = (props) => {
             </div>
             <div>
                 <b>Nearby Stores</b>
+                console.log(showStore())
             </div>
             <div className='Buttons'>
                 <button onClick = {() => handleBack()}className='buttons1'>Back</button>
