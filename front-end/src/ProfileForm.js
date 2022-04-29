@@ -1,7 +1,6 @@
 import {useState, useEffect} from "react"
 import axios from "axios"
 import "./Profile.css"
-import { useLocalStorage } from "./useLocalStorage"
 import ToggleSwitch from "./ToggleSwitch"
 
 
@@ -56,7 +55,6 @@ const ProfileForm = () => {
   },[])
     const submitForm = e => {
       e.preventDefault()
-      console.log('front end')
       axios
         .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/profile/save`, {
           days: days,

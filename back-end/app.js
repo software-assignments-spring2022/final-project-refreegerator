@@ -129,6 +129,7 @@ app.get('/profileform', async(req,res)=>{
 
 })
 
+
 app.post('/profile/save', async (req, res) => {
   const data = {
     days: req.body.days,
