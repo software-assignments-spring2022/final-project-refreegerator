@@ -179,6 +179,17 @@ app.get("/logout", function (req, res) {
   })
 })
 
+app.get('/api/kroger', async (req, res) => {
+  const {itemName, zipCode} = req.query;
+
+  const response = await getKrogerItem(itemName, zipCode).catch((err) => {
+    console.log(err);
+    res.status(500).send(err);
+  });
+
+  res.status(200).json(response).send();
+
+})
 // app.post('/recipes', async(req, res) => {
 //   const data = {
 //     inputs: req.body.inputs
