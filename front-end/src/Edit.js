@@ -11,6 +11,8 @@ const Edit = (props) =>{
     const navigate = useNavigate();
     const handleChange = (event) => {
     const name = event.target.name;
+    const savedname = event.target.name;
+    console.log(savedname);
     const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
     setInputs(values => ({...values, [name]: value}))
     }
@@ -158,5 +160,7 @@ const Edit = (props) =>{
     </div>
         </>
       );
+      
 }
+
 export default Edit;
