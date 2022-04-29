@@ -25,6 +25,9 @@ const Inspect = (props) => {
                 <b>Suggested Recipes</b>
                 <SuggestedRecipes itemname={props.listitem.name}/>
             </div>
+            <div>
+                <b>Nearby Stores</b>
+            </div>
             <div className='Buttons'>
                 <button onClick = {() => handleBack()}className='buttons1'>Back</button>
                 <button onClick = {() => editHandle()}className='buttons1'>Edit Item</button>

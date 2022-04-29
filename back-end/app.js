@@ -178,10 +178,16 @@ app.get("/logout", function (req, res) {
       "logged out",
   })
 })
-// kroger api call?
-app.get('/KrogerStores', async(req,res)=>{
-  //get zip
-  //call func?? 
+
+app.get('/api/kroger', async (req, res) => {
+  const {itemName, zipCode} = req.query;
+
+  const response = await getKrogerItem(itemName, zipCode).catch((err) => {
+    console.log(err);
+    res.status(500).send(err);
+  });
+
+  res.status(200).json(response).send();
 
 })
 // app.post('/recipes', async(req, res) => {
