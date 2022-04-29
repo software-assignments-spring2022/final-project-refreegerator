@@ -28,6 +28,7 @@ const Edit = (props) =>{
         console.table(newlist)
         props.changelist(newlist)
         props.func(false)
+        console.log("edit handle submit")
         axios
         .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/edit/save`, {
           inputs: inputs
