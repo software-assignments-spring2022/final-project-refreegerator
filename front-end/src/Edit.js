@@ -7,7 +7,6 @@ import axios from "axios"
 const Edit = (props) =>{
     const [inputs, setInputs] = useState(props.listitem);
     const [update, setUpdate] = useState(false);
-    const [zip, setZip] = useState("")
     //console.log(props.func.toString());
     console.log("username is ", localStorage.getItem("username"))
     let storeItem = props.listitem;

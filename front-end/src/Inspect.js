@@ -2,6 +2,8 @@ import React from 'react'
 import './Inspect.css'
 import Item from "./Item"
 import SuggestedRecipes from './SuggestedRecipes'
+import axios from 'axios'
+import {useState, useEffect} from "react"
 
 const Inspect = (props) => {
     const editHandle = () =>{
@@ -13,6 +15,8 @@ const Inspect = (props) => {
         props.inspectMode(false)
 
     } 
+    const username = localStorage.getItem("username")
+
     const fetchZip = async() => {
         try {
           console.log(username);
@@ -31,7 +35,7 @@ const Inspect = (props) => {
         }
         useEffect(()=>{
           fetchZip();
-            }, [])
+            }, [])}
     const showStore = () => {
         axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/kroger`, {
             itemName: props.listitem.name,
@@ -43,7 +47,7 @@ const Inspect = (props) => {
             console.log('error')
           })
 
-    }
+        }
   return (
     <>
         <div>
