@@ -10,14 +10,16 @@ const Add = props =>{
     let currentdate = new Date();
     //console.log("hello")
     const location = useLocation();
+    //console.log(localStorage.getItem("username"))
+    let olditems = location.state.olditems.d_
+    console.log("olditems is ", olditems)
 
-    let {olditems} = location.state
     const [oldLength, setOldLength] = useState(olditems.length)
     const [newLength, setNewLength] = useState(olditems.length)
     const [itemList, setItemList] = useState(olditems)
     const [update, forceUpdate] = useState(false)
     //console.log(olditems.length)
-    const autocomplete_names = [
+    let autocomplete_names = [
         "yogurt",
         "milk",
         "banana",
@@ -61,6 +63,7 @@ const Add = props =>{
         "egg",
         "tofu",
     ];
+    //if (true) autocomplete_names = [];
     const placeholder = [
         {name: "yogurt", days:14, category: "dairy"},
         {name: "milk", days: 10, category: "dairy"},
@@ -233,9 +236,10 @@ const Add = props =>{
         console.log("input test");
         console.log(inputs)
         let newdata = inputs;
+        newdata.username = (localStorage.getItem("username"))
         //navigate('/UserList');
         axios
-        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/add/save`,inputs 
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/add/save`,newdata 
             
         )
         .then(response => {
@@ -258,7 +262,7 @@ const Add = props =>{
     const cancel = (event) =>{
       event.preventDefault();
       console.log("cancelled");
-      navigate('/GuestList');
+      navigate('/UserList');
     }
       return (
         <>
@@ -271,6 +275,7 @@ const Add = props =>{
         options={(autocomplete_names)}
         value = {inputs.name || ""}
         name = "name"
+        //onInputChange= {(event,value)  => autoComplete(event, value)}
         onInputChange= {(event,value)  => autoComplete(event, value)}
         //onChange = {(event,value) => autoComplete(event,value)}
         renderInput={(params) => (

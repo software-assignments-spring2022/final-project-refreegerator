@@ -3,6 +3,10 @@ const Schema = mongoose.Schema
 
 const itemSchema = new Schema(
   {
+      username:{
+        type:String,
+        required:false,
+      },
     expdatestr: {
       type: String,
       required: true,

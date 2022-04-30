@@ -13,7 +13,10 @@ const YourList = props => {
     const location = useLocation();
     const [sortpref, setSortPref] = useState(""); 
     props.setSingleItem(false)    
-    const [orderedList, updateOrder] = useState([]);
+    console.log(props.placeholder.d_)
+    let dbitems = props.placeholder.d_;
+    const [orderedList, updateOrder] = useState(props.placeholder.d_ || [])
+    console.log(orderedList)
     const [alreadyAdded, changeAdded] = useState(false); 
     let isGuest = true;
     if (isGuest in props) {
@@ -93,7 +96,14 @@ const YourList = props => {
         //console.log("current localstorage is")
         //console.table(existingEntries)
         if (existingEntries != null && existingEntries != undefined){
-        updateOrder(existingEntries)
+            if (localStorage.getItem("username") == null){
+                updateOrder(existingEntries)
+            }
+            else {
+                if (dbitems != null){
+                    updateOrder(dbitems);
+                }
+            }
         }
     }, [props.placeholder]);
     
@@ -110,6 +120,16 @@ const YourList = props => {
         updateOrder(orderedList.filter( 
             (iterateitem) => (iterateitem !== item))
         )
+        axios
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/delete`, 
+         item
+        )
+        .then(response => {
+            console.log("deletion successful")
+        })
+        .catch(err => {
+          console.log('error')
+        })
         props.propagate(orderedList)
         let existingEntries = JSON.parse(localStorage.getItem("items"))
         if(existingEntries == null) existingEntries = [];
@@ -230,7 +250,7 @@ const YourList = props => {
                     console.log(isEditing)
                 return (
                     
-                    <GuestEdit func = {editMode} 
+                    <Edit func = {editMode} 
                         listitem = {currentItem}
                         changelist = {updateOrder}
                         currentlist = {orderedList}

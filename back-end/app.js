@@ -108,10 +108,14 @@ app.post('/create/save', async (req, res)=>{
 })
 
 app.get('/userlist', passport.authenticate("jwt", { session: false }), async (req, res)=>{
-    const d = itemData;
-    console.log(d);
+    //const d = itemData;
+    console.log("so far so good");
+    console.log(req.query.username)
+    let data = await Item.find({username: req.query.username})
+    //console.log(d);
+    console.log(data)
     res.json({
-      d_: d,
+      d_: data,
       success: true});
 })
 
@@ -159,11 +163,14 @@ app.post('/add/save', async (req, res) => {
     expdatestr: req.body.expdatestr,
     name: req.body.name,
     category: req.body.category,
+    username: req.body.username
   }
+  console.log("username is ", data.username)
   console.log('data here: ' + data)
   console.log('done')
   try{
     const item = await Item.create({
+      username: data.username,
       category: data.category,
       name: data.name,
         expdatestr: data.expdatestr,
@@ -241,6 +248,7 @@ module.exports = app
 
 //for editing an item
 app.post("/edit/save", async(req, res) => {
+<<<<<<< HEAD
   const itemName = req.body.savedname
   try{
     const updateItem = await Item.findOneAndUpdate(
@@ -249,6 +257,12 @@ app.post("/edit/save", async(req, res) => {
         name: req.body.name, 
         expdatestr: req.body.expdatestr} 
       )
+=======
+  const olditem = req.body.oldobj
+  const newitem = req.body.newobj
+  try{
+      const updateItem = await Item.findOneAndUpdate(olditem, newitem )
+>>>>>>> ad3d4808187ed88c9131f071457ad5716c679927
     res.json(updateItem)
   } catch(e){
   console.log("Couldn't Find Item");
@@ -257,9 +271,10 @@ app.post("/edit/save", async(req, res) => {
 })
 //for deleting an item
 app.post("/delete", async(req, res) => {
-  const itemName = req.params.name
+  const item = req.body
+    console.log(item)
   try{
-    const deleteItem = await Item.findOneAndDelete({name: itemName} )
+      const deleteItem = await Item.findOneAndDelete(item )
   } catch(e){
     console.log("Cannot find Item")
   }

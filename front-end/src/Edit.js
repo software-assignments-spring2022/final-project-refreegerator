@@ -8,6 +8,9 @@ const Edit = (props) =>{
     const [inputs, setInputs] = useState(props.listitem);
     const [update, setUpdate] = useState(false);
     //console.log(props.func.toString());
+    console.log("username is ", localStorage.getItem("username"))
+    let storeItem = props.listitem;
+    storeItem.username = localStorage.getItem("username")
     const navigate = useNavigate();
     const handleChange = (event) => {
     const name = event.target.name;
@@ -29,18 +32,27 @@ const Edit = (props) =>{
         newlist[props.currentlist.indexOf(props.listitem)] = inputs
         console.table(newlist)
         props.changelist(newlist)
+<<<<<<< HEAD
         props.func(false)
         console.log("edit handle submit")
+=======
+        console.log("calling axios")
+        let newobject = {
+            oldobj: storeItem,
+            newobj: inputs
+        }
+>>>>>>> ad3d4808187ed88c9131f071457ad5716c679927
         axios
-        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/edit/save`, {
-          inputs: inputs
-        })
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/edit/save`, 
+          newobject
+        )
         .then(response => {
         })
         .catch(err => {
           console.log('error')
         })
         //navigate('/userlist');
+        props.func(false)
         
     }
 
@@ -57,11 +69,16 @@ const Edit = (props) =>{
             (iterateitem) => (iterateitem != props.listitem))
         )
         props.func(false);
+        let newobject = {
+            oldobj: storeItem,
+            newobj: inputs
+        }
         axios
-        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/delete`, {
-          inputs: inputs
-        })
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/delete`, 
+          newobject.oldobj
+        )
         .then(response => {
+            console.log("deletion successful")
         })
         .catch(err => {
           console.log('error')
@@ -162,5 +179,9 @@ const Edit = (props) =>{
       );
       
 }
+<<<<<<< HEAD
 
 export default Edit;
+=======
+export default Edit;
+>>>>>>> ad3d4808187ed88c9131f071457ad5716c679927
