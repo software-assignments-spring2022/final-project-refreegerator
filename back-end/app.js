@@ -108,10 +108,14 @@ app.post('/create/save', async (req, res)=>{
 })
 
 app.get('/userlist', passport.authenticate("jwt", { session: false }), async (req, res)=>{
-    const d = itemData;
-    console.log(d);
+    //const d = itemData;
+    console.log("so far so good");
+    console.log(req.query.username)
+    let data = await Item.find({username: req.query.username})
+    //console.log(d);
+    console.log(data)
     res.json({
-      d_: d,
+      d_: data,
       success: true});
 })
 
