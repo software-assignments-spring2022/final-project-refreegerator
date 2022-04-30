@@ -32,16 +32,11 @@ const Edit = (props) =>{
         newlist[props.currentlist.indexOf(props.listitem)] = inputs
         console.table(newlist)
         props.changelist(newlist)
-<<<<<<< HEAD
-        props.func(false)
-        console.log("edit handle submit")
-=======
         console.log("calling axios")
         let newobject = {
             oldobj: storeItem,
             newobj: inputs
         }
->>>>>>> ad3d4808187ed88c9131f071457ad5716c679927
         axios
         .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/edit/save`, 
           newobject
@@ -179,9 +174,4 @@ const Edit = (props) =>{
       );
       
 }
-<<<<<<< HEAD
-
 export default Edit;
-=======
-export default Edit;
->>>>>>> ad3d4808187ed88c9131f071457ad5716c679927
