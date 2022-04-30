@@ -13,6 +13,7 @@ const UserList = props => {
     const [response, setResponse] = useState({}) 
     const jwtToken = localStorage.getItem("token")
     const [isLoggedIn, setIsLoggedIn] = useState(jwtToken && true) 
+    const currentusername = localStorage.getItem("username")
     
     const placeholder = [
         {category: "Dairy",

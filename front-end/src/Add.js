@@ -11,7 +11,9 @@ const Add = props =>{
     //console.log("hello")
     const location = useLocation();
     //console.log(localStorage.getItem("username"))
-    let {olditems} = location.state
+    let olditems = location.state.olditems.d_
+    console.log("olditems is ", olditems)
+
     const [oldLength, setOldLength] = useState(olditems.length)
     const [newLength, setNewLength] = useState(olditems.length)
     const [itemList, setItemList] = useState(olditems)
@@ -260,7 +262,7 @@ const Add = props =>{
     const cancel = (event) =>{
       event.preventDefault();
       console.log("cancelled");
-      navigate('/GuestList');
+      navigate('/UserList');
     }
       return (
         <>

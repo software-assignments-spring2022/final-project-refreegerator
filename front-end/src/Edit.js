@@ -62,11 +62,16 @@ const Edit = (props) =>{
             (iterateitem) => (iterateitem != props.listitem))
         )
         props.func(false);
+        let newobject = {
+            oldobj: storeItem,
+            newobj: inputs
+        }
         axios
-        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/delete`, {
-          inputs: inputs
-        })
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/delete`, 
+          newobject.oldobj
+        )
         .then(response => {
+            console.log("deletion successful")
         })
         .catch(err => {
           console.log('error')

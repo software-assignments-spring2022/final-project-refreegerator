@@ -260,9 +260,10 @@ app.post("/edit/save", async(req, res) => {
 })
 //for deleting an item
 app.post("/delete", async(req, res) => {
-  const itemName = req.params.name
+  const item = req.body
+    console.log(item)
   try{
-    const deleteItem = await Item.findOneAndDelete({name: itemName} )
+      const deleteItem = await Item.findOneAndDelete(item )
   } catch(e){
     console.log("Cannot find Item")
   }
