@@ -13,7 +13,9 @@ const YourList = props => {
     const location = useLocation();
     const [sortpref, setSortPref] = useState(""); 
     props.setSingleItem(false)    
-    const [orderedList, updateOrder] = useState([]);
+    console.log(props.placeholder.d_)
+    const [orderedList, updateOrder] = useState(props.placeholder.d_ || [])
+    console.log(orderedList)
     const [alreadyAdded, changeAdded] = useState(false); 
     let isGuest = true;
     if (isGuest in props) {

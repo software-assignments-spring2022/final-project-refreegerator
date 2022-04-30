@@ -31,12 +31,13 @@ const UserList = props => {
 
 const fetchData = async() => {
     try {
-        const response = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/userlist`, {
+
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/userlist?username=${localStorage.getItem("username")}`, {
             headers: { Authorization: `JWT ${jwtToken}` }
         });
         console.log((response.data));
         setResponse(response.data); 
-        setItems([...response.data.d_]);
+        setItems(response.data);
     }
     catch(error){
         console.log('probably incorrect jwt token ');
