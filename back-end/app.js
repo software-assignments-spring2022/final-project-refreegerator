@@ -241,9 +241,10 @@ module.exports = app
 
 //for editing an item
 app.post("/edit/save", async(req, res) => {
-  const itemName = req.params.name
+  const olditem = req.body.oldobj
+  const newitem = req.body.newobj
   try{
-    const updateItem = await Item.findOneAndUpdate({name: itemName}, {category: req.body.category, name: req.body.name, expdatestr: req.body.expdatestr} )
+    const updateItem = await Item.findOneAndUpdate({name: olditem.name}, {category: newitem.category, name: newitem.name, expdatestr: newitem.expdatestr} )
     res.json(updateItem)
   } catch(e){
   console.log("Couldn't Find Item");

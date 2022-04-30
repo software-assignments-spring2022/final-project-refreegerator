@@ -230,7 +230,7 @@ const YourList = props => {
                     console.log(isEditing)
                 return (
                     
-                    <GuestEdit func = {editMode} 
+                    <Edit func = {editMode} 
                         listitem = {currentItem}
                         changelist = {updateOrder}
                         currentlist = {orderedList}

@@ -17,7 +17,7 @@ const Add = props =>{
     const [itemList, setItemList] = useState(olditems)
     const [update, forceUpdate] = useState(false)
     //console.log(olditems.length)
-    const autocomplete_names = [
+    let autocomplete_names = [
         "yogurt",
         "milk",
         "banana",
@@ -61,6 +61,7 @@ const Add = props =>{
         "egg",
         "tofu",
     ];
+    //if (true) autocomplete_names = [];
     const placeholder = [
         {name: "yogurt", days:14, category: "dairy"},
         {name: "milk", days: 10, category: "dairy"},
@@ -271,6 +272,7 @@ const Add = props =>{
         options={(autocomplete_names)}
         value = {inputs.name || ""}
         name = "name"
+        //onInputChange= {(event,value)  => autoComplete(event, value)}
         onInputChange= {(event,value)  => autoComplete(event, value)}
         //onChange = {(event,value) => autoComplete(event,value)}
         renderInput={(params) => (

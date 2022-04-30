@@ -8,6 +8,7 @@ const Edit = (props) =>{
     const [inputs, setInputs] = useState(props.listitem);
     const [update, setUpdate] = useState(false);
     //console.log(props.func.toString());
+    const storeItem = props.listitem;
     const navigate = useNavigate();
     const handleChange = (event) => {
     const name = event.target.name;
@@ -27,17 +28,22 @@ const Edit = (props) =>{
         newlist[props.currentlist.indexOf(props.listitem)] = inputs
         console.table(newlist)
         props.changelist(newlist)
-        props.func(false)
+        console.log("calling axios")
+        let newobject = {
+            oldobj: storeItem,
+            newobj: inputs
+        }
         axios
-        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/edit/save`, {
-          inputs: inputs
-        })
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/edit/save`, 
+          newobject
+        )
         .then(response => {
         })
         .catch(err => {
           console.log('error')
         })
         //navigate('/userlist');
+        props.func(false)
         
     }
 
