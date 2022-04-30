@@ -10,7 +10,7 @@ const Add = props =>{
     let currentdate = new Date();
     //console.log("hello")
     const location = useLocation();
-
+    //console.log(localStorage.getItem("username"))
     let {olditems} = location.state
     const [oldLength, setOldLength] = useState(olditems.length)
     const [newLength, setNewLength] = useState(olditems.length)
@@ -234,9 +234,10 @@ const Add = props =>{
         console.log("input test");
         console.log(inputs)
         let newdata = inputs;
+        newdata.username = (localStorage.getItem("username"))
         //navigate('/UserList');
         axios
-        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/add/save`,inputs 
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/add/save`,newdata 
             
         )
         .then(response => {

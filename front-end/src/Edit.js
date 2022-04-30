@@ -8,7 +8,9 @@ const Edit = (props) =>{
     const [inputs, setInputs] = useState(props.listitem);
     const [update, setUpdate] = useState(false);
     //console.log(props.func.toString());
-    const storeItem = props.listitem;
+    console.log("username is ", localStorage.getItem("username"))
+    let storeItem = props.listitem;
+    storeItem.username = localStorage.getItem("username")
     const navigate = useNavigate();
     const handleChange = (event) => {
     const name = event.target.name;

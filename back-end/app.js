@@ -159,11 +159,14 @@ app.post('/add/save', async (req, res) => {
     expdatestr: req.body.expdatestr,
     name: req.body.name,
     category: req.body.category,
+    username: req.body.username
   }
+  console.log("username is ", data.username)
   console.log('data here: ' + data)
   console.log('done')
   try{
     const item = await Item.create({
+      username: data.username,
       category: data.category,
       name: data.name,
         expdatestr: data.expdatestr,
@@ -244,7 +247,7 @@ app.post("/edit/save", async(req, res) => {
   const olditem = req.body.oldobj
   const newitem = req.body.newobj
   try{
-    const updateItem = await Item.findOneAndUpdate({name: olditem.name}, {category: newitem.category, name: newitem.name, expdatestr: newitem.expdatestr} )
+      const updateItem = await Item.findOneAndUpdate(olditem, newitem )
     res.json(updateItem)
   } catch(e){
   console.log("Couldn't Find Item");
