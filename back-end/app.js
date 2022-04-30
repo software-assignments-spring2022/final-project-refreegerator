@@ -32,6 +32,7 @@ mongoose
   .catch(err => console.error(`Failed to connect to MongoDB: ${err}`))
 
 const {User} = require('./models/User')
+const {Item} = require('./models/Item')
 
 app.post('/save', async (req, res)=>{
     const data = {
@@ -107,10 +108,14 @@ app.post('/create/save', async (req, res)=>{
 })
 
 app.get('/userlist', passport.authenticate("jwt", { session: false }), async (req, res)=>{
-    const d = itemData;
-    console.log(d);
+    //const d = itemData;
+    console.log("so far so good");
+    console.log(req.query.username)
+    let data = await Item.find({username: req.query.username})
+    //console.log(d);
+    console.log(data)
     res.json({
-      d_: d,
+      d_: data,
       success: true});
 })
 
@@ -150,7 +155,40 @@ app.post('/profile/save', async (req, res) => {
   res.json(data)
 })
 
+
+//adding item
 app.post('/add/save', async (req, res) => {
+
+  const data = {
+    expdatestr: req.body.expdatestr,
+    name: req.body.name,
+    category: req.body.category,
+    username: req.body.username
+  }
+  console.log("username is ", data.username)
+  console.log('data here: ' + data)
+  console.log('done')
+  try{
+    const item = await Item.create({
+      username: data.username,
+      category: data.category,
+      name: data.name,
+        expdatestr: data.expdatestr,
+    })
+    return res.json({
+      item: item,
+      status: 'all good',
+    })
+  } catch (err) {
+    console.error(err)
+    return res.status(400).json({
+      error: err,
+      status: 'failed to save item to database',
+    })
+  }
+})
+
+/*app.post('/add/save', async (req, res) => {
   const data = {
     inputs: req.body.inputs
   }
@@ -162,14 +200,14 @@ app.post('/add/save', async (req, res) => {
     });
     console.log(itemData);
   res.json(data)
-})
-app.post('/edit/save', async (req, res) => {
-  const data = {
-    inputs: req.body.inputs
-  }
-  console.log(data)
-  res.json(data)
-})
+})*/
+// app.post('/edit/save', async (req, res) => {
+//   const data = {
+//     inputs: req.body.inputs
+//   }
+//   console.log(data)
+//   res.json(data)
+// })
 
 app.get("/logout", function (req, res) {
   res.json({
@@ -179,17 +217,6 @@ app.get("/logout", function (req, res) {
   })
 })
 
-app.get('/api/kroger', async (req, res) => {
-  const {itemName, zipCode} = req.query;
-
-  const response = await getKrogerItem(itemName, zipCode).catch((err) => {
-    console.log(err);
-    res.status(500).send(err);
-  });
-
-  res.status(200).json(response).send();
-
-})
 // app.post('/recipes', async(req, res) => {
 //   const data = {
 //     inputs: req.body.inputs
@@ -217,3 +244,27 @@ app.get('/UserList/rec', function(req, res) {
   
 });
 module.exports = app
+
+
+//for editing an item
+app.post("/edit/save", async(req, res) => {
+  const olditem = req.body.oldobj
+  const newitem = req.body.newobj
+  try{
+      const updateItem = await Item.findOneAndUpdate(olditem, newitem )
+    res.json(updateItem)
+  } catch(e){
+  console.log("Couldn't Find Item");
+  res.status(500)
+}
+})
+//for deleting an item
+app.post("/delete", async(req, res) => {
+  const item = req.body
+    console.log(item)
+  try{
+      const deleteItem = await Item.findOneAndDelete(item )
+  } catch(e){
+    console.log("Cannot find Item")
+  }
+})
