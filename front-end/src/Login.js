@@ -52,7 +52,7 @@ const Login =props => {
     .catch(err => {
       console.log(`error error error! ${err}`)
       console.log(response)
-      setErrorMessage('inavlid');
+      setErrorMessage('invalid input');
 
     })
     setName('');

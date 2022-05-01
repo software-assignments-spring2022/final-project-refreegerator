@@ -1,5 +1,5 @@
 import YourList from "./YourList"
-import ListButtons from "./ListButtons"
+import UserButtons from "./UserButtons"
 import {useState, useEffect} from "react"
 import axios from 'axios';
 import { Navigate } from "react-router-dom"
@@ -70,7 +70,7 @@ const fetchData = async() => {
                       setSingleItem = {setSingleItem}
                       
             />
-            <ListButtons 
+            <UserButtons 
                       editAll = {editAll}                                 
                       setEditAll = {setEditAll}
                       allItems = {items} 

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-const ListButtons = (props) => {
+const UserButtons = (props) => {
     const manageEdit = () => {
         if (props.editAll == false) {
     //        console.log(props.editAll)
@@ -21,7 +21,7 @@ const ListButtons = (props) => {
                 <button onClick = {() => manageEdit()}type = "button"> Edit List</button>
                 {// <Link to={{pathname: "/add", state: {allitems: itemlist}}} >
                    }
-                <Link to = "/GuestAdd" state= {{olditems:itemlist}}>
+                <Link to = "/add" state= {{olditems:itemlist}}>
                 <button type = "button"> Add Item</button>
                 </Link>
             </div>
@@ -31,7 +31,10 @@ const ListButtons = (props) => {
         return(
             <div className= "navigation">
                 <button onClick = {() => manageEdit()}type = "button"> Done Editing </button>
-                <Link to="/add"><button type = "button"> Add Item</button></Link>
+                <Link to="/add"
+                    state= {{olditems:itemlist}}
+
+                ><button type = "button"> Add Item</button></Link>
             </div>
         )
     }
@@ -44,4 +47,4 @@ const ListButtons = (props) => {
 
 }
 
-export default ListButtons
+export default UserButtons

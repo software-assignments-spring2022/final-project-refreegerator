@@ -27,7 +27,6 @@ const Header = (props) => {
     localStorage.removeItem("username");
     setLogin(false);
   };
-
   useEffect(()=>{
     const loggedin = localStorage.getItem("username");
     console.log(loggedin);
@@ -80,12 +79,13 @@ const Header = (props) => {
       <>
     <header className="Header-header">
       <img src = {logo} className = "logo" alt = "ReFreegerator Logo" />
-      <h2> <Link to="/UserList" className='Refreegerator'> Refreegerator </Link> </h2>
+      <h2> <Link to="/" className='Refreegerator'> Refreegerator </Link> </h2>
         
     </header>
       </>
   );
   }
+
 return(
   <div>
     {login ? userloggedin() : guestheader()}

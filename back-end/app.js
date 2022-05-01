@@ -170,7 +170,20 @@ app.post('/profile/save', async (req, res) => {
   console.log(data)
   res.json(data)
 })
+app.get('/add', async(req,res)=>{
+  const username = req.query.username;
+  console.log(username);
+  const retrieve = async() => {
+    const user = await User.findOne({username: username})
+    console.log(user)
+    console.log(user.preferences)
+    res.json({
+      preferences: user.preferences
+    })
+  }
+  retrieve();
 
+})
 app.post('/add/save', async (req, res) => {
   const data = {
     inputs: req.body.inputs
@@ -200,6 +213,17 @@ app.get("/logout", function (req, res) {
   })
 })
 
+app.get('/api/kroger', async (req, res) => {
+  const {itemName, zipCode} = req.query;
+
+  const response = await getKrogerItem(itemName, zipCode).catch((err) => {
+    console.log(err);
+    res.status(500).send(err);
+  });
+
+  res.status(200).json(response).send();
+
+})
 // app.post('/recipes', async(req, res) => {
 //   const data = {
 //     inputs: req.body.inputs
