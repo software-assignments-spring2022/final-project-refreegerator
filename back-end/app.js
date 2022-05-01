@@ -4,6 +4,7 @@ const morgan = require('morgan') // middleware for nice logging of incoming HTTP
 const cors = require('cors') 
 const mongoose = require('mongoose')
 const jsonData = require('./recipes.json')
+const bcrypt = require('bcryptjs');
 
 var chai = require('chai'), chaiHttp = require('chai-http');
 
@@ -48,23 +49,31 @@ app.post('/save', async (req, res)=>{
     const user = User.find({ username: username1 })*/
     const retrieve = async() => {
       const user = await User.findOne({username: username1})
-      console.log(user)
+      //console.log(user)
       if (!user) {
-        // no user found with this name... send an error
         res
           //.status(401)
           .json({ success: false, message: `user not found: ${username1}.` })
       }
-      else if(data.password==user.password){
-        const payload = {id : user.id}
-        const token = jwt.sign(payload, jwtOptions.secretOrKey) // create a signed token
-      res.json({ success: true, username: user.username, token: token }) // send the token to the client to store
-        } else {
-          // the password did not match
-          res
-          //.status(401)
-          .json({ success: false, message: "passwords did not match" })
-        }
+      else if (user){
+        bcrypt.compare(data.password, user.password, (err, passwordMatch)=>{
+          console.log(user.password)
+          if (err){
+            console.log(err)
+          }
+          else if(passwordMatch){
+            const payload = {id : user.id}
+            const token = jwt.sign(payload, jwtOptions.secretOrKey) // create a signed token
+            res.json({ success: true, username: user.username, token: token }) // send the token to the client to store
+          }
+        })
+      }
+      else {
+        // the password did not match
+        res
+        //.status(401)
+        .json({ success: false, message: "passwords did not match" })
+      }
     }
     retrieve();
 
@@ -84,22 +93,31 @@ app.post('/create/save', async (req, res)=>{
           message: 'username already exists'
         })
       }
-      const newUser = await User.create({
-        username: data.username,
-        password: data.password,
-        preferences: {
-          notification: "0",
-          suggest: true,
-          auto: true
+      let token;
+      bcrypt.hash(data.password, 10, function(err,hash){
+        if (err){
+          console.log(err);
+        }
+        else{
+          const newUser = User.create({
+            username: data.username,
+            password: hash,
+            preferences: {
+              notification: "0",
+              suggest: true,
+              auto: true
+            }
+          })
+          const payload = {id : newUser.id}
+          token = jwt.sign(payload, jwtOptions.secretOrKey)
+          return res.json({
+            success: true,
+            username: data.username,
+            token: token
+          })
         }
       })
-      const payload = {id : newUser.id}
-      const token = jwt.sign(payload, jwtOptions.secretOrKey)
-      return res.json({
-          success: true,
-          username: data.username,
-          token: token
-        })
+    
     }
     catch(err){
       console.error(err)
@@ -134,6 +152,7 @@ app.post('/profile/save', async (req, res) => {
   const data = {
     days: req.body.days,
     suggest: req.body.suggest,
+    zipcode: req.body.zipcode,
     auto: req.body.auto,
     username: req.body.username
   }
@@ -142,6 +161,7 @@ app.post('/profile/save', async (req, res) => {
       preferences: {
         notification: data.days,
         suggest: data.suggest,
+        zipcode: data.zipcode,
         auto: data.auto
       }
     },
@@ -161,14 +181,14 @@ app.post('/add/save', async (req, res) => {
             console.log(err);
         }
     });
-    console.log(itemData);
+    //console.log(itemData);
   res.json(data)
 })
 app.post('/edit/save', async (req, res) => {
   const data = {
     inputs: req.body.inputs
   }
-  console.log(data)
+  //console.log(data)
   res.json(data)
 })
 
