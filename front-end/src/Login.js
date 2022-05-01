@@ -43,6 +43,7 @@ const Login =props => {
       setResponse(response.data);
       setErrorMessage(response.data.message);
       console.log(response.data);
+      localStorage.setItem('refresh', 'true');
     })
     .catch(err => {
       console.log(`error error error! ${err}`)
@@ -50,14 +51,8 @@ const Login =props => {
       setErrorMessage('invalid input');
 
     })
-    /*
-    const r = await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/save`, {name: name, pass: pass});
-    setResponse(r.data);
-    setErrorMessage(r.data.message);*/
     setName('');
     setPass('');
-
-    
   }
   
   // JSX code for login form

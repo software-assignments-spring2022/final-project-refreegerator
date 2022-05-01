@@ -129,6 +129,7 @@ app.get('/profileform', async(req,res)=>{
 
 })
 
+
 app.post('/profile/save', async (req, res) => {
   const data = {
     days: req.body.days,
@@ -149,7 +150,20 @@ app.post('/profile/save', async (req, res) => {
   console.log(data)
   res.json(data)
 })
+app.get('/add', async(req,res)=>{
+  const username = req.query.username;
+  console.log(username);
+  const retrieve = async() => {
+    const user = await User.findOne({username: username})
+    console.log(user)
+    console.log(user.preferences)
+    res.json({
+      preferences: user.preferences
+    })
+  }
+  retrieve();
 
+})
 app.post('/add/save', async (req, res) => {
   const data = {
     inputs: req.body.inputs
