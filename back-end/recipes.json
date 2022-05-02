@@ -33,8 +33,7 @@
         "body": "Scramble the eggs as noted earlier, then put them between some bread!"
       }
     ]
-  }
-  , 
+  }, 
   {
     "itemName": "Egg",
     "recipes": [
@@ -45,6 +44,32 @@
       {
         "title": "Scrambled Egg Sandwich",
         "body": "Scramble the eggs as noted earlier, then put them between some bread!"
+      }
+    ]
+  },
+  {
+    "itemName": "Apple",
+    "recipes": [
+      {
+        "title": "Apple With Peanut Butter",
+        "body": "Spread some peanut butter on a few slices of apple!"
+      },
+      {
+        "title": "Ranger's Apple Pie",
+        "body": "Peel apple, cover in brown sugar, roast over open flame."
+      }
+    ]
+  },
+  {
+    "itemName": "Apples",
+    "recipes": [
+      {
+        "title": "Apple With Peanut Butter",
+        "body": "Spread some peanut butter on a few slices of apple!"
+      },
+      {
+        "title": "Ranger's Apple Pie",
+        "body": "Peel apple, cover in brown sugar, roast over open flame."
       }
     ]
   }
