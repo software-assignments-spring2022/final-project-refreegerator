@@ -10,42 +10,17 @@ const Add = props =>{
     let currentdate = new Date();
     //console.log("hello")
     const location = useLocation();
+    //console.log(localStorage.getItem("username"))
+    let olditems = location.state.olditems.d_
+    console.log("olditems is ", olditems)
 
-    let {olditems} = location.state
     const [oldLength, setOldLength] = useState(olditems.length)
     const [newLength, setNewLength] = useState(olditems.length)
     const [itemList, setItemList] = useState(olditems)
     const [update, forceUpdate] = useState(false)
     const [response, setResponse] = useState({})
     //console.log(olditems.length)
-    const username = localStorage.getItem("username")
-    const fetchData = async() => {
-      try {
-        console.log(username);
-          await axios
-            .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/add`, {params:{username: username}})
-            .then((response) =>{
-              console.log(response.data)
-              setResponse(response.data.preferences);
-            })
-            .catch(err =>{
-              console.log(err)
-            })
-          
-
-      }
-      catch(error){
-          console.log(error);
-
-      }
-  };
-
-  useEffect(()=>{
-    fetchData();
-  },[])
-    let autocomplete_names = []
-    if(response.auto){
-      autocomplete_names = [
+    let autocomplete_names = [
         "yogurt",
         "milk",
         "banana",
@@ -89,8 +64,7 @@ const Add = props =>{
         "egg",
         "tofu",
     ];
-    }
-    
+    //if (true) autocomplete_names = [];
     const placeholder = [
         {name: "yogurt", days:14, category: "dairy"},
         {name: "milk", days: 10, category: "dairy"},
@@ -154,6 +128,7 @@ const Add = props =>{
         }
                     },[inputs])
     const autoComplete = async (event, value) =>  { 
+        console.log("autocomplete called")
         let foodname = "undefined"
         const currentname = event.target.name;
         //console.log(event.target.name);
@@ -163,11 +138,11 @@ const Add = props =>{
              foodname = event.target.value;
             if (value != null) {
                 foodname = value;
-             //handleChange(event, foodname); 
+             handleChange(event, foodname); 
             }
             else {
 
-                //handleChange(event)
+                handleChange(event)
             }
         }
         //console.log(foodname);
@@ -178,7 +153,6 @@ const Add = props =>{
                 {
                     if (auto_item.name == foodname){
                        //if (event.target.name = "ex_date"){
-                           //handleChange(event);
                            // console.log("ex date = true");
                            // console.log(auto_item);
                            // console.log(currentdate);
@@ -215,7 +189,7 @@ const Add = props =>{
         }
     }
     const handleChange = (event, value) => {
-        // console.log(event, value)
+         //console.log(event, value)
         let  newname = event.target.name;
         let newval = ""
           newval = event.target.type === 'checkbox' ? event.target.checked : event.target.value;;
@@ -245,6 +219,7 @@ const Add = props =>{
             olditems[newLength-1] = inputs;
             setItemList(olditems);
         }
+        console.table(inputs)
       }
 /*
     const handleChange = (event) => {
@@ -259,14 +234,17 @@ const Add = props =>{
     const handleSubmit = (event) => {
         event.preventDefault();
         addEntry();
-        // console.log(inputs);
-        //navigate('/UserList');
+        console.log("input test");
         console.log(inputs)
+        let newdata = inputs;
+        newdata.username = (localStorage.getItem("username"))
+        //navigate('/UserList');
         axios
-        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/add/save`, {
-          inputs: inputs
-        })
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/add/save`,newdata 
+            
+        )
         .then(response => {
+          console.log(response)
         })
         .catch(err => {
           console.log('error')
@@ -298,6 +276,7 @@ const Add = props =>{
         options={(autocomplete_names)}
         value = {inputs.name || ""}
         name = "name"
+        //onInputChange= {(event,value)  => autoComplete(event, value)}
         onInputChange= {(event,value)  => autoComplete(event, value)}
         //onChange = {(event,value) => autoComplete(event,value)}
         renderInput={(params) => (

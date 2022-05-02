@@ -3,7 +3,11 @@ const Schema = mongoose.Schema
 
 const itemSchema = new Schema(
   {
-    category: {
+      username:{
+        type:String,
+        required:false,
+      },
+    expdatestr: {
       type: String,
       required: true,
     },
@@ -11,13 +15,10 @@ const itemSchema = new Schema(
       type: String,
       required: true,
     },
-    expdatestr: {
-        type: String,
-        required: true,
-      },
-  },
-  {
-    timestamps: true,
+    category: {
+      type: String,
+      required: true,
+    }
   }
 )
 

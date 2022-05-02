@@ -31,6 +31,7 @@ function App() {
             <Route path="/inspect" element={<Inspect />} />
             <Route path = "/Profile" element = {<Profile />}> </Route>
             <Route path = "/GuestAdd" element = {<GuestAdd />}> </Route>
+            
           </Routes>
         </main>
         

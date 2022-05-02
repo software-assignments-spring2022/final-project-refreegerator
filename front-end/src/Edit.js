@@ -8,9 +8,14 @@ const Edit = (props) =>{
     const [inputs, setInputs] = useState(props.listitem);
     const [update, setUpdate] = useState(false);
     //console.log(props.func.toString());
+    console.log("username is ", localStorage.getItem("username"))
+    let storeItem = props.listitem;
+    storeItem.username = localStorage.getItem("username")
     const navigate = useNavigate();
     const handleChange = (event) => {
     const name = event.target.name;
+    const savedname = event.target.name;
+    console.log(savedname);
     const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
     setInputs(values => ({...values, [name]: value}))
     }
@@ -27,19 +32,25 @@ const Edit = (props) =>{
         newlist[props.currentlist.indexOf(props.listitem)] = inputs
         console.table(newlist)
         props.changelist(newlist)
-        props.func(false)
+        console.log("calling axios")
+        let newobject = {
+            oldobj: storeItem,
+            newobj: inputs
+        }
         axios
-        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/edit/save`, {
-          inputs: inputs
-        })
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/edit/save`, 
+          newobject
+        )
         .then(response => {
         })
         .catch(err => {
           console.log('error')
         })
         //navigate('/userlist');
+        props.func(false)
         
     }
+
     const cancel = (event) =>{
         event.preventDefault();
         console.log("cancelled");
@@ -53,7 +64,21 @@ const Edit = (props) =>{
             (iterateitem) => (iterateitem != props.listitem))
         )
         props.func(false);
-        console.log("deleted");
+        let newobject = {
+            oldobj: storeItem,
+            newobj: inputs
+        }
+        axios
+        .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/delete`, 
+          newobject.oldobj
+        )
+        .then(response => {
+            console.log("deletion successful")
+        })
+        .catch(err => {
+          console.log('error')
+        })
+        //console.log("deleted");
         //navigate('/userlist');
     }
       return (
@@ -147,5 +172,6 @@ const Edit = (props) =>{
     </div>
         </>
       );
+      
 }
 export default Edit;
