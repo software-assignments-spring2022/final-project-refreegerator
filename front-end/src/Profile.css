@@ -35,6 +35,11 @@
     display: block;
     margin: 0 auto;
 }
+#zipcode{
+  width: 100px;
+  height: 30px;
+  border-color: black;
+}
 .save{
   display:inline-block;
   padding:0.35em 1.2em;

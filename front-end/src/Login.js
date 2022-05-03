@@ -25,7 +25,7 @@ const Login =props => {
     const qsError = urlSearchParams.get("error") 
     if (qsError === "protected")
       setErrorMessage("Please log in to view our fabulous protected content.")
-  }, []) 
+  }, []) /*
   useEffect(() => {
     if (response.success && response.token) {
       console.log(`User successfully logged in: ${response.username}`)
@@ -34,7 +34,7 @@ const Login =props => {
     }
   }, [response])
 
-
+*/
   const handleSubmit = async e =>{
     e.preventDefault();
     axios
@@ -43,6 +43,11 @@ const Login =props => {
       setResponse(response.data);
       setErrorMessage(response.data.message);
       console.log(response.data);
+      if (response.data.success && response.data.token) {
+        console.log(`User successfully logged in: ${response.data.username}`)
+        localStorage.setItem("token", response.data.token) 
+        localStorage.setItem("username", response.data.username)
+      }
     })
     .catch(err => {
       console.log(`error error error! ${err}`)
@@ -50,14 +55,8 @@ const Login =props => {
       setErrorMessage('invalid input');
 
     })
-    /*
-    const r = await axios.post(`${process.env.REACT_APP_SERVER_HOSTNAME}/save`, {name: name, pass: pass});
-    setResponse(r.data);
-    setErrorMessage(r.data.message);*/
     setName('');
     setPass('');
-
-    
   }
   
   // JSX code for login form

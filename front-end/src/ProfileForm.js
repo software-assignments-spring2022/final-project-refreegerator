@@ -1,7 +1,6 @@
 import {useState, useEffect} from "react"
 import axios from "axios"
 import "./Profile.css"
-import { useLocalStorage } from "./useLocalStorage"
 import ToggleSwitch from "./ToggleSwitch"
 
 
@@ -15,6 +14,7 @@ const ProfileForm = () => {
     const username = localStorage.getItem("username")
     const [days, setDays] = useState("0")
     const [suggest, setSuggest] = useState(true)
+    const [zipcode, setZipcode] = useState("")
     const [auto, setAuto] = useState(true)
     const [response, setResponse] = useState({})
     const onSuggestChange = (checked) => {
@@ -35,6 +35,7 @@ const ProfileForm = () => {
               
               setDays(response.data.preferences.notification);
               setSuggest(response.data.preferences.suggest);
+              setZipcode(response.data.preferences.zipcode)
               setAuto(response.data.preferences.auto);
             })
             .catch(err =>{
@@ -52,15 +53,16 @@ const ProfileForm = () => {
     fetchData();
     setDays(response.notification);
     setSuggest(response.suggest);
+    setZipcode(response.zipcode);
     setAuto(response.auto);
   },[])
     const submitForm = e => {
       e.preventDefault()
-      console.log('front end')
       axios
         .post(`${process.env.REACT_APP_SERVER_HOSTNAME}/profile/save`, {
           days: days,
           suggest: suggest,
+          zipcode: zipcode,
           auto:auto,
           username: username
         })
@@ -68,7 +70,8 @@ const ProfileForm = () => {
         })
         .catch(err => {
           console.log('error')
-        })
+        }) 
+        window.location.reload()
     } 
 
     return (
@@ -101,6 +104,21 @@ const ProfileForm = () => {
                     />
                 </div>
             </div>
+        <div className='Preference'>
+        <div className = 'column left'>
+            <label>Zip Code: </label>
+        </div>
+        <div className = 'column right'>
+                <input 
+                    type = "text" 
+                    value={zipcode}
+                    id = "zipcode"
+                    maxLength="5"
+                    pattern="\d{5}"
+                    onChange={e => setZipcode(e.target.value)}
+                />
+            </div>
+        </div>   
         <div className='Preference'>
             <div className = 'column left'>
                 <label>Autocomplete expiration dates for recognized items?</label>

@@ -16,8 +16,36 @@ const Add = props =>{
     const [newLength, setNewLength] = useState(olditems.length)
     const [itemList, setItemList] = useState(olditems)
     const [update, forceUpdate] = useState(false)
+    const [response, setResponse] = useState({})
     //console.log(olditems.length)
-    const autocomplete_names = [
+    const username = localStorage.getItem("username")
+    const fetchData = async() => {
+      try {
+        console.log(username);
+          await axios
+            .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/add`, {params:{username: username}})
+            .then((response) =>{
+              console.log(response.data)
+              setResponse(response.data.preferences);
+            })
+            .catch(err =>{
+              console.log(err)
+            })
+          
+
+      }
+      catch(error){
+          console.log(error);
+
+      }
+  };
+
+  useEffect(()=>{
+    fetchData();
+  },[])
+    let autocomplete_names = []
+    if(response.auto){
+      autocomplete_names = [
         "yogurt",
         "milk",
         "banana",
@@ -61,6 +89,8 @@ const Add = props =>{
         "egg",
         "tofu",
     ];
+    }
+    
     const placeholder = [
         {name: "yogurt", days:14, category: "dairy"},
         {name: "milk", days: 10, category: "dairy"},
@@ -255,7 +285,7 @@ const Add = props =>{
     const cancel = (event) =>{
       event.preventDefault();
       console.log("cancelled");
-      navigate('/GuestList');
+      navigate('/UserList');
     }
       return (
         <>
