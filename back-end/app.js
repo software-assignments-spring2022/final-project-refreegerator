@@ -188,12 +188,7 @@ app.get('/add', async(req,res)=>{
   }
   retrieve();
 
-<<<<<<< HEAD
-
-//adding item
-=======
 })
->>>>>>> origin/notification-preferences
 app.post('/add/save', async (req, res) => {
 
   const data = {
@@ -237,7 +232,6 @@ app.post('/add/save', async (req, res) => {
     });
     //console.log(itemData);
   res.json(data)
-<<<<<<< HEAD
 })*/
 // app.post('/edit/save', async (req, res) => {
 //   const data = {
@@ -246,16 +240,6 @@ app.post('/add/save', async (req, res) => {
 //   console.log(data)
 //   res.json(data)
 // })
-=======
-})
-app.post('/edit/save', async (req, res) => {
-  const data = {
-    inputs: req.body.inputs
-  }
-  //console.log(data)
-  res.json(data)
-})
->>>>>>> origin/notification-preferences
 
 app.get("/logout", function (req, res) {
   res.json({

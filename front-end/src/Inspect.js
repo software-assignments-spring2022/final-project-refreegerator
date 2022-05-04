@@ -4,8 +4,10 @@ import Item from "./Item"
 import SuggestedRecipes from './SuggestedRecipes'
 import axios from 'axios'
 import {useState, useEffect} from "react"
+//const [zip, setZipcode] = useState("")
 
 const Inspect = (props) => {
+  const [zip, setZipcode] = useState("")
     const editHandle = () =>{
         props.editMode(true)
         props.inspectMode(false)
@@ -23,7 +25,7 @@ const Inspect = (props) => {
             await axios
               .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/profileform`, {params:{username: username}})
               .then((response) =>{
-                zip = response.data.zipCode
+                setZipcode(response.data.zipcode)
               })
               .catch(err =>{
                 console.log(err)
@@ -33,9 +35,8 @@ const Inspect = (props) => {
             console.log(error);
       
         }
-        useEffect(()=>{
-          fetchZip();
-            }, [])}
+    }  
+         
     const showStore = () => {
         axios.get(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/kroger`, {
             itemName: props.listitem.name,
@@ -48,6 +49,11 @@ const Inspect = (props) => {
           })
 
         }
+
+        useEffect(()=>{
+          fetchZip();
+          showStore();
+            }, [])
   return (
     <>
         <div>
@@ -62,7 +68,8 @@ const Inspect = (props) => {
             </div>
             <div>
                 <b>Nearby Stores</b>
-                showStore()
+                
+                
             </div>
             <div className='Buttons'>
                 <button onClick = {() => handleBack()}className='buttons1'>Back</button>
