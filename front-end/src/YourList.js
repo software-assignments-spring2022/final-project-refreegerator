@@ -15,14 +15,10 @@ const YourList = props => {
     props.setSingleItem(false)    
     console.log(props.placeholder.d_)
     let dbitems = props.placeholder.d_;
-    const [orderedList, updateOrder] = useState(props.placeholder.d_ || [])
+    const [orderedList, updateOrder] = useState(props.placeholder.d_ || props.placeholder ||   [])
     console.log(orderedList)
     const [alreadyAdded, changeAdded] = useState(false); 
     let isGuest = true;
-    if (isGuest in props) {
-        
-
-    }
     const placeholder = [
         {category: "Dairy",
             name: "Cheese",
@@ -111,15 +107,24 @@ const YourList = props => {
         }
 
 
-    }, orderedList)
+    }, [orderedList])
     useEffect(() => {
         
-        if (dbitems != null){
+        if (dbitems != null && dbitems != undefined){
             console.log("useeffect, db")
             updateOrder(dbitems)
             localStorage.setItem("items", JSON.stringify(orderedList))
         } 
-    }, dbitems)
+    }, [dbitems])
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem("items"))!= null){
+            if (localStorage.getItem("username") == null){
+                updateOrder(JSON.parse(localStorage.getItem("items")))
+            }
+        }
+
+
+    }, [props.placeholder])
     
     const handleClick = (item) => {
         if (isEditing == false){
