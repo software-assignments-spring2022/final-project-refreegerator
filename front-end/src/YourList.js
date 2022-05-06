@@ -15,14 +15,10 @@ const YourList = props => {
     props.setSingleItem(false)    
     console.log(props.placeholder.d_)
     let dbitems = props.placeholder.d_;
-    const [orderedList, updateOrder] = useState(props.placeholder.d_ || [])
+    const [orderedList, updateOrder] = useState(props.placeholder.d_ || props.placeholder ||   [])
     console.log(orderedList)
     const [alreadyAdded, changeAdded] = useState(false); 
     let isGuest = true;
-    if (isGuest in props) {
-        
-
-    }
     const placeholder = [
         {category: "Dairy",
             name: "Cheese",
@@ -97,15 +93,38 @@ const YourList = props => {
         //console.table(existingEntries)
         if (existingEntries != null && existingEntries != undefined){
             if (localStorage.getItem("username") == null){
+                console.log("useeffect, existingentries")
                 updateOrder(existingEntries)
             }
-            else {
-                if (dbitems != null){
-                    updateOrder(dbitems);
-                }
+            }
+    }, []);
+    useEffect(() => {
+        if (orderedList != null && orderedList != undefined && orderedList.length != 0){
+            if (localStorage.getItem("username")== null){
+                console.log("useeffect, username")
+                localStorage.setItem("items", JSON.stringify(orderedList))
             }
         }
-    }, [props.placeholder]);
+
+
+    }, [orderedList])
+    useEffect(() => {
+        
+        if (dbitems != null && dbitems != undefined){
+            console.log("useeffect, db")
+            updateOrder(dbitems)
+            localStorage.setItem("items", JSON.stringify(orderedList))
+        } 
+    }, [dbitems])
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem("items"))!= null){
+            if (localStorage.getItem("username") == null){
+                updateOrder(JSON.parse(localStorage.getItem("items")))
+            }
+        }
+
+
+    }, [props.placeholder])
     
     const handleClick = (item) => {
         if (isEditing == false){
@@ -248,16 +267,36 @@ const YourList = props => {
             if (isEditing == true  && isInspecting == false){
                     console.log(editMode.toString()) 
                     console.log(isEditing)
-                return (
-                    
-                    <Edit func = {editMode} 
-                        listitem = {currentItem}
-                        changelist = {updateOrder}
-                        currentlist = {orderedList}
-                        setEditAll = {props.setEditAll}
-                        setSingleItem = {props.setSingleItem}
-                    />
-                )
+                if (localStorage.getItem("username") != null){
+
+                    return (
+                        
+                        <Edit func = {editMode} 
+                            listitem = {currentItem}
+                            changelist = {updateOrder}
+                            currentlist = {orderedList}
+                            setEditAll = {props.setEditAll}
+                            setSingleItem = {props.setSingleItem}
+                        />
+                    )
+                } 
+                else{
+                    console.log("found a guest")
+                    return (
+                        <GuestEdit
+                            func = {editMode}
+                            listitem = {currentItem}
+                            changelist = {updateOrder}
+                            currentlist = {orderedList}
+                            setEditAll = {props.setEditAll}
+                            setSingleItem = {props.setSingleItem}
+
+
+                        />
+
+                    )
+
+                }
             }
             if (isInspecting == true && isEditing == false) {
                 return (

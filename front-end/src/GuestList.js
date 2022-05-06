@@ -5,6 +5,8 @@ const GuestList = props => {
     
     var item = JSON.parse(localStorage.getItem('items'));
     let data = []
+    //localStorage.setItem("username",null)//resetting the stored username if the user chooses the guest option
+    localStorage.removeItem("username")
     if (item != null && item != undefined){
          data = item.map(item => {
             const container = {};
