@@ -7,6 +7,7 @@ import {useState, useEffect} from "react"
 
 const Inspect = (props) => {
   const [zip, setZipcode] = useState("")
+  const [pref, setPref] = useState(true)
   const [loc, setLoc] = useState("")
   const [brand, setBrand] = useState("")
   const [desc, setDesc] = useState("")
@@ -30,6 +31,7 @@ const Inspect = (props) => {
             await axios
               .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/profileform`, {params:{username: username}})
               .then((response) =>{
+                setPref(response.data.suggest)
                 setZipcode(response.data.zipcode)
               })
               .catch(err =>{
@@ -79,7 +81,6 @@ const Inspect = (props) => {
             </div>
             <div>
                 <b>Nearby Stores</b>
-                <div> </div>
                 
             </div>
             <div className='Buttons'>
