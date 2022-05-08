@@ -31,8 +31,9 @@ const Inspect = (props) => {
             await axios
               .get(`${process.env.REACT_APP_SERVER_HOSTNAME}/profileform`, {params:{username: username}})
               .then((response) =>{
-                setPref(response.data.suggest)
-                setZipcode(response.data.zipcode)
+                setPref(response.data.preferences.suggest)
+                setZipcode(response.data.preferences.zipcode)
+                  console.log(zip)
               })
               .catch(err =>{
                 console.log(err)
