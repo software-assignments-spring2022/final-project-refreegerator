@@ -55,7 +55,7 @@ const Inspect = (props) => {
             setBrand(response.brand)
             setDesc(response.description)
             setPrice(response.price)
-            return response
+            //return response
           })
           .catch(err => {
             console.log('error')
@@ -81,6 +81,12 @@ const Inspect = (props) => {
             </div>
             <div>
                 <b>Nearby Stores</b>
+                {pref && 
+                  <h1>Location Name: {loc}
+                      Brand: {brand}
+                      Description: {desc} 
+                      Price: {price} </h1>
+                }
                 
             </div>
             <div className='Buttons'>
