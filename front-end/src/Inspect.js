@@ -4,10 +4,15 @@ import Item from "./Item"
 import SuggestedRecipes from './SuggestedRecipes'
 import axios from 'axios'
 import {useState, useEffect} from "react"
-//const [zip, setZipcode] = useState("")
 
 const Inspect = (props) => {
   const [zip, setZipcode] = useState("")
+  const [loc, setLoc] = useState("")
+  const [brand, setBrand] = useState("")
+  const [desc, setDesc] = useState("")
+  //desc for description, ie 2% milk vs whole
+  const [price, setPrice] = useState("")
+
     const editHandle = () =>{
         props.editMode(true)
         props.inspectMode(false)
@@ -43,6 +48,12 @@ const Inspect = (props) => {
             zipCode: zip
           })
           .then(response => {
+            console.log(response)
+            setLoc(response.locationName)
+            setBrand(response.brand)
+            setDesc(response.description)
+            setPrice(response.price)
+            return response
           })
           .catch(err => {
             console.log('error')
@@ -68,7 +79,7 @@ const Inspect = (props) => {
             </div>
             <div>
                 <b>Nearby Stores</b>
-                
+                <div> </div>
                 
             </div>
             <div className='Buttons'>
