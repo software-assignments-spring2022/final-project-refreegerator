@@ -1,0 +1,61 @@
+.Header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.Refreegerator{
+  color: white;
+  text-decoration: none;
+}
+.Header-header {
+  background-color: #89C43A;
+  min-height: 12vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 1vmin);
+  color: white;
+}
+.dropdownMenu{
+  text-decoration: none;
+  color: black;
+}
+#profile {
+ display:flex;
+ margin-right: 25px;
+ padding-right: 15px;
+}
+#notifications {
+  display:flex;
+  margin-left: auto;
+  margin-right: 10px;
+  width: 40px;
+}
+
+.logo {
+  display: block;
+  width: 60px;
+  margin-left: 25px;
+}
+
+.nav-links {
+  list-style: none;
+}
+.nav-item {
+  display: inline-block;
+  padding: 10px 15px;
+}
+.nav-item a {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-item:hover a {
+  color: gray;
+}
+
+.logo img {
+  width: 175px;
+  vertical-align: middle;
+}
